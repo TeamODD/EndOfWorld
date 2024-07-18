@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "statusEffect", menuName = "effectScriptable/CreateEffectData", order = int.MaxValue)]
-public class StatusEffet : ScriptableObject
+[CreateAssetMenu(fileName = "statusEffect", menuName = "effectScriptable/CreateEffectData", order = 1)]
+public class StatusEffetSO : ScriptableObject
 {
     [SerializeField]
     private string effectname;

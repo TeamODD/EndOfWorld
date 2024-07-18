@@ -9,14 +9,23 @@ public abstract class StatSystem : MonoBehaviour
     public int defensePoint { get; private set; }
     public int speed { get; private set; }
 
-    protected int currentHitPoint;
-    protected int currentAttackPoint;
-    protected int currentDefensePoint;
+    private int currentHitPoint;
+    private int currentAttackPoint;
+    private int currentDefensePoint;
 
-    protected List<EffectDB> effectList = new List<EffectDB>();
+    private List<EffectDB> effectList = new List<EffectDB>();
+
+    //기본 스탯 저장하는 함수(레벨 데이터 표가 존재한다면 일정 렙마다 값을 넣는 방식으로 레벨업 가능)
+    public void InitStat(int maxHP, int ATK, int DEF, int SPD)
+    {
+        maxHitPoint = maxHP;
+        attackPoint = ATK;
+        defensePoint = DEF;
+        speed = SPD;
+    }
 
     //전투 시작 시 스탯을 초기화 하는 함수 / 전투시작 시 단 1번만 호출
-    protected void BattleStartStatus()
+    public void BattleStartStat()
     {
         currentHitPoint = maxHitPoint;
         currentAttackPoint = attackPoint;
@@ -24,14 +33,14 @@ public abstract class StatSystem : MonoBehaviour
     }
 
     //턴 시작시 기본 공격력, 기본 방어력으로 초기화 하는 함수 / 자신의 턴 마다 호출
-    protected void TurnResetStatus()
+    public void TurnResetStat()
     {
         currentAttackPoint = attackPoint;
         currentDefensePoint = defensePoint;
     }
 
     //List에 저장된 버프,디버프 들을 적용시키는 함수 / 턴 시작 시 호출
-    protected void ActivateEffect()
+    public void ActivateEffect()
     {
         foreach (EffectDB db in effectList) 
         {
@@ -48,7 +57,7 @@ public abstract class StatSystem : MonoBehaviour
     }
 
     //ScriptableObject로 작성된 버프,디버프 asset을 인수로 받는 함수 / 버프, 디버프를 받을 때마다 호출
-    public void ApplyEffect(StatusEffet statusEffect)
+    public void ApplyEffect(StatusEffetSO statusEffect)
     {
         EffectDB effectDB = new EffectDB(
             statusEffect.EFFECTNAME, 
@@ -60,9 +69,13 @@ public abstract class StatSystem : MonoBehaviour
 
         effectList.Add(effectDB);
     }
-}
 
-//스킬도 스크립터블오브젝트 할 예정인데 구성을 어케할것인가
-//이름 데미지 거리 이동 버프or디버프 전투스킬
-//이름 이동 버프or디버프 3개 이동스킬
-//2개로 나눠서 리스트 만들고 관리해야할 것 같다.
+    public int AttackedByEnemy(int damage)
+    {
+        currentHitPoint -= damage;
+
+        return currentHitPoint;
+    }
+
+    public List<EffectDB> getEffectList() { return effectList; }
+}
