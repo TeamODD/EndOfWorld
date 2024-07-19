@@ -33,4 +33,8 @@ public class SkillSO : ScriptableObject
     [SerializeField]
     private int uses;
     public int USES { get { return uses; } }
+
+    [SerializeField]
+    private int cooltime;
+    public int COOLTIME { get { return cooltime; } }
 }

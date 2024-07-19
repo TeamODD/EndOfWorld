@@ -19,3 +19,4 @@ MonoBehaviour:
   move: 0
   skillicon: {fileID: 0}
   uses: 3
+  cooltime: 0
