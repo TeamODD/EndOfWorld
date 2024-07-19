@@ -9,9 +9,9 @@ public abstract class StatSystem : MonoBehaviour
     public int defensePoint { get; private set; }
     public int speed { get; private set; }
 
-    private int currentHitPoint;
-    private int currentAttackPoint;
-    private int currentDefensePoint;
+    public int currentHitPoint { get; private set; }
+    public int currentAttackPoint { get; private set; }
+    public int currentDefensePoint { get; private set; }
 
     private List<EffectDB> effectList = new List<EffectDB>();
 
@@ -42,17 +42,29 @@ public abstract class StatSystem : MonoBehaviour
     //List에 저장된 버프,디버프 들을 적용시키는 함수 / 턴 시작 시 호출
     public void ActivateEffect()
     {
-        foreach (EffectDB db in effectList) 
-        {
+        if (effectList.Count < 1) return;
+
+        for(int i =0; i < effectList.Count; i++) {
+            EffectDB db = effectList[i];
+
             if (currentDefensePoint + db.HP > maxHitPoint) currentHitPoint = maxHitPoint;
             else currentHitPoint += db.HP;
             currentAttackPoint += db.ATK;
             currentDefensePoint += db.DEF;
 
-            db.DURATION--;
-
             if (db.DURATION < 1) effectList.Remove(db);
             //버프 디버프 UI 스크립트
+        }
+
+    }
+
+    public void DicreaseEffectDuration()
+    {
+        for(int i =0; i< effectList.Count; i++)
+        {
+            EffectDB db = effectList[i];
+            if (--db.DURATION < 1) effectList.Remove(db);
+
         }
     }
 
@@ -68,13 +80,20 @@ public abstract class StatSystem : MonoBehaviour
             );
 
         effectList.Add(effectDB);
+
+        ActivateEffect();
     }
 
-    public int AttackedByEnemy(int damage)
+    //후에 방어력 계산까지 하는 함수로 변경 예정
+    public bool AttackedByEnemy(int damage)
     {
-        currentHitPoint -= damage;
+        int currentDamage = (damage * currentAttackPoint) - currentDefensePoint;
+        if (currentDamage < 0) currentDamage = 0;
+        currentHitPoint -= currentDamage;
 
-        return currentHitPoint;
+        Debug.Log(currentDamage + " / " + currentHitPoint);
+        bool isDead = currentHitPoint <= 0 ? true : false;
+        return isDead;
     }
 
     public List<EffectDB> getEffectList() { return effectList; }

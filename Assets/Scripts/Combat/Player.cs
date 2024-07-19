@@ -15,11 +15,13 @@ public class Player : StatSystem
             skill.EFFECT, 
             skill.MOVE, 
             skill.SKILLICON, 
-            skill.USES
+            skill.USES,
+            skill.COOLTIME
             );
 
         skillList.Add(skillDB);
     }
 
     public List<SkillDB> GetSkillList() { return skillList; }
+
 }

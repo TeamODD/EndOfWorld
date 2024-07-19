@@ -12,8 +12,9 @@ public class SkillDB
     public Sprite ICON { get; private set; }
     
     public int USES;
+    public int COOLTIME;
 
-    public SkillDB(string name, int damage, int distance, StatusEffetSO effect, int move, Sprite icon, int uses)
+    public SkillDB(string name, int damage, int distance, StatusEffetSO effect, int move, Sprite icon, int uses, int cooltime)
     {
         NAME = name;
         DAMAGE = damage;
@@ -22,5 +23,6 @@ public class SkillDB
         MOVE = move;
         ICON = icon;
         USES = uses;
+        COOLTIME = cooltime;
     }
 }
