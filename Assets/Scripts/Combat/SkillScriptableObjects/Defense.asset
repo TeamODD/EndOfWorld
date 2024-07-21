@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillname: Defense
   damage: 0
-  distance: 0
+  distance: 2
   effect: {fileID: 11400000, guid: fb9c3a0a24bb43a4181b5dd776fbad1f, type: 2}
   move: 0
   skillicon: {fileID: 0}
   uses: 3
   cooltime: 0
+  linkattack: 

@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillname: Attack
   damage: 5
-  distance: 1
+  distance: 2
   effect: {fileID: 0}
   move: 0
   skillicon: {fileID: 0}
   uses: 3
   cooltime: 0
+  linkattack: 

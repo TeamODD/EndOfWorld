@@ -37,4 +37,12 @@ public class SkillSO : ScriptableObject
     [SerializeField]
     private int cooltime;
     public int COOLTIME { get { return cooltime; } }
+
+    [SerializeField]
+    private bool islink;
+    public bool ISLINK { get { return islink; } }
+
+    [SerializeField]
+    private string linkattack = null;
+    public string LINKATTACK { get { return linkattack; } }
 }
