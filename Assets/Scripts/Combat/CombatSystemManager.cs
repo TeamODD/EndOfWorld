@@ -27,20 +27,10 @@ public class CombatSystemManager : MonoBehaviour
     private Enemy enemy;
 
     private List<SkillDB> playerSkillList;
+
     //임시
     public SkillSO playerSkill;
     public SkillSO playerSkill2;
-
-    private void Awake()
-    {
-        if(instance == null)
-            instance = this;
-
-        else
-        {
-            Destroy(this.gameObject);
-        }
-    }
 
     public static CombatSystemManager Instance
     {
@@ -54,6 +44,21 @@ public class CombatSystemManager : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        if(instance == null)
+            instance = this;
+
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        BattleStart();
+    }
 
     private void BattleStart()
     {
@@ -81,22 +86,17 @@ public class CombatSystemManager : MonoBehaviour
         
         //HUD 설정
         playerHUD.SetHUD(player);
-        playerHUD.SetSkillButton(playerSkillList);
         enemyHUD.SetHUD(enemy);
-
+        playerHUD.SetSkillButton(playerSkillList);
+        
         //거리 설정 지금은 임의로 정하지만 후에 어떻게 설정할 것인지
-        distance = 2;
+        distance = SetDistance();
 
         //속도 비교 후 선공권
         state = CompareSpeed();
+
         if (state == BattleState.PLAYERTURN) PlayerTurn();
         else EnemyTurn();
-    }
-
-    private BattleState CompareSpeed()
-    {
-        if(player.speed >= enemy.speed) return BattleState.PLAYERTURN;
-        else return BattleState.ENEMYTURN;
     }
 
     private void PlayerTurn()
@@ -104,11 +104,33 @@ public class CombatSystemManager : MonoBehaviour
         player.DicreaseEffectDuration();
         player.TurnResetStat();
         player.ActivateEffect();
+
         playerHUD.SetHUD(player);
         enemyHUD.SetHUD(enemy);
 
         state = BattleState.PLAYERTURN;
         Debug.Log("플레이어 턴!");
+    }
+
+    private void EnemyTurn()
+    {
+        state = BattleState.ENEMYTURN;
+        Debug.Log("적 턴!");
+        player.AttackedByEnemy(enemy.Attack(distance).DAMAGE);
+        playerHUD.SetHPSlider(player.currentHitPoint);
+        PlayerTurn();
+    }
+
+    private int SetDistance()
+    {
+        int temp = 2;
+        return temp;
+    }
+
+    private BattleState CompareSpeed()
+    {
+        if (player.speed >= enemy.speed) return BattleState.PLAYERTURN;
+        else return BattleState.ENEMYTURN;
     }
 
     public void OnSkillButton()
@@ -117,7 +139,7 @@ public class CombatSystemManager : MonoBehaviour
             return;
 
         GameObject clickButton = EventSystem.current.currentSelectedGameObject;
-        if(clickButton != null)
+        if (clickButton != null)
         {
             int skillIndex = clickButton.GetComponent<SkillButtonInfo>().getSkillIndex();
             SkillDB usingSkill = playerSkillList[skillIndex];
@@ -131,7 +153,7 @@ public class CombatSystemManager : MonoBehaviour
             //스킬 사용하면 적체력체크, 버프체크, HUD설정이 한꺼번에 이루어져야한다.
             enemyHUD.SetHPSlider(enemy.currentHitPoint);
 
-            if(isDead)
+            if (isDead)
             {
                 Debug.Log("플레이어 승리!");
             }
@@ -156,19 +178,5 @@ public class CombatSystemManager : MonoBehaviour
         //그럴려면 버튼에서 정보를 가져와야한다.
         //그럼 버튼에 있는 정보를 고쳤을 때 player의 리스트에도 영향이 가야함
         //index로? 1번 버튼 2번 버튼 눌리면 1번 스킬 2번 스킬 이런식으로? 이렇게 해야겠다 그럼 음 
-    }
-
-    private void EnemyTurn()
-    {
-        state = BattleState.ENEMYTURN;
-        Debug.Log("적 턴!");
-        player.AttackedByEnemy(enemy.Attack(distance).DAMAGE);
-        playerHUD.SetHPSlider(player.currentHitPoint);
-        PlayerTurn();
-    }
-
-    private void Start()
-    {
-        BattleStart();
     }
 }
