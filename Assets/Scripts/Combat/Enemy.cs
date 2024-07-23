@@ -33,7 +33,7 @@ public abstract class Enemy : StatSystem
         //최초 스킬 시전
         if (lastAttack == null) return skillIndex = Random.Range(0, skillList.Count);
 
-        //최소 스킬 시전 이후
+        //최초 스킬 시전 이후
         if (skillList.Count <= 1) skillIndex = 0;
 
         else

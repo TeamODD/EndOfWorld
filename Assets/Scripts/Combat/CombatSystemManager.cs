@@ -116,8 +116,14 @@ public class CombatSystemManager : MonoBehaviour
     {
         state = BattleState.ENEMYTURN;
         Debug.Log("적 턴!");
-        player.AttackedByEnemy(enemy.Attack(distance).DAMAGE);
-        playerHUD.SetHPSlider(player.currentHitPoint);
+
+        SkillSO enemyAttackSkill = enemy.Attack(distance);
+        //공격횟수 추가
+        for(int i = 0; i < enemyAttackSkill.NUMBEROFATTACK; i++)
+        {
+            player.AttackedByEnemy(enemyAttackSkill.DAMAGE);
+            playerHUD.SetHPSlider(player.currentHitPoint);
+        }
         PlayerTurn();
     }
 
@@ -146,7 +152,14 @@ public class CombatSystemManager : MonoBehaviour
 
             //사용한 스킬에 따라 공격, 버프, 디버프 등을 설정해줘야함
             bool isDead = enemy.AttackedByEnemy(usingSkill.DAMAGE);
-            if (usingSkill.EFFECT != null) player.ApplyEffect(usingSkill.EFFECT);
+
+            if (usingSkill.EFFECT != null)
+            {
+                foreach(StatusEffetSO effect in usingSkill.EFFECT)
+                {
+                    player.ApplyEffect(effect);
+                }
+            }
             playerHUD.SetHUD(player);
 
             //이동은 추후에 그리고 이런 공격은 플레이어 공격, 적 공격 함수로 따로 떼어낼 예정

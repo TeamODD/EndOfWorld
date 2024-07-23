@@ -9,9 +9,11 @@ public class Player : StatSystem
     public void ApplySkill(SkillSO skill)
     {
         SkillDB skillDB = new SkillDB(
-            skill.SKILLNAME, 
+            skill.SKILLNAME,
+            skill.SKILLTYPE,
+            skill.NUMBEROFATTACK,
             skill.DAMAGE, 
-            skill.DISTANCE, 
+            skill.DISTANCE,
             skill.EFFECT, 
             skill.MOVE, 
             skill.SKILLICON, 
