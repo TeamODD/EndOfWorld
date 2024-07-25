@@ -9,7 +9,7 @@ public abstract class PullingManager : MonoBehaviour
     [SerializeField]
     protected GameObject _object;
     private Canvas canvas;
-    protected List<GameObject> list = new List<GameObject>();
+    protected List<GameObject> pulledObjectList = new List<GameObject>();
 
     protected int nextPullingIndex = 0;
     private static int hierarchyIndex = 0;
@@ -25,9 +25,9 @@ public abstract class PullingManager : MonoBehaviour
         canvas = this.GetComponent<PrintManager>().canvas;
         for (int i = 0; i < objectInstantiateCount; i++)
         {
-            list.Add(Instantiate(_object, canvas.transform.position, Quaternion.identity));
-            list[i].transform.SetParent(canvas.transform, false);
-            list[i].SetActive(false);
+            pulledObjectList.Add(Instantiate(_object, canvas.transform.position, Quaternion.identity));
+            pulledObjectList[i].transform.SetParent(canvas.transform, false);
+            pulledObjectList[i].SetActive(false);
         }
     }
 
@@ -36,29 +36,29 @@ public abstract class PullingManager : MonoBehaviour
         //풀링할 오브젝트가 있는지 없는지 체크하여 Instantiate 혹은 활성화
         indexCheck();
 
-        if (nextPullingIndex > list.Count - 1)
+        if (nextPullingIndex > pulledObjectList.Count - 1)
         {
-            list.Add(Instantiate(_object, canvas.transform.position, Quaternion.identity));
-            list[nextPullingIndex].transform.SetParent(canvas.transform);
+            pulledObjectList.Add(Instantiate(_object, canvas.transform.position, Quaternion.identity));
+            pulledObjectList[nextPullingIndex].transform.SetParent(canvas.transform);
         }
         else
-            list[nextPullingIndex].SetActive(true);
+            pulledObjectList[nextPullingIndex].SetActive(true);
 
-        list[hierarchyIndex++].transform.SetSiblingIndex(nextPullingIndex);
+        pulledObjectList[nextPullingIndex].transform.SetSiblingIndex(hierarchyIndex++);
         nextPullingIndex++;
     }
     private void indexCheck()
     {
         int i;
-        for (i = 0; i < list.Count; i++)
+        for (i = 0; i < pulledObjectList.Count; i++)
         {
-            if (list[i].activeSelf == false)
+            if (pulledObjectList[i].activeSelf == false)
             {
                 nextPullingIndex = i;
                 break;
             }
         }
-        if (i == list.Count)
+        if (i == pulledObjectList.Count)
             nextPullingIndex = i;
     }
 }

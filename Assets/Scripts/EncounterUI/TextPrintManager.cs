@@ -10,10 +10,10 @@ public class TextPrintManager : PullingManager
     public void PrintText(string text)
     {
         PullObject();
-        SetText(text);
+        SetTextContents(text);
     }
-    public void SetText(string text)
+    public void SetTextContents(string text)
     {
-        list[nextPullingIndex - 1].GetComponent<TMP_Text>().text = text;
+        pulledObjectList[nextPullingIndex - 1].GetComponent<TMP_Text>().text = text;
     }
 }

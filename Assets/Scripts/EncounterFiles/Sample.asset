@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8a1cd31fa423ef409a822f46b285cfc, type: 3}
+  m_Name: Sample
+  m_EditorClassIdentifier: 
+  itemType: 0
+  itemList:
+  - rid: 1023324822833201178
+  - rid: 1023324822833201179
+  - rid: 1023324822833201180
+  nextAction: 1
+  nextEncounterFile: {fileID: 11400000, guid: 6a8d6333f0e1b144faeb910666e5221d, type: 2}
+  references:
+    version: 2
+    RefIds:
+    - rid: 1023324822833201178
+      type: {class: TextItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        text: "\uC5B4\uC774 \uAC70\uAE30\uAE4C\uC9C0\uB2E4"
+    - rid: 1023324822833201179
+      type: {class: SpriteItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        sprite: {fileID: 21300000, guid: 6d7c787e2910c0e469ee5ec2bde474d5, type: 3}
+    - rid: 1023324822833201180
+      type: {class: ChoiceItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        choice:
+        - "\uC608"
+        - "\uC544\uB2C8\uC624"
