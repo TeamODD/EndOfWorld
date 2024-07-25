@@ -9,10 +9,10 @@ public class ImagePrintManager : PullingManager
     public void PrintImage(Sprite sprite)
     {
         PullObject();
-        SetImage(sprite);
+        SetImageContents(sprite);
     }
-    public void SetImage(Sprite sprite)
+    public void SetImageContents(Sprite sprite)
     {
-        list[nextPullingIndex - 1].GetComponent<Image>().sprite = sprite;
+        pulledObjectList[nextPullingIndex - 1].GetComponent<Image>().sprite = sprite;
     }
 }

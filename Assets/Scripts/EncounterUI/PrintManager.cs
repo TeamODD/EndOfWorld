@@ -11,8 +11,10 @@ public class PrintManager : MonoBehaviour
 
     ChoicePrintManager choiceManager;
 
+    [HideInInspector]
     public Canvas canvas;
 
+    public Sprite sampleSprite;
     void Awake()
     {
         init();
@@ -22,7 +24,14 @@ public class PrintManager : MonoBehaviour
         textManager = GetComponent<TextPrintManager>();
         imageManager = GetComponent<ImagePrintManager>();
         choiceManager = GetComponent<ChoicePrintManager>();
-        //canvas = GameObject.FindWithTag("EncounterUI").GetComponent<Canvas>();
+        canvas = GameObject.Find("EncounterUICanvas").GetComponent<Canvas>();
     }
 
+    private void Start()
+    {
+        textManager.PrintText("12312412412");
+        imageManager.PrintImage(sampleSprite);
+        imageManager.PrintImage(sampleSprite);
+        imageManager.PrintImage(sampleSprite);
+    }
 }

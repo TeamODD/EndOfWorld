@@ -6,12 +6,16 @@ using UnityEngine.UI;
 
 public class ChoicePrintManager : PullingManager
 {
-    public void PrintChoice()
+    public void PrintChoice(List<string> choice)
     {
-        PullObject();
-        SetChoice();
+        for(int i = 0; i < choice.Count; i++) PullObject();
+        SetChoiceContents(choice);
     }
-    public void SetChoice()
+    public void SetChoiceContents(List<string> choice)
     {
+        for(int i = 0; i < choice.Count; i++)
+        {
+            pulledObjectList[i].GetComponent<Button>().GetComponent<TMP_Text>().text = choice[i];
+        }
     }
 }
