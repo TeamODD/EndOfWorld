@@ -17,15 +17,13 @@ MonoBehaviour:
   - rid: 1023324822833201178
   - rid: 1023324822833201179
   - rid: 1023324822833201180
-  nextAction: 1
-  nextEncounterFile: {fileID: 11400000, guid: 6a8d6333f0e1b144faeb910666e5221d, type: 2}
   references:
     version: 2
     RefIds:
     - rid: 1023324822833201178
       type: {class: TextItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
       data:
-        text: "\uC5B4\uC774 \uAC70\uAE30\uAE4C\uC9C0\uB2E4"
+        text: Go to next encounter
     - rid: 1023324822833201179
       type: {class: SpriteItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
       data:
@@ -33,6 +31,8 @@ MonoBehaviour:
     - rid: 1023324822833201180
       type: {class: ChoiceItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
       data:
-        choice:
-        - "\uC608"
-        - "\uC544\uB2C8\uC624"
+        choiceList:
+        - text: yes
+          encounterFile: {fileID: 11400000, guid: 6a8d6333f0e1b144faeb910666e5221d, type: 2}
+        - text: no
+          encounterFile: {fileID: 0}

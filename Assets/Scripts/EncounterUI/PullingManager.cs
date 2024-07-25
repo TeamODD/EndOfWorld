@@ -22,7 +22,7 @@ public abstract class PullingManager : MonoBehaviour
 
     private void init()
     {
-        canvas = this.GetComponent<PrintManager>().canvas;
+        canvas = this.GetComponent<PrintManager>().encounterUICanvas;
         for (int i = 0; i < objectInstantiateCount; i++)
         {
             pulledObjectList.Add(Instantiate(_object, canvas.transform.position, Quaternion.identity));
@@ -34,7 +34,7 @@ public abstract class PullingManager : MonoBehaviour
     public void PullObject()
     {
         //풀링할 오브젝트가 있는지 없는지 체크하여 Instantiate 혹은 활성화
-        indexCheck();
+        CheckIndex();
 
         if (nextPullingIndex > pulledObjectList.Count - 1)
         {
@@ -47,7 +47,18 @@ public abstract class PullingManager : MonoBehaviour
         pulledObjectList[nextPullingIndex].transform.SetSiblingIndex(hierarchyIndex++);
         nextPullingIndex++;
     }
-    private void indexCheck()
+
+    public void ReturnAllObject()
+    {
+        for (int i = nextPullingIndex - 1; i >= 0; i--)
+        {
+            pulledObjectList[i].SetActive(false);
+        }
+
+        CheckIndex();
+    }
+
+    private void CheckIndex()
     {
         int i;
         for (i = 0; i < pulledObjectList.Count; i++)

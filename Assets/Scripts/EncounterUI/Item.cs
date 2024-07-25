@@ -26,13 +26,12 @@ namespace EndOfWorld.EncounterSystem
     [System.Serializable]
     public class TextItem : Item
     {
-        [SerializeField]
         [TextArea (3, 8)]
-        private string text;
+        public string text;
 
-        public TextItem(string text) : base(ItemType.Text)
+        public TextItem(/*string text*/) : base(ItemType.Text)
         {
-            this.text = text;
+            //this.text = text;
         }
 
         public string Text
@@ -44,12 +43,11 @@ namespace EndOfWorld.EncounterSystem
     [System.Serializable]
     public class SpriteItem : Item
     {
-        [SerializeField]
-        private Sprite sprite;
+        public Sprite sprite;
 
-        public SpriteItem(Sprite sprite) : base(ItemType.Sprite)
+        public SpriteItem(/*Sprite sprite*/) : base(ItemType.Sprite)
         {
-            this.sprite = sprite;
+            //this.sprite = sprite;
         }
 
         public Sprite Sprite
@@ -61,10 +59,16 @@ namespace EndOfWorld.EncounterSystem
     [System.Serializable]
     public class ChoiceItem : Item
     {
-        [SerializeField]
-        private List<string> choice;
+        public List<TextAndEncounterFile> choiceList;
 
         public ChoiceItem() : base(ItemType.Choice)
         { }
+    }
+
+    [System.Serializable]
+    public class TextAndEncounterFile
+    {
+        public string text;
+        public EncounterFile encounterFile;
     }
 }

@@ -14,18 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 0
   itemList:
-  - rid: 1023324822833201181
   - rid: 1023324822833201182
-  nextAction: 0
-  nextEncounterFile: {fileID: 0}
+  - rid: 1023324841215262721
   references:
     version: 2
     RefIds:
-    - rid: 1023324822833201181
-      type: {class: TextItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
-      data:
-        text: "\uC559 \uAE30\uBAA8\uB760"
     - rid: 1023324822833201182
       type: {class: TextItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
       data:
-        text: "\uC559 \uAE30\uBAA8"
+        text: you good?
+    - rid: 1023324841215262721
+      type: {class: ChoiceItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        choiceList:
+        - text: I'm good
+          encounterFile: {fileID: 0}
+        - text: no good
+          encounterFile: {fileID: 0}
