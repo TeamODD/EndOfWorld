@@ -28,20 +28,16 @@ namespace EndOfWorld.EncounterSystem
         [SerializeReference]
         public List<Item> itemList = new List<Item>();
 
-        [Header("NextEncounter")]
-        public NextAction nextAction;
-        public EncounterFile nextEncounterFile;
-
         [ContextMenu("AddText")]
         public void AddText()
         {
-            itemList.Add(new TextItem(""));
+            itemList.Add(new TextItem());
         }
 
         [ContextMenu("AddSprite")]
         public void AddSprite()
         {
-            itemList.Add(new SpriteItem(null));
+            itemList.Add(new SpriteItem());
         }
 
         [ContextMenu("AddChoice")]

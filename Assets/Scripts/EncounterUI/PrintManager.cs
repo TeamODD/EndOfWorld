@@ -1,5 +1,7 @@
+using EndOfWorld.EncounterSystem;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,9 +14,8 @@ public class PrintManager : MonoBehaviour
     ChoicePrintManager choiceManager;
 
     [HideInInspector]
-    public Canvas canvas;
+    public Canvas encounterUICanvas;
 
-    public Sprite sampleSprite;
     void Awake()
     {
         init();
@@ -24,14 +25,34 @@ public class PrintManager : MonoBehaviour
         textManager = GetComponent<TextPrintManager>();
         imageManager = GetComponent<ImagePrintManager>();
         choiceManager = GetComponent<ChoicePrintManager>();
-        canvas = GameObject.Find("EncounterUICanvas").GetComponent<Canvas>();
+        encounterUICanvas = GameObject.Find("EncounterUICanvas").GetComponent<Canvas>();
     }
 
-    private void Start()
+    public bool PrintContent(string text)
     {
-        textManager.PrintText("12312412412");
-        imageManager.PrintImage(sampleSprite);
-        imageManager.PrintImage(sampleSprite);
-        imageManager.PrintImage(sampleSprite);
+        textManager.PrintText(text);
+        return true;
+    }
+    public bool PrintContent(Sprite sprite)
+    {
+        imageManager.PrintImage(sprite);
+        return true;
+    }
+    public bool PrintContent(List<TextAndEncounterFile> choiceList)
+    {
+        choiceManager.PrintChoice(choiceList);
+        return true;
+    }
+
+    public void ReturnObjects()
+    {
+        textManager.ReturnAllObject();
+        imageManager.ReturnAllObject();
+        choiceManager.ReturnAllObject();
+    }
+
+    public void ReturnChoiceObjects()
+    {
+        choiceManager.ReturnAllObject();
     }
 }

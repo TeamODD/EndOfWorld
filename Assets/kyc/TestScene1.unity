@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 532815936}
   m_Layer: 0
   m_Name: PrintManager
-  m_TagString: Untagged
+  m_TagString: PrintManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -154,8 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d1a63d65a271da478cbd2b4b17deeab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 1180027196}
-  sampleSprite: {fileID: 21300000, guid: 6d7c787e2910c0e469ee5ec2bde474d5, type: 3}
+  encounterUICanvas: {fileID: 0}
 --- !u!4 &532815935
 Transform:
   m_ObjectHideFlags: 0
@@ -183,7 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 226745b017c0eeb46ab48cb1c2cce705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _object: {fileID: 4357094945571491129, guid: 6ef2fcc2a552f7d43a9a5e97b175a73b, type: 3}
+  _object: {fileID: 6700713279600543515, guid: 081bd5a1c557d8745bca5f1382558974, type: 3}
 --- !u!114 &532815937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,7 +417,7 @@ GameObject:
   - component: {fileID: 1669018923}
   m_Layer: 0
   m_Name: EncounterManager
-  m_TagString: Untagged
+  m_TagString: EncounterManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -435,6 +434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d684c9a27ef555447a3e6e84923aeab7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  encounterFile: {fileID: 11400000, guid: 0d3aa9e07ad7d0d4e99804a4d8db71e9, type: 2}
 --- !u!4 &1669018924
 Transform:
   m_ObjectHideFlags: 0
