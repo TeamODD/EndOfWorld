@@ -4,10 +4,20 @@ using UnityEngine;
 using EndOfWorld.EncounterSystem;
 using System.IO;
 using System.Linq;
+using static UnityEngine.GraphicsBuffer;
+using UnityEditor;
 
 public class EncounterManager : MonoBehaviour
 {
     [SerializeField]
+    private List<EncounterFile> unusedEncounterFileList;
+
+    [SerializeField]
+    private readonly List<EncounterFile> usedEncounterFileList = new List<EncounterFile>();
+
+    [SerializeField]
+    private SaveEncounterFileList saveEncounterFileList;
+
     private EncounterFile encounterFile;
 
     private PrintManager printManager;
@@ -23,12 +33,20 @@ public class EncounterManager : MonoBehaviour
 
     private void Start()
     {
+        encounterFile = unusedEncounterFileList[0];
         StartCoroutine(PrintEncounter());
+    }
+
+    //Fisher Yates algorithm (Knuth Shuffle)
+    public void SelectRandomEncounterFile()
+    {
+        ShuffleList();
+        encounterFile = unusedEncounterFileList[0];
     }
 
     IEnumerator PrintEncounter()
     {
-        copyList();
+        CopyList();
 
         foreach (var item in itemList)
         {
@@ -39,27 +57,30 @@ public class EncounterManager : MonoBehaviour
         yield return null;
     }
 
-    //선택지에서 정답을 골랐을 시
+    //선택지에서 골랐을 시
     public void TakeAChoice(int index)
     {
-
-        void selectEncounterFile()
+        void SelectEncounterFile()
         {
             encounterFile = choiceItemList[index].encounterFile;
         }
 
+        ConveyToUsedList();
+
         if (choiceItemList[index].encounterFile != null)
         {
-            selectEncounterFile();
-            copyList();
+            SelectEncounterFile();
+            CopyList();
             ConnectEncounter();
         }
         else //인카운터 파일이 null일 경우 
         {
-            //랜덤으로 파일 하나 고름
-            copyList();
+            SelectRandomEncounterFile();
+            CopyList();
             SkipEncounter();
         }
+
+        SaveData();
     }
 
     public void SkipEncounter()
@@ -74,7 +95,7 @@ public class EncounterManager : MonoBehaviour
         StartCoroutine(PrintEncounter());
     }
 
-    private void copyList()
+    private void CopyList()
     {
         this.itemList = new List<Item>(encounterFile.itemList);
     }
@@ -105,5 +126,37 @@ public class EncounterManager : MonoBehaviour
 
         Debug.Log("Error occurs on CallPrintManager.cs");
         return false;
+    }
+
+    private static System.Random random = new System.Random();
+    private void ShuffleList()
+    {
+        //Fisher Yates Shuffle
+
+        int listLength = unusedEncounterFileList.Count;
+
+        int n = unusedEncounterFileList.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = random.Next(n + 1);
+            EncounterFile value = unusedEncounterFileList[k];
+            unusedEncounterFileList[k] = unusedEncounterFileList[n];
+            unusedEncounterFileList[n] = value;
+        }
+    }
+
+    private void ConveyToUsedList()
+    {
+        usedEncounterFileList.Add(unusedEncounterFileList[0]);
+        unusedEncounterFileList.RemoveAt(0);
+    }
+
+    private void SaveData()
+    {
+        saveEncounterFileList.unusedEncounterFiles = new List<EncounterFile>(unusedEncounterFileList);
+        saveEncounterFileList.usedEncounterFiles = new List<EncounterFile>(usedEncounterFileList);
+
+        EditorUtility.SetDirty(saveEncounterFileList);
     }
 }

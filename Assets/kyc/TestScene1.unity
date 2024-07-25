@@ -434,7 +434,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d684c9a27ef555447a3e6e84923aeab7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  encounterFile: {fileID: 11400000, guid: 0d3aa9e07ad7d0d4e99804a4d8db71e9, type: 2}
+  unusedEncounterFileList:
+  - {fileID: 11400000, guid: 0d3aa9e07ad7d0d4e99804a4d8db71e9, type: 2}
+  - {fileID: 11400000, guid: 6a8d6333f0e1b144faeb910666e5221d, type: 2}
+  - {fileID: 11400000, guid: 32e297e65e5744f4c9a79f716f9d896b, type: 2}
+  - {fileID: 11400000, guid: a7341e77d1342b6488756a82cd66bb40, type: 2}
+  - {fileID: 11400000, guid: f34bf9f75be99c34898240303e4ee466, type: 2}
+  saveEncounterFileList: {fileID: 11400000, guid: 5a3bf68a9fa93e34ba367f9dfb5c6be1, type: 2}
 --- !u!4 &1669018924
 Transform:
   m_ObjectHideFlags: 0
