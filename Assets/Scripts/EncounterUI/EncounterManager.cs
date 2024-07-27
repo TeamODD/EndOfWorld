@@ -18,6 +18,9 @@ public class EncounterManager : MonoBehaviour
     [SerializeField]
     private SaveEncounterFileList saveEncounterFileList;
 
+    [SerializeField]
+    private EncounterFileListForAcquiredFiles encounterFileListForAcquiredFiles;
+
     private EncounterFile encounterFile;
 
     private PrintManager printManager;
@@ -26,6 +29,7 @@ public class EncounterManager : MonoBehaviour
 
     private List<TextAndEncounterFile> choiceItemList;
 
+
     private void Awake()
     {
         printManager = GameObject.FindWithTag("PrintManager").GetComponent<PrintManager>();
@@ -33,8 +37,16 @@ public class EncounterManager : MonoBehaviour
 
     private void Start()
     {
+        BringAcquiredFiles();
+        //ShuffleList();
         encounterFile = unusedEncounterFileList[0];
-        StartCoroutine(PrintEncounter());
+        //StartCoroutine(PrintEncounter());
+    }
+
+    private void BringAcquiredFiles()
+    {
+        unusedEncounterFileList.AddRange(encounterFileListForAcquiredFiles.EncounterFiles);
+        unusedEncounterFileList = unusedEncounterFileList.Distinct().ToList(); //중복 제거
     }
 
     //Fisher Yates algorithm (Knuth Shuffle)
@@ -60,7 +72,7 @@ public class EncounterManager : MonoBehaviour
     //선택지에서 골랐을 시
     public void TakeAChoice(int index)
     {
-        void SelectEncounterFile()
+        void ContinueToNextEncounterFile()
         {
             encounterFile = choiceItemList[index].encounterFile;
         }
@@ -69,7 +81,7 @@ public class EncounterManager : MonoBehaviour
 
         if (choiceItemList[index].encounterFile != null)
         {
-            SelectEncounterFile();
+            ContinueToNextEncounterFile();
             CopyList();
             ConnectEncounter();
         }
@@ -158,5 +170,6 @@ public class EncounterManager : MonoBehaviour
         saveEncounterFileList.usedEncounterFiles = new List<EncounterFile>(usedEncounterFileList);
 
         EditorUtility.SetDirty(saveEncounterFileList);
+        encounterFileListForAcquiredFiles.SaveData();
     }
 }
