@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: Sample4
   m_EditorClassIdentifier: 
   itemType: 0
+  chaperIndex: 1
+  progressIndex: 0
   itemList: []
+  isHaveSpecialEncounter: 0
+  specialEncounterFile: {fileID: 0}
   references:
     version: 2
     RefIds: []

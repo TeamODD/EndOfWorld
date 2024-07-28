@@ -10,6 +10,9 @@ using UnityEditor;
 public class EncounterManager : MonoBehaviour
 {
     [SerializeField]
+    private short chaperIndex;
+
+    [SerializeField]
     private List<EncounterFile> unusedEncounterFileList;
 
     [SerializeField]
@@ -43,10 +46,25 @@ public class EncounterManager : MonoBehaviour
         //StartCoroutine(PrintEncounter());
     }
 
+
+    /// <summary>
+    /// 특정한 조건에 의해 추가된 EncounterFile을 가져오는 함수
+    /// </summary>
     private void BringAcquiredFiles()
     {
-        unusedEncounterFileList.AddRange(encounterFileListForAcquiredFiles.EncounterFiles);
-        unusedEncounterFileList = unusedEncounterFileList.Distinct().ToList(); //중복 제거
+        int listLength = encounterFileListForAcquiredFiles.acquiredEncounterFileList.Count;
+
+        for (short i = 0; i < listLength; i++)
+        {
+            //한번도 추가 된 적 없다면 && EncounterFile의 chaperIndex가 EncounterManager의 chaperIndex와 같다면 
+            if (!encounterFileListForAcquiredFiles.IsItAdded(i) && encounterFileListForAcquiredFiles.GetChaperIndex(i) == this.chaperIndex) 
+            {   //리스트에 추가
+                unusedEncounterFileList.Add(encounterFileListForAcquiredFiles.acquiredEncounterFileList[i].GetEncounterFile());
+            }
+        }
+
+        //unusedEncounterFileList = unusedEncounterFileList.Distinct().ToList(); //중복 제거
+        SaveData();
     }
 
     //Fisher Yates algorithm (Knuth Shuffle)
@@ -59,6 +77,8 @@ public class EncounterManager : MonoBehaviour
     IEnumerator PrintEncounter()
     {
         CopyList();
+
+        CheckAndSaveSpecialEncounter();
 
         foreach (var item in itemList)
         {
@@ -95,13 +115,29 @@ public class EncounterManager : MonoBehaviour
         SaveData();
     }
 
-    public void SkipEncounter()
+    /// <summary>
+    /// SpecialEncounter가 있는지 확인하고 저장
+    /// </summary>
+    private void CheckAndSaveSpecialEncounter()
+    {
+        bool CheckIsHavingSpecialEncounter()
+        {
+            return this.encounterFile.isHaveSpecialEncounter;
+        }
+
+        if (CheckIsHavingSpecialEncounter())
+        {
+            encounterFileListForAcquiredFiles.SaveToAcquiredFileList(this.encounterFile.specialEncounterFile);
+        }
+    }
+
+    private void SkipEncounter()
     {
         printManager.ReturnObjects();
         StartCoroutine(PrintEncounter());
     }
 
-    public void ConnectEncounter()
+    private void ConnectEncounter()
     {
         printManager.ReturnChoiceObjects();
         StartCoroutine(PrintEncounter());

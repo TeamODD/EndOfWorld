@@ -9,15 +9,54 @@ using UnityEngine;
 [System.Serializable]
 public class EncounterFileListForAcquiredFiles : ScriptableObject
 {
-    public List<EncounterFile> EncounterFiles;
-    public void SaveToAcquireFileList(EncounterFile encounterFile)
+    public List<AcquiredEncounterFile> acquiredEncounterFileList;
+
+    public bool IsItAdded(short index)
     {
-        EncounterFiles.Add(encounterFile);
+        return acquiredEncounterFileList[index].isItAdded;
+    }
+
+    public short GetChaperIndex(short index)
+    {
+        return acquiredEncounterFileList[index].encounterFile.chaperIndex;
+    }
+
+    public void SaveToAcquiredFileList(EncounterFile encounterFile)
+    {
+        AcquiredEncounterFile acquiredEncounterFile = new AcquiredEncounterFile(encounterFile);
+
+        acquiredEncounterFileList.Add(acquiredEncounterFile);
         SaveData();
     }
 
     public void SaveData()
     {
         EditorUtility.SetDirty(this);
+    }
+}
+
+public class AcquiredEncounterFile
+{
+    public AcquiredEncounterFile(EncounterFile encounterFile)
+    {
+        isItAdded = false;
+        this.encounterFile = encounterFile;
+    }
+
+    [HideInInspector]
+    public bool isItAdded { get; private set; }
+
+    public EncounterFile encounterFile;
+
+
+    public EncounterFile GetEncounterFile()
+    {
+        CheckAdded();
+        return this.encounterFile;
+    }
+
+    public void CheckAdded()
+    {
+        this.isItAdded = true;
     }
 }

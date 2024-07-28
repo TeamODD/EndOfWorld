@@ -434,6 +434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d684c9a27ef555447a3e6e84923aeab7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chaperIndex: 1
   unusedEncounterFileList:
   - {fileID: 11400000, guid: 0d3aa9e07ad7d0d4e99804a4d8db71e9, type: 2}
   - {fileID: 11400000, guid: 6a8d6333f0e1b144faeb910666e5221d, type: 2}

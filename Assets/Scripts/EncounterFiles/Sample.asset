@@ -13,10 +13,14 @@ MonoBehaviour:
   m_Name: Sample
   m_EditorClassIdentifier: 
   itemType: 0
+  chaperIndex: 1
+  progressIndex: 0
   itemList:
   - rid: 1023324822833201178
   - rid: 1023324822833201179
   - rid: 1023324822833201180
+  isHaveSpecialEncounter: 0
+  specialEncounterFile: {fileID: 0}
   references:
     version: 2
     RefIds:

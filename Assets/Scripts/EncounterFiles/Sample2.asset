@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: Sample2
   m_EditorClassIdentifier: 
   itemType: 0
+  chaperIndex: 1
+  progressIndex: 0
   itemList:
   - rid: 1023324822833201182
   - rid: 1023324841215262721
+  isHaveSpecialEncounter: 1
+  specialEncounterFile: {fileID: 11400000, guid: f34bf9f75be99c34898240303e4ee466, type: 2}
   references:
     version: 2
     RefIds:
