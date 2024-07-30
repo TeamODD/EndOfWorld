@@ -43,7 +43,7 @@ public class EncounterManager : MonoBehaviour
         BringAcquiredFiles();
         //ShuffleList();
         encounterFile = unusedEncounterFileList[0];
-        //StartCoroutine(PrintEncounter());
+        StartCoroutine(PrintEncounter());
     }
 
 
@@ -52,6 +52,7 @@ public class EncounterManager : MonoBehaviour
     /// </summary>
     private void BringAcquiredFiles()
     {
+        if (encounterFileListForAcquiredFiles.acquiredEncounterFileList == null) return;
         int listLength = encounterFileListForAcquiredFiles.acquiredEncounterFileList.Count;
 
         for (short i = 0; i < listLength; i++)
@@ -67,7 +68,6 @@ public class EncounterManager : MonoBehaviour
         SaveData();
     }
 
-    //Fisher Yates algorithm (Knuth Shuffle)
     public void SelectRandomEncounterFile()
     {
         ShuffleList();
@@ -179,7 +179,8 @@ public class EncounterManager : MonoBehaviour
     private static System.Random random = new System.Random();
     private void ShuffleList()
     {
-        //Fisher Yates Shuffle
+        //Fisher Yates algorithm (Knuth Shuffle)
+        //리스트 길이를 하나씩 줄여가며 그 안에서 랜덤한 요소와 리스트의 끝에 있는 요소를 바꾼다.
 
         int listLength = unusedEncounterFileList.Count;
 

@@ -9,7 +9,7 @@ using UnityEngine;
 [System.Serializable]
 public class EncounterFileListForAcquiredFiles : ScriptableObject
 {
-    public List<AcquiredEncounterFile> acquiredEncounterFileList;
+    public List<AcquiredEncounterFile> acquiredEncounterFileList = new List<AcquiredEncounterFile>();
 
     public bool IsItAdded(short index)
     {
