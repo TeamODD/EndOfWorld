@@ -12,5 +12,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed198ae58d32e394c8dedc2149b7532d, type: 3}
   m_Name: AcquiredEncounterFileListSample
   m_EditorClassIdentifier: 
-  EncounterFiles:
-  - {fileID: 11400000, guid: f34bf9f75be99c34898240303e4ee466, type: 2}
