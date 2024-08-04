@@ -3,6 +3,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "statusEffect", menuName = "effectScriptable/CreateEffectData", order = 1)]
 public class StatusEffetSO : ScriptableObject
 {
+    public enum Meze
+    {
+        None,
+        Frightened,
+        Ensnared,
+        Paralysis
+    }
+
     [SerializeField]
     private string effectname;
     public string EFFECTNAME { get { return effectname; } }
@@ -18,6 +26,10 @@ public class StatusEffetSO : ScriptableObject
     [SerializeField]
     private int defense;
     public int DEFENSE { get { return defense; } }
+
+    [SerializeField]
+    private Meze meze;
+    public Meze MEZE { get { return meze; } }
 
     [SerializeField]
     private int duration;

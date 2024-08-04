@@ -13,14 +13,18 @@ MonoBehaviour:
   m_Name: Attack
   m_EditorClassIdentifier: 
   skillname: Attack
-  skilltype: 1
+  skilltype: 0
+  skillattacktype: 1
+  minAttackRange: 0
+  maxAttackRange: 0
   numberOfAttack: 2
-  damage: 5
-  distance: 2
-  effect: []
+  damage: 10
+  minDistance: 0
+  maxDistance: 0
   move: 0
+  effect: []
+  linkskill: {fileID: 11400000, guid: b76ed2cc30d7e4e47afbf9647c2edff0, type: 2}
   skillicon: {fileID: 0}
   uses: 3
   cooltime: 0
-  isLink: 0
-  linkattack: 
+  text: 
