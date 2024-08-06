@@ -8,12 +8,17 @@ public abstract class PullingManager : MonoBehaviour
 {
     [SerializeField]
     protected GameObject _object;
+
     private Canvas canvas;
     protected List<GameObject> pulledObjectList = new List<GameObject>();
 
     protected int nextPullingIndex = 0;
+
     private static int hierarchyIndex = 0;
+
     private int objectInstantiateCount = 3;
+
+
 
     private void Awake()
     {
@@ -23,6 +28,8 @@ public abstract class PullingManager : MonoBehaviour
     private void init()
     {
         canvas = this.GetComponent<PrintManager>().encounterUICanvas;
+
+        //미리 오브젝트 생성해놓기
         for (int i = 0; i < objectInstantiateCount; i++)
         {
             pulledObjectList.Add(Instantiate(_object, canvas.transform.position, Quaternion.identity));

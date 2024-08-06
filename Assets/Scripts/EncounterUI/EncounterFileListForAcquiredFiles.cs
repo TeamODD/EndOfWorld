@@ -18,7 +18,7 @@ public class EncounterFileListForAcquiredFiles : ScriptableObject
 
     public short GetChaperIndex(short index)
     {
-        return acquiredEncounterFileList[index].encounterFile.chaperIndex;
+        return acquiredEncounterFileList[index].encounterFile.chaperLevel;
     }
 
     public void SaveToAcquiredFileList(EncounterFile encounterFile)

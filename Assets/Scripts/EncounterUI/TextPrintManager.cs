@@ -12,15 +12,25 @@ public class TextPrintManager : PullingManager
     [HideInInspector]
     public TMP_Text textComponent;
 
-    public float FadeSpeed = 1.0F;
-    public int RolloverCharacterSpread = 10;
+    public float fadeSpeed = 23f;
+    public int rolloverCharacterSpread = 10;
+
+    private PrintManager printManager;
+
+    private void Start()
+    {
+        printManager = this.gameObject.GetComponent<PrintManager>();
+    }
 
     public void PrintText(string text)
     {
         PullObject();
+
         SetTextObject();
+
         //SetTextContents(text);
         textComponent.SetText(text);
+
         StartCoroutine(AnimateVertexColors());
     }
 
@@ -28,6 +38,12 @@ public class TextPrintManager : PullingManager
     {
         StopCoroutine(AnimateVertexColors());
         textComponent.color = new Color32(255, 255, 255, 255);
+        EndPrint();
+    }
+
+    private void EndPrint()
+    {
+        printManager.isPrintDone = true;
     }
 
     /// <summary>
@@ -57,7 +73,7 @@ public class TextPrintManager : PullingManager
         {
             int characterCount = textInfo.characterCount;
             // Spread should not exceed the number of characters.
-            byte fadeSteps = (byte)Mathf.Max(1, 255 / RolloverCharacterSpread);
+            byte fadeSteps = (byte)Mathf.Max(1, 255 / rolloverCharacterSpread);
 
 
             for (int i = startingCharacterRange; i < currentCharacter + 1; i++)
@@ -108,9 +124,10 @@ public class TextPrintManager : PullingManager
             // Upload the changed vertex colors to the Mesh.
             textComponent.UpdateVertexData(TMP_VertexDataUpdateFlags.Colors32);
             if (currentCharacter + 1 < characterCount) currentCharacter += 1;
-            yield return new WaitForSeconds(0.25f - FadeSpeed * 0.01f);
+            yield return new WaitForSeconds(0.25f - fadeSpeed * 0.01f);
         }
 
+        EndPrint();
         yield return null;
     }
 }

@@ -32,6 +32,7 @@ public class EncounterManager : MonoBehaviour
 
     private List<TextAndEncounterFile> choiceItemList;
 
+    private int thisProgressLevel = 0;
 
     private void Awake()
     {
@@ -41,8 +42,7 @@ public class EncounterManager : MonoBehaviour
     private void Start()
     {
         BringAcquiredFiles();
-        //ShuffleList();
-        encounterFile = unusedEncounterFileList[0];
+        SelectRandomEncounterFile();
         StartCoroutine(PrintEncounter());
     }
 
@@ -71,19 +71,44 @@ public class EncounterManager : MonoBehaviour
     public void SelectRandomEncounterFile()
     {
         ShuffleList();
-        encounterFile = unusedEncounterFileList[0];
+
+        int i;
+
+        for(i = 0; i < unusedEncounterFileList.Count; i++)
+        {
+            if(unusedEncounterFileList[i].progressLevel == thisProgressLevel)
+            {
+                encounterFile = unusedEncounterFileList[i];
+                return;
+            }
+        }
+
+        if (i == unusedEncounterFileList.Count)
+            Debug.LogError("No more encounter file that match with this progress level at EncounterManager.cs");
     }
 
     IEnumerator PrintEncounter()
     {
-        CopyList();
+        //인카운터 파일 내 리스트에 요소가 없을 경우(special encounter만 저장하고 싶을 경우)
+        if(encounterFile.itemList == null)
+        {
+            CheckAndSaveSpecialEncounter();
+            yield return null;
+        }
+
+        CopyItems();
 
         CheckAndSaveSpecialEncounter();
 
         foreach (var item in itemList)
         {
-            yield return new WaitUntil(() => CallPrintManager(item) == true);
-            yield return new WaitForFixedUpdate();
+            CallPrintManager(item);
+
+            yield return new WaitUntil(() => printManager.isPrintDone == true);
+            yield return null;
+
+            printManager.isPrintDone = false;
+            yield return null;
         }
 
         yield return null;
@@ -102,13 +127,13 @@ public class EncounterManager : MonoBehaviour
         if (choiceItemList[index].encounterFile != null)
         {
             ContinueToNextEncounterFile();
-            CopyList();
+            CopyItems();
             ConnectEncounter();
         }
         else //인카운터 파일이 null일 경우 
         {
             SelectRandomEncounterFile();
-            CopyList();
+            CopyItems();
             SkipEncounter();
         }
 
@@ -122,7 +147,7 @@ public class EncounterManager : MonoBehaviour
     {
         bool CheckIsHavingSpecialEncounter()
         {
-            return this.encounterFile.isHaveSpecialEncounter;
+            return this.encounterFile.specialEncounterFile != null;
         }
 
         if (CheckIsHavingSpecialEncounter())
@@ -130,7 +155,7 @@ public class EncounterManager : MonoBehaviour
             encounterFileListForAcquiredFiles.SaveToAcquiredFileList(this.encounterFile.specialEncounterFile);
         }
     }
-
+    
     private void SkipEncounter()
     {
         printManager.ReturnObjects();
@@ -143,12 +168,12 @@ public class EncounterManager : MonoBehaviour
         StartCoroutine(PrintEncounter());
     }
 
-    private void CopyList()
+    private void CopyItems()
     {
         this.itemList = new List<Item>(encounterFile.itemList);
     }
 
-    private bool CallPrintManager(Item item)
+    private void CallPrintManager(Item item)
     {
         switch(item.ItemType)
         {
@@ -156,24 +181,26 @@ public class EncounterManager : MonoBehaviour
                 TextItem textItem = item as TextItem;
                 string text = textItem.text;
 
-                return printManager.PrintContent(text);
+                printManager.PrintContent(text);
+                break;
 
             case ItemType.Sprite:
                 SpriteItem spriteItem = item as SpriteItem;
                 Sprite sprite = spriteItem.sprite;
 
-                return printManager.PrintContent(sprite);
+                printManager.PrintContent(sprite);
+                break;
 
             case ItemType.Choice:
                 ChoiceItem choiceItem = item as ChoiceItem;
                 choiceItemList = choiceItem.choiceList;
 
-                return printManager.PrintContent(choiceItemList);
+                printManager.PrintContent(choiceItemList);
+                break;
         }
 
 
-        Debug.Log("Error occurs on CallPrintManager.cs");
-        return false;
+        Debug.Log("Print " + item.ItemType);
     }
 
     private static System.Random random = new System.Random();
