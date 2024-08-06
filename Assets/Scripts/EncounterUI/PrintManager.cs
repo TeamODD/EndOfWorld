@@ -16,6 +16,10 @@ public class PrintManager : MonoBehaviour
     [HideInInspector]
     public Canvas encounterUICanvas;
 
+    [HideInInspector]
+    public bool isPrintDone = false;
+
+
     void Awake()
     {
         init();
@@ -28,20 +32,17 @@ public class PrintManager : MonoBehaviour
         encounterUICanvas = GameObject.Find("EncounterUICanvas").GetComponent<Canvas>();
     }
 
-    public bool PrintContent(string text)
+    public void PrintContent(string text)
     {
         textManager.PrintText(text);
-        return true;
     }
-    public bool PrintContent(Sprite sprite)
+    public void PrintContent(Sprite sprite)
     {
         imageManager.PrintImage(sprite);
-        return true;
     }
-    public bool PrintContent(List<TextAndEncounterFile> choiceList)
+    public void PrintContent(List<TextAndEncounterFile> choiceList)
     {
         choiceManager.PrintChoice(choiceList);
-        return true;
     }
 
     public void ReturnObjects()

@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   encounterUICanvas: {fileID: 0}
+  isPrintDone: 0
 --- !u!4 &532815935
 Transform:
   m_ObjectHideFlags: 0
@@ -183,6 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _object: {fileID: 6700713279600543515, guid: 081bd5a1c557d8745bca5f1382558974, type: 3}
+  fadeSpeed: 1
 --- !u!114 &532815937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,6 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _object: {fileID: 8098229702396641771, guid: c70e927d1f0051e4aa7871ba2c613b93, type: 3}
+  fadeSpeed: 1
 --- !u!114 &532815938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,8 +213,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _object: {fileID: 4157449455439134172, guid: d13af7cdb22c5f74586f79ad193b81eb, type: 3}
   textComponent: {fileID: 0}
-  FadeSpeed: 22
-  RolloverCharacterSpread: 10
+  fadeSpeed: 23
+  rolloverCharacterSpread: 10
 --- !u!1 &794550494
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,9 +318,9 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 300
     m_Bottom: 0
-  m_ChildAlignment: 4
+  m_ChildAlignment: 1
   m_Spacing: 30
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
