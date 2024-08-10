@@ -11,9 +11,19 @@ public class StatusEffetSO : ScriptableObject
         Paralysis
     }
 
+    public enum Target
+    {
+        Player,
+        Enemy
+    }
+
     [SerializeField]
     private string effectname;
     public string EFFECTNAME { get { return effectname; } }
+
+    [SerializeField]
+    private Target target;
+    public Target TARGET { get { return target; } }
 
     [SerializeField]
     private int hp;

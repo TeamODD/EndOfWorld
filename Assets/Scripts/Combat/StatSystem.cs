@@ -139,6 +139,7 @@ public abstract class StatSystem : MonoBehaviour
     {
         EffectDB effectDB = new EffectDB(
             statusEffect.EFFECTNAME, 
+            statusEffect.TARGET,
             statusEffect.HP, 
             statusEffect.ATTACK, 
             statusEffect.DEFENSE,
@@ -152,8 +153,7 @@ public abstract class StatSystem : MonoBehaviour
     public int CombatSkillActivate(SkillDB skill)
     {
         int coefficient = GetCoefficient(skill);
-        int skillDamage = (int)((float)(skill.DAMAGE / 100) * coefficient);
-
+        int skillDamage = (int)((float)skill.DAMAGE / 100 * coefficient);
         switch(skill.ATTACKTYPE)
         {
             case SkillSO.SkillAttackType.Attack:
@@ -161,7 +161,7 @@ public abstract class StatSystem : MonoBehaviour
                 if(!isNoDamage)
                 {
                     currentHitPoint -= (skillDamage - currentShieldPoint);
-                    return (skillDamage - currentHitPoint);
+                    return (skillDamage - currentShieldPoint);
                 }
                 else return 0;
 

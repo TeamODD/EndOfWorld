@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class Enemy : StatSystem
 {
-    const int MAXDISTANCE = 5;
+    private const int MAXDISTANCE = 5;
 
     //기획자가 사용하기 편하도록 사용할 모든 스킬을 이 리스트에 넣고 내부함수로 구분하기
     [SerializeField, Space(1), Header("전체 스킬 리스트")]
@@ -15,9 +15,10 @@ public abstract class Enemy : StatSystem
     private int firstPreferenceDistance;
     [SerializeField]
     private int secondPreferenceDistance;
-    protected SkillDB lastSkill = null;
-    protected SkillDB reservationSkill = null;
-    protected bool isLinkAttack = false;
+
+    public SkillDB lastSkill { get; private set; } = null;
+    public SkillDB reservationSkill { get; private set; } = null;
+    public bool isLinkAttack { get; private set; } = false;
 
     public void EnemySkillListReady()
     {
@@ -27,8 +28,10 @@ public abstract class Enemy : StatSystem
         }
     }
 
-    protected void ReservationSkill(int distance)
+    //현재 
+    public void ReservationSkill(int distance)
     {
+        Debug.Log("1");
         //공포X, 마비X, 속박(상관X)
         if (!isFrightened && !isParalysus)
         {
@@ -39,7 +42,7 @@ public abstract class Enemy : StatSystem
                      && combatSkillList[index].COOLTIME == 0
                      && combatSkillList[index].USES > 0)
                 {
-                    reservationSkill = combatSkillList[i];
+                    reservationSkill = combatSkillList[index];
                     return;
                 }
 
@@ -47,10 +50,13 @@ public abstract class Enemy : StatSystem
             }
         }
         
+
         //랜덤 이동스킬 선택하기(선호거리 체크 X)
         //공포O, 속박X, 마비X
-        else if(isFrightened && !isParalysus && !isEnsnared)
+        if(isFrightened && !isParalysus && !isEnsnared)
         {
+            Debug.Log("2");
+
             int index = getRandomIndex(moveSkillList.Count);
             for (int i = 0; i < moveSkillList.Count; i++) 
             {
@@ -65,8 +71,10 @@ public abstract class Enemy : StatSystem
         }
 
         //공포X, 속박X, 마비X
-        else if (!isFrightened && !isEnsnared && !isParalysus)
+        if (!isEnsnared && !isParalysus)
         {
+            Debug.Log("3");
+
             if (CheckPreferenceSkillUses())
             {
                 reservationSkill = selectReservationMoveSkill(firstPreferenceDistance, distance);
@@ -80,8 +88,10 @@ public abstract class Enemy : StatSystem
         }
 
         //마비O
-        else
+        if(isParalysus)
         {
+            Debug.Log("4");
+
             reservationSkill = null;
             lastSkill = null;
         }
@@ -138,11 +148,6 @@ public abstract class Enemy : StatSystem
     private int getRandomIndex(int count)
     {
         return Random.Range(0, count);
-    }
-
-    public SkillDB getReservationSkill()
-    {
-        return reservationSkill;
     }
 }
 

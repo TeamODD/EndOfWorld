@@ -15,15 +15,17 @@ MonoBehaviour:
   skillname: Attack
   skilltype: 0
   skillattacktype: 1
-  minAttackRange: 0
-  maxAttackRange: 0
-  numberOfAttack: 2
-  damage: 10
-  minDistance: 0
-  maxDistance: 0
+  target: 0
+  coefficienttype: 1
+  minAttackRange: 1
+  maxAttackRange: 1
+  numberOfAttack: 1
+  damage: 80
+  minDistance: 2
+  maxDistance: 2
   move: 0
   effect: []
-  linkskill: {fileID: 11400000, guid: b76ed2cc30d7e4e47afbf9647c2edff0, type: 2}
+  linkskill: {fileID: 0}
   skillicon: {fileID: 0}
   uses: 3
   cooltime: 0

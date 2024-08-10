@@ -1451,14 +1451,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5d93ef05bf33a14aa614c05cc561cb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceOneSkillList: []
-  distanceTwoSkillList:
+  allSkillList:
   - {fileID: 11400000, guid: 14c49376c1d29794db938d975accd742, type: 2}
   - {fileID: 11400000, guid: b76ed2cc30d7e4e47afbf9647c2edff0, type: 2}
-  distanceThreeSkillList: []
-  distanceFourSkillList: []
-  distanceFiveSkillList: []
-  specialSkillList: []
+  firstPreferenceDistance: 1
+  secondPreferenceDistance: 2
 --- !u!4 &1303907103
 Transform:
   m_ObjectHideFlags: 0

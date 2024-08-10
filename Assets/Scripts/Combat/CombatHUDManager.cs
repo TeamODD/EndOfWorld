@@ -38,7 +38,7 @@ public class CombatHUDManager : MonoBehaviour
             button.onClick.AddListener(CombatSystemManager.Instance.OnSkillButton);
 
             SkillButtonInfo info = button.GetComponent<SkillButtonInfo>();
-            info.InfoInit(index, skill.NAME, skill.USES);
+            info.InfoInit(index, skill);
 
 
             index++;
