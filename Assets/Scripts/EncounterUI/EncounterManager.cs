@@ -34,6 +34,8 @@ public class EncounterManager : MonoBehaviour
 
     private int thisProgressLevel = 0;
 
+    private int encounterFileIndex;
+
     private void Awake()
     {
         printManager = GameObject.FindWithTag("PrintManager").GetComponent<PrintManager>();
@@ -79,6 +81,7 @@ public class EncounterManager : MonoBehaviour
             if(unusedEncounterFileList[i].progressLevel == thisProgressLevel)
             {
                 encounterFile = unusedEncounterFileList[i];
+                encounterFileIndex = i;
                 return;
             }
         }
@@ -132,6 +135,8 @@ public class EncounterManager : MonoBehaviour
         }
         else //인카운터 파일이 null일 경우 
         {
+            thisProgressLevel += 1;
+
             SelectRandomEncounterFile();
             CopyItems();
             SkipEncounter();
@@ -224,8 +229,8 @@ public class EncounterManager : MonoBehaviour
 
     private void ConveyToUsedList()
     {
-        usedEncounterFileList.Add(unusedEncounterFileList[0]);
-        unusedEncounterFileList.RemoveAt(0);
+        usedEncounterFileList.Add(unusedEncounterFileList[encounterFileIndex]);
+        unusedEncounterFileList.RemoveAt(encounterFileIndex);
     }
 
     private void SaveData()

@@ -12,10 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c1e3abcfb593ab4a8be5463520cd5ee, type: 3}
   m_Name: EncounterFilesSavingObject
   m_EditorClassIdentifier: 
-  unusedEncounterFiles:
-  - {fileID: 11400000, guid: 0d3aa9e07ad7d0d4e99804a4d8db71e9, type: 2}
-  - {fileID: 11400000, guid: 6a8d6333f0e1b144faeb910666e5221d, type: 2}
-  - {fileID: 11400000, guid: 32e297e65e5744f4c9a79f716f9d896b, type: 2}
-  - {fileID: 11400000, guid: a7341e77d1342b6488756a82cd66bb40, type: 2}
-  - {fileID: 11400000, guid: f34bf9f75be99c34898240303e4ee466, type: 2}
+  unusedEncounterFiles: []
   usedEncounterFiles: []
