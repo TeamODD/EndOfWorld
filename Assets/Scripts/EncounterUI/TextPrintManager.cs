@@ -10,16 +10,16 @@ using System;
 public class TextPrintManager : PullingManager
 {
     [HideInInspector]
-    public TMP_Text textComponent;
+    public TMP_Text TextComponent;
 
-    public float fadeSpeed = 23f;
-    public int rolloverCharacterSpread = 10;
+    public float FadeSpeed = 23f;
+    public int RolloverCharacterSpread = 10;
 
-    private PrintManager printManager;
+    private PrintManager _printManager;
 
     private void Start()
     {
-        printManager = this.gameObject.GetComponent<PrintManager>();
+        _printManager = this.gameObject.GetComponent<PrintManager>();
     }
 
     public void PrintText(string text)
@@ -29,7 +29,7 @@ public class TextPrintManager : PullingManager
         SetTextObject();
 
         //SetTextContents(text);
-        textComponent.SetText(text);
+        TextComponent.SetText(text);
 
         StartCoroutine(AnimateVertexColors());
     }
@@ -37,13 +37,13 @@ public class TextPrintManager : PullingManager
     public void ForcePrint()
     {
         StopCoroutine(AnimateVertexColors());
-        textComponent.color = new Color32(255, 255, 255, 255);
+        TextComponent.color = new Color32(255, 255, 255, 255);
         EndPrint();
     }
 
     private void EndPrint()
     {
-        printManager.isPrintDone = true;
+        _printManager.isPrintDone = true;
     }
 
     /// <summary>
@@ -51,19 +51,19 @@ public class TextPrintManager : PullingManager
     /// </summary>
     private void SetTextObject()
     {
-        textComponent = pulledObjectList[nextPullingIndex - 1].GetComponent<TMP_Text>();
+        TextComponent = pulledObjectList[nextPullingIndex - 1].GetComponent<TMP_Text>();
     }
 
     private void SetTextContents(string text)
     {
-        this.textComponent.text = text;
+        this.TextComponent.text = text;
     }
 
     IEnumerator AnimateVertexColors()
     {
         // Need to force the text object to be generated so we have valid data to work with right from the start.
-        textComponent.ForceMeshUpdate();
-        TMP_TextInfo textInfo = textComponent.textInfo;
+        TextComponent.ForceMeshUpdate();
+        TMP_TextInfo textInfo = TextComponent.textInfo;
         Color32[] newVertexColors;
         int currentCharacter = 0;
         int startingCharacterRange = currentCharacter;
@@ -73,7 +73,7 @@ public class TextPrintManager : PullingManager
         {
             int characterCount = textInfo.characterCount;
             // Spread should not exceed the number of characters.
-            byte fadeSteps = (byte)Mathf.Max(1, 255 / rolloverCharacterSpread);
+            byte fadeSteps = (byte)Mathf.Max(1, 255 / RolloverCharacterSpread);
 
 
             for (int i = startingCharacterRange; i < currentCharacter + 1; i++)
@@ -108,7 +108,7 @@ public class TextPrintManager : PullingManager
                     if (startingCharacterRange == characterCount)
                     {
                         // Update mesh vertex data one last time.
-                        textComponent.UpdateVertexData(TMP_VertexDataUpdateFlags.Colors32);
+                        TextComponent.UpdateVertexData(TMP_VertexDataUpdateFlags.Colors32);
                         // Reset the text object back to original state.
                         //textComponent.ForceMeshUpdate();
                         // Reset our counters.
@@ -122,9 +122,9 @@ public class TextPrintManager : PullingManager
             }
 
             // Upload the changed vertex colors to the Mesh.
-            textComponent.UpdateVertexData(TMP_VertexDataUpdateFlags.Colors32);
+            TextComponent.UpdateVertexData(TMP_VertexDataUpdateFlags.Colors32);
             if (currentCharacter + 1 < characterCount) currentCharacter += 1;
-            yield return new WaitForSeconds(0.25f - fadeSpeed * 0.01f);
+            yield return new WaitForSeconds(0.25f - FadeSpeed * 0.01f);
         }
 
         EndPrint();

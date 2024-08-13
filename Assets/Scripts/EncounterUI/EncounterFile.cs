@@ -17,36 +17,36 @@ namespace EndOfWorld.EncounterSystem
     public class EncounterFile : ScriptableObject
     {
         [HideInInspector]
-        public ItemType itemType;
+        public ItemType ItemType;
 
         [Tooltip("챕터 번호")]
-        public short chaperLevel;
+        public short ChaperLevel;
         [Tooltip("진행도 번호")]
-        public short progressLevel;
+        public short ProgressLevel;
         [Space(10f)]
 
         [SerializeReference]
-        public List<Item> itemList = new List<Item>();
+        public List<Item> ItemList = new List<Item>();
 
         [Tooltip("특정 조건에 의해 나중에 인카운터 파일이 생길 경우 이곳에 넣으십시오.")]
-        public EncounterFile specialEncounterFile;
+        public EncounterFile SpecialEncounterFile;
 
         [ContextMenu("AddText")]
         public void AddText()
         {
-            itemList.Add(new TextItem());
+            ItemList.Add(new TextItem());
         }
 
         [ContextMenu("AddSprite")]
         public void AddSprite()
         {
-            itemList.Add(new SpriteItem());
+            ItemList.Add(new SpriteItem());
         }
 
         [ContextMenu("AddChoice")]
         public void AddChoice()
         {
-            itemList.Add(new ChoiceItem());
+            ItemList.Add(new ChoiceItem());
         }
     }
 }

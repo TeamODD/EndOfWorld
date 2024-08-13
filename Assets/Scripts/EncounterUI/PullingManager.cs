@@ -7,18 +7,19 @@ using UnityEngine.UI;
 public abstract class PullingManager : MonoBehaviour
 {
     [SerializeField]
-    protected GameObject _object;
+    protected GameObject initObject;
 
-    private Canvas canvas;
+    private Canvas _canvas;
+
     protected List<GameObject> pulledObjectList = new List<GameObject>();
 
     protected int nextPullingIndex = 0;
 
-    private static int hierarchyIndex = 0;
+    private static int _hierarchyIndex = 0;
 
-    private int objectInstantiateCount = 3;
+    private int _objectInstantiateCount = 3;
 
-
+    private GameObject _scrollViewObject;
 
     private void Awake()
     {
@@ -27,13 +28,14 @@ public abstract class PullingManager : MonoBehaviour
 
     private void init()
     {
-        canvas = this.GetComponent<PrintManager>().encounterUICanvas;
+        //canvas = this.GetComponent<PrintManager>().encounterUICanvas;
+        _scrollViewObject = this.GetComponent<PrintManager>().scrollViewObject;
 
         //미리 오브젝트 생성해놓기
-        for (int i = 0; i < objectInstantiateCount; i++)
+        for (int i = 0; i < _objectInstantiateCount; i++)
         {
-            pulledObjectList.Add(Instantiate(_object, canvas.transform.position, Quaternion.identity));
-            pulledObjectList[i].transform.SetParent(canvas.transform, false);
+            pulledObjectList.Add(Instantiate(initObject, _scrollViewObject.transform.position, Quaternion.identity));
+            pulledObjectList[i].transform.SetParent(_scrollViewObject.transform, false);
             pulledObjectList[i].SetActive(false);
         }
     }
@@ -45,13 +47,13 @@ public abstract class PullingManager : MonoBehaviour
 
         if (nextPullingIndex > pulledObjectList.Count - 1)
         {
-            pulledObjectList.Add(Instantiate(_object, canvas.transform.position, Quaternion.identity));
-            pulledObjectList[nextPullingIndex].transform.SetParent(canvas.transform);
+            pulledObjectList.Add(Instantiate(initObject, _canvas.transform.position, Quaternion.identity));
+            pulledObjectList[nextPullingIndex].transform.SetParent(_canvas.transform);
         }
         else
             pulledObjectList[nextPullingIndex].SetActive(true);
 
-        pulledObjectList[nextPullingIndex].transform.SetSiblingIndex(hierarchyIndex++);
+        pulledObjectList[nextPullingIndex].transform.SetSiblingIndex(_hierarchyIndex++);
         nextPullingIndex++;
     }
 

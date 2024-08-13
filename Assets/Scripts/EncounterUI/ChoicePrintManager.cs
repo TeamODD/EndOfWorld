@@ -7,17 +7,17 @@ using UnityEngine.UI;
 
 public class ChoicePrintManager : PullingManager
 {
-    private PrintManager printManager;
+    private PrintManager _printManager;
 
-    public float fadeSpeed = 1.0f;
+    public float FadeSpeed = 1.0f;
 
     private void Start()
     {
-        printManager = this.gameObject.GetComponent<PrintManager>();
+        _printManager = this.gameObject.GetComponent<PrintManager>();
     }
     private void EndPrint()
     {
-        printManager.isPrintDone = true;
+        _printManager.isPrintDone = true;
     }
 
     public void PrintChoice(List<TextAndEncounterFile> choice)

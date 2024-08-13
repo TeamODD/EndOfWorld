@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class EncounterButtonStats : MonoBehaviour
+namespace EndOfWorld.EncounterSystem
 {
-    EncounterManager encounterManager;
-
-    public int myIndex;
-
-    public void GiveSelectedChoiceIndex()
+    public class EncounterButtonStats : MonoBehaviour
     {
-        encounterManager = GameObject.FindWithTag("EncounterManager").GetComponent<EncounterManager>();
-        encounterManager.TakeAChoice(myIndex);
+        EncounterManager encounterManager;
+
+        public int myIndex;
+
+        public void OnGiveSelectedChoiceIndex()
+        {
+            encounterManager = GameObject.FindWithTag("EncounterManager").GetComponent<EncounterManager>();
+            encounterManager.TakeAChoice(myIndex);
+        }
     }
 }

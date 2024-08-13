@@ -8,14 +8,14 @@ public class ImagePrintManager : PullingManager
 {
     Image imageComponent;
 
-    private PrintManager printManager;
+    private PrintManager _printManager;
 
-    public float fadeSpeed = 1.0f;
+    public float FadeSpeed = 1.0f;
 
 
     private void Start()
     {
-        printManager = this.gameObject.GetComponent<PrintManager>();
+        _printManager = this.gameObject.GetComponent<PrintManager>();
     }
 
     public void PrintImage(Sprite sprite)
@@ -41,7 +41,7 @@ public class ImagePrintManager : PullingManager
 
     private void EndPrint()
     {
-        printManager.isPrintDone = true;
+        _printManager.isPrintDone = true;
     }
 
     IEnumerator ImageFadeAnimation()

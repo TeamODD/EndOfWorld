@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unusedEncounterFiles: []
   usedEncounterFiles: []
+  progressLevel: 0
