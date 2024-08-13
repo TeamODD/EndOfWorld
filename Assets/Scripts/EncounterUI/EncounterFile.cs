@@ -23,13 +23,13 @@ namespace EndOfWorld.EncounterSystem
         public short ChaperLevel;
         [Tooltip("진행도 번호")]
         public short ProgressLevel;
+        [Tooltip("특정 조건에 의해 나중에 인카운터 파일이 생길 경우 이곳에 넣으십시오.")]
+        public EncounterFile SpecialEncounterFile;
         [Space(10f)]
 
         [SerializeReference]
         public List<Item> ItemList = new List<Item>();
 
-        [Tooltip("특정 조건에 의해 나중에 인카운터 파일이 생길 경우 이곳에 넣으십시오.")]
-        public EncounterFile SpecialEncounterFile;
 
         [ContextMenu("AddText")]
         public void AddText()

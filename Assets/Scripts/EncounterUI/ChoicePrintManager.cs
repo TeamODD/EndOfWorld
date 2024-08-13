@@ -20,7 +20,7 @@ public class ChoicePrintManager : PullingManager
         _printManager.isPrintDone = true;
     }
 
-    public void PrintChoice(List<TextAndEncounterFile> choice)
+    public void PrintChoice(List<ChoiceContents> choice)
     {
         for(int i = nextPullingIndex; i < choice.Count; i++)
             PullObject();
@@ -29,7 +29,7 @@ public class ChoicePrintManager : PullingManager
         StartCoroutine(ChoiceFadeAnimation(choice.Count));
     }
 
-    public void SetChoiceContents(List<TextAndEncounterFile> choice)
+    public void SetChoiceContents(List<ChoiceContents> choice)
     {
         for (int i = 0; i < choice.Count; i++)
         {

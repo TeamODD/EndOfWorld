@@ -4,9 +4,16 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-
 namespace EndOfWorld.EncounterSystem
 {
+    public enum EventType
+    {
+        Encounter,
+        Heal,
+        UpgradeArmor,
+        Enchant
+    }
+
     [System.Serializable]
     public class Item
     {
@@ -59,16 +66,17 @@ namespace EndOfWorld.EncounterSystem
     [System.Serializable]
     public class ChoiceItem : Item
     {
-        public List<TextAndEncounterFile> choiceList;
+        public List<ChoiceContents> choiceList;
 
         public ChoiceItem() : base(ItemType.Choice)
         { }
     }
 
     [System.Serializable]
-    public class TextAndEncounterFile
+    public class ChoiceContents
     {
         public string text;
+        public EventType EventType;
         public EncounterFile encounterFile;
     }
 }

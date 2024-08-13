@@ -14,11 +14,10 @@ public class PlayerData : MonoBehaviour
 
     public int DEX { get; private set; }
 
+    public int Distance;
 
-    public enum BattleType {
-
-    }
-
+    public MonsterName MonsterName { get; private set; }
+    
     private void Awake()
     {
         init();
@@ -33,9 +32,8 @@ public class PlayerData : MonoBehaviour
         ATK = 0;
         DEF = 0;
         DEX = 0;
+        Distance = 0;
     }
-
-
 
     public void SetMaxHP(int amount)
     {
