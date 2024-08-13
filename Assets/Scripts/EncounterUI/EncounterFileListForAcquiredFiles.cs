@@ -9,23 +9,23 @@ using UnityEngine;
 [System.Serializable]
 public class EncounterFileListForAcquiredFiles : ScriptableObject
 {
-    public List<AcquiredEncounterFile> acquiredEncounterFileList = new List<AcquiredEncounterFile>();
+    public List<AcquiredEncounterFile> AcquiredEncounterFileList = new List<AcquiredEncounterFile>();
 
     public bool IsItAdded(short index)
     {
-        return acquiredEncounterFileList[index].isItAdded;
+        return AcquiredEncounterFileList[index].isItAdded;
     }
 
     public short GetChaperIndex(short index)
     {
-        return acquiredEncounterFileList[index].encounterFile.chaperLevel;
+        return AcquiredEncounterFileList[index].encounterFile.ChaperLevel;
     }
 
     public void SaveToAcquiredFileList(EncounterFile encounterFile)
     {
         AcquiredEncounterFile acquiredEncounterFile = new AcquiredEncounterFile(encounterFile);
 
-        acquiredEncounterFileList.Add(acquiredEncounterFile);
+        AcquiredEncounterFileList.Add(acquiredEncounterFile);
         SaveData();
     }
 

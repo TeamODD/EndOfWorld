@@ -16,21 +16,23 @@ MonoBehaviour:
   chaperLevel: 0
   progressLevel: 1
   itemList:
-  - rid: 1023324822833201182
-  - rid: 1023324841215262721
-  specialEncounterFile: {fileID: 11400000, guid: f34bf9f75be99c34898240303e4ee466, type: 2}
+  - rid: 5294809576733409285
+  - rid: 5294809576733409286
+  specialEncounterFile: {fileID: 0}
   references:
     version: 2
     RefIds:
-    - rid: 1023324822833201182
+    - rid: 5294809576733409285
       type: {class: TextItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
       data:
-        text: you good?
-    - rid: 1023324841215262721
+        text: ' Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industry''s standard dummy text ever
+          since the 1500s, when an unknown printer took a galley of type and scrambled
+          it to make a type specimen book. It has survived not only five centuries,
+          but also the leap into electronic typesetting, remaining essentially unchanged.'
+    - rid: 5294809576733409286
       type: {class: ChoiceItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
       data:
         choiceList:
-        - text: I'm good
-          encounterFile: {fileID: 0}
-        - text: no good
-          encounterFile: {fileID: 0}
+        - text: 1
+          encounterFile: {fileID: 11400000, guid: 32e297e65e5744f4c9a79f716f9d896b, type: 2}

@@ -15,8 +15,17 @@ MonoBehaviour:
   itemType: 0
   chaperLevel: 0
   progressLevel: 2
-  itemList: []
+  itemList:
+  - rid: 5294809576733409287
   specialEncounterFile: {fileID: 0}
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 5294809576733409287
+      type: {class: ChoiceItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        choiceList:
+        - text: asd123
+          encounterFile: {fileID: 0}
+        - text: 123124
+          encounterFile: {fileID: 0}

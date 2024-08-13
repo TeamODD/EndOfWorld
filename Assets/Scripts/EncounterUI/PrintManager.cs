@@ -19,6 +19,8 @@ public class PrintManager : MonoBehaviour
     [HideInInspector]
     public bool isPrintDone = false;
 
+    public GameObject scrollViewObject;
+
 
     void Awake()
     {
