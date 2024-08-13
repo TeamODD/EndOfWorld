@@ -42,7 +42,7 @@ public class PrintManager : MonoBehaviour
     {
         imageManager.PrintImage(sprite);
     }
-    public void PrintContent(List<TextAndEncounterFile> choiceList)
+    public void PrintContent(List<ChoiceContents> choiceList)
     {
         choiceManager.PrintChoice(choiceList);
     }

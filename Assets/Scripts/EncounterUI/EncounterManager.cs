@@ -31,7 +31,7 @@ namespace EndOfWorld.EncounterSystem
 
         private List<Item> _itemList;
 
-        private List<TextAndEncounterFile> _choiceItemList;
+        private List<ChoiceContents> _choiceItemList;
 
         private int _thisProgressLevel = 0;
 
@@ -141,20 +141,37 @@ namespace EndOfWorld.EncounterSystem
         {
             ConveyToUsedList();
 
-            if (_choiceItemList[index].encounterFile != null)
+            switch(_choiceItemList[index].EventType)
             {
-                _encounterFile = _choiceItemList[index].encounterFile;
-                CopyItems();
-                ConnectEncounter();
-            }
-            else //인카운터 파일이 null일 경우 (다음 encounterFile이 없을 경우)
-            {
-                _thisProgressLevel += 1;
+                case EventType.Encounter:
+                    _encounterFile = _choiceItemList[index].encounterFile;
+                    CopyItems();
+                    ConnectEncounter();
 
-                SelectRandomEncounterFile();
-                CopyItems();
-                SkipEncounter();
+                    break;
+
+                case EventType.Heal:
+                    _thisProgressLevel += 1;
+
+
+                    break;
+
+                case EventType.UpgradeArmor:
+                    _thisProgressLevel += 1;
+
+                    break;
+
+                case EventType.Enchant:
+                    _thisProgressLevel += 1;
+
+
+                    break;
             }
+
+
+            SelectRandomEncounterFile();
+            CopyItems();
+            SkipEncounter();
 
             SaveData();
         }

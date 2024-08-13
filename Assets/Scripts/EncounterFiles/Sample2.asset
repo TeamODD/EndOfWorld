@@ -12,27 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a1cd31fa423ef409a822f46b285cfc, type: 3}
   m_Name: Sample2
   m_EditorClassIdentifier: 
-  itemType: 0
-  chaperLevel: 0
-  progressLevel: 1
-  itemList:
-  - rid: 5294809576733409285
-  - rid: 5294809576733409286
-  specialEncounterFile: {fileID: 0}
+  ItemType: 0
+  ChaperLevel: 0
+  ProgressLevel: 0
+  ItemList:
+  - rid: 5294809602512388099
+  SpecialEncounterFile: {fileID: 0}
   references:
     version: 2
     RefIds:
-    - rid: 5294809576733409285
+    - rid: 5294809602512388099
       type: {class: TextItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
       data:
-        text: ' Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry''s standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and scrambled
-          it to make a type specimen book. It has survived not only five centuries,
-          but also the leap into electronic typesetting, remaining essentially unchanged.'
-    - rid: 5294809576733409286
-      type: {class: ChoiceItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
-      data:
-        choiceList:
-        - text: 1
-          encounterFile: {fileID: 11400000, guid: 32e297e65e5744f4c9a79f716f9d896b, type: 2}
+        text: "\uB2F9\uC2E0\uC740 \uC5B4\uB290\uC0C8 \uC190\uC5D0 \uB4E4\uB824\uC788\uB358
+          \uBB34\uAE30\uC640 \uD568\uAED8, \uB545\uC5D0\uC11C\uBD80\uD130 \uC19F\uC544\uC788\uB294
+          \uAC70\uB300\uD55C \uBFCC\uB9AC \uC0AC\uC774\uB85C \uAC77\uAE30 \uC2DC\uC791\uD588\uB2E4."
