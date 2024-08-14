@@ -38,25 +38,30 @@ public class PlayerData : MonoBehaviour
     public void SetMaxHP(int amount)
     {
         this.MaxHP += amount;
+        Debug.Log("MaxHp " + amount);
     }
 
     public void SetHP(int amount)
     {
         this.HP += amount;
+        Debug.Log("Hp " + amount);
     }
 
     public void SetATK(int amount)
     {
         this.ATK += amount;
+        Debug.Log("ATK " + amount);
     }
 
     public void SetDEF(int amount)
     {
         this.DEF += amount;
+        Debug.Log("DEF " + amount);
     }
 
     public void SetDEX(int amount)
     {
         this.DEX += amount;
+        Debug.Log("DEX " + amount);
     }
 }

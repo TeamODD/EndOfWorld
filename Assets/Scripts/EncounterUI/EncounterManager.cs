@@ -6,6 +6,7 @@ using System.Linq;
 using static UnityEngine.GraphicsBuffer;
 using UnityEditor;
 
+
 namespace EndOfWorld.EncounterSystem
 {
     public class EncounterManager : MonoBehaviour
@@ -37,10 +38,13 @@ namespace EndOfWorld.EncounterSystem
 
         private int _encounterFileIndex;
 
+        private EnchantManager _enchantManager;
 
         private void Awake()
         {
             _printManager = GameObject.FindWithTag("PrintManager").GetComponent<PrintManager>();
+
+            _enchantManager = GameObject.FindWithTag("EnchantManager").GetComponent<EnchantManager>();
         }
 
         private void Start()
@@ -109,28 +113,54 @@ namespace EndOfWorld.EncounterSystem
 
         IEnumerator PrintEncounter()
         {
-            //인카운터 파일 내 리스트에 요소가 없을 경우(special encounter만 저장하고 싶을 경우)
-            if (_encounterFile.ItemList == null)
-            {
-                CheckAndSaveSpecialEncounter();
-                ConveyToUsedList();
-                SaveData();
-                yield return null;
-            }
-
             CopyItems();
 
-            CheckAndSaveSpecialEncounter();
 
             foreach (var item in _itemList)
             {
-                CallPrintManager(item);
+                switch (item.ItemType)
+                {
+                    case ItemType.Text:
+                    case ItemType.Sprite:
+                    case ItemType.Choice:
 
-                yield return new WaitUntil(() => _printManager.isPrintDone == true);
-                yield return null;
+                        CallPrintManager(item);
 
-                _printManager.isPrintDone = false;
-                yield return null;
+                        yield return new WaitUntil(() => _printManager.isPrintDone == true);
+                        yield return null;
+
+                        _printManager.isPrintDone = false;
+                        yield return null;
+
+                        break;
+
+                    case ItemType.Encounter:
+                        break;
+
+                    case ItemType.SetHP:
+                        break;
+
+                    case ItemType.UpgradeArmor:
+                        break;
+
+                    case ItemType.Enchant:
+                        _enchantManager.gameObject.transform.parent.gameObject.SetActive(true);
+                        _enchantManager.StartEnchantManager();
+
+                        yield return new WaitUntil(() => _enchantManager.IsEnchantDone == true);
+                        yield return null;
+
+                        _enchantManager.IsEnchantDone = false;
+                        _enchantManager.gameObject.transform.parent.gameObject.SetActive(false);
+                        yield return null;
+
+                        break;
+
+                    case ItemType.SpecialEncounter:
+                        SaveSpecialEncounter( (SpecialEncounterItem)item );
+                        break;
+                }
+
             }
 
             yield return null;
@@ -140,38 +170,21 @@ namespace EndOfWorld.EncounterSystem
         public void TakeAChoice(int index)
         {
             ConveyToUsedList();
-
-            switch(_choiceItemList[index].EventType)
+            
+            if (_choiceItemList[index].encounterFile != null)
             {
-                case EventType.Encounter:
-                    _encounterFile = _choiceItemList[index].encounterFile;
-                    CopyItems();
-                    ConnectEncounter();
-
-                    break;
-
-                case EventType.Heal:
-                    _thisProgressLevel += 1;
-
-
-                    break;
-
-                case EventType.UpgradeArmor:
-                    _thisProgressLevel += 1;
-
-                    break;
-
-                case EventType.Enchant:
-                    _thisProgressLevel += 1;
-
-
-                    break;
+                _encounterFile = _choiceItemList[index].encounterFile;
+                CopyItems();
+                ConnectEncounter();
             }
+            else
+            {
+                _thisProgressLevel += 1;
 
-
-            SelectRandomEncounterFile();
-            CopyItems();
-            SkipEncounter();
+                SelectRandomEncounterFile();
+                CopyItems();
+                SkipEncounter();
+            }
 
             SaveData();
         }
@@ -179,21 +192,13 @@ namespace EndOfWorld.EncounterSystem
         /// <summary>
         /// SpecialEncounter가 있는지 확인하고 저장
         /// </summary>
-        private void CheckAndSaveSpecialEncounter()
+        private void SaveSpecialEncounter(SpecialEncounterItem specialEncounterItem)
         {
-            bool CheckIsHavingSpecialEncounter()
-            {
-                return this._encounterFile.SpecialEncounterFile != null;
-            }
+            _encounterFileListForAcquiredFiles.SaveToAcquiredFileList(specialEncounterItem.SpecialEncounterFile);
 
-            if (CheckIsHavingSpecialEncounter())
-            {
-                _encounterFileListForAcquiredFiles.SaveToAcquiredFileList(this._encounterFile.SpecialEncounterFile);
-
-                //리스트에 중복되는 요소 제거
-                _encounterFileListForAcquiredFiles.AcquiredEncounterFileList =
-                    _encounterFileListForAcquiredFiles.AcquiredEncounterFileList.Distinct().ToList();
-            }
+            //리스트에 중복되는 요소 제거
+            _encounterFileListForAcquiredFiles.AcquiredEncounterFileList =
+                _encounterFileListForAcquiredFiles.AcquiredEncounterFileList.Distinct().ToList();
         }
 
         private void SkipEncounter()

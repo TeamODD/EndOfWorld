@@ -62,6 +62,8 @@ public abstract class PullingManager : MonoBehaviour
         for (int i = nextPullingIndex - 1; i >= 0; i--)
         {
             pulledObjectList[i].SetActive(false);
+            pulledObjectList[i].transform.SetSiblingIndex((pulledObjectList.Count - 1) - _hierarchyIndex);
+            _hierarchyIndex -= 1;
         }
 
         CheckIndex();

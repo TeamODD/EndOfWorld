@@ -1,17 +1,23 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
 namespace EndOfWorld.EncounterSystem
 {
-    public enum EventType
+    public enum ItemType
     {
+        Text,
+        Sprite,
+        Choice,
         Encounter,
-        Heal,
+        SetHP,
         UpgradeArmor,
-        Enchant
+        Enchant,
+        SpecialEncounter
     }
 
     [System.Serializable]
@@ -70,13 +76,80 @@ namespace EndOfWorld.EncounterSystem
 
         public ChoiceItem() : base(ItemType.Choice)
         { }
+
+
     }
 
     [System.Serializable]
     public class ChoiceContents
     {
         public string text;
-        public EventType EventType;
         public EncounterFile encounterFile;
+    }
+
+    [System.Serializable]
+    public class EncounterItem : Item
+    {
+        public bool Encounter;
+
+        public EncounterItem() : base(ItemType.Encounter)
+        { }
+    }
+
+    [System.Serializable]
+    public class SetHPItem : Item
+    {
+        public bool _SetHP;
+
+        PlayerData _playerData;
+
+        public void SetHP(int amount)
+        {
+            _playerData = GameObject.FindWithTag("PlayerData").GetComponent<PlayerData>();
+
+            _playerData.SetHP(amount);
+        }
+
+        public SetHPItem() : base(ItemType.SetHP)
+        { }
+    }
+
+    [System.Serializable]
+    public class UpgradeArmorItem : Item
+    {
+        public bool UpgradeArmor;
+
+        PlayerData _playerData;
+
+        public void SetDef(int amount)
+        {
+            _playerData = GameObject.FindWithTag("PlayerData").GetComponent<PlayerData>();
+
+            _playerData.SetDEF(amount);
+        }
+
+        public UpgradeArmorItem() : base(ItemType.UpgradeArmor) { }
+    }
+
+    [System.Serializable]
+    public class EnchantItem : Item
+    {
+        public bool Enchant;
+
+        EnchantManager _enchantManager;
+
+
+        public EnchantItem() : base(ItemType.Enchant) 
+        {
+
+        }
+    }
+
+    [System.Serializable]
+    public class SpecialEncounterItem : Item
+    {
+        public EncounterFile SpecialEncounterFile;
+
+        public SpecialEncounterItem() : base(ItemType.SpecialEncounter) { }
     }
 }

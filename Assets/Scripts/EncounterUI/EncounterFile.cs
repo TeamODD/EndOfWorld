@@ -5,13 +5,6 @@ using UnityEngine;
 
 namespace EndOfWorld.EncounterSystem
 {
-    public enum ItemType
-    {
-        Text,
-        Sprite,
-        Choice,
-    }
-
     [CreateAssetMenu(fileName = "EncounterFile", menuName = "EncounterSystem/EncounterFile")]
     [System.Serializable]
     public class EncounterFile : ScriptableObject
@@ -23,8 +16,6 @@ namespace EndOfWorld.EncounterSystem
         public short ChaperLevel;
         [Tooltip("진행도 번호")]
         public short ProgressLevel;
-        [Tooltip("특정 조건에 의해 나중에 인카운터 파일이 생길 경우 이곳에 넣으십시오.")]
-        public EncounterFile SpecialEncounterFile;
         [Space(10f)]
 
         [SerializeReference]
@@ -47,6 +38,36 @@ namespace EndOfWorld.EncounterSystem
         public void AddChoice()
         {
             ItemList.Add(new ChoiceItem());
+        }
+
+        [ContextMenu("AddEncounter")]
+        public void AddEncounter()
+        {
+            ItemList.Add(new EncounterItem());
+        }
+
+        [ContextMenu("AddSetHP")]
+        public void AddSetHP()
+        {
+            ItemList.Add(new SetHPItem());
+        }
+
+        [ContextMenu("AddUpgradeArmor")]
+        public void AddUpgradeArmor()
+        {
+            ItemList.Add(new UpgradeArmorItem());
+        }
+
+        [ContextMenu("AddEnchant")]
+        public void AddEnchant()
+        {
+            ItemList.Add(new EnchantItem());
+        }
+
+        [ContextMenu("AddSpecialEncounter")]
+        public void AddSpecialEncounter()
+        {
+            ItemList.Add(new SpecialEncounterItem());
         }
     }
 }
