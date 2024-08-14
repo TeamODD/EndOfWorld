@@ -17,24 +17,15 @@ MonoBehaviour:
   ProgressLevel: 1
   ItemList:
   - rid: 5294809602512388100
-  - rid: 5294809602512388101
-  - rid: 5294809602512388102
-  SpecialEncounterFile: {fileID: 0}
+  - rid: 5294809628353232898
   references:
     version: 2
     RefIds:
     - rid: 5294809602512388100
       type: {class: TextItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
       data:
-        text: 
-    - rid: 5294809602512388101
-      type: {class: SpriteItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+        text: Enchant?
+    - rid: 5294809628353232898
+      type: {class: EnchantItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
       data:
-        sprite: {fileID: 0}
-    - rid: 5294809602512388102
-      type: {class: ChoiceItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
-      data:
-        choiceList:
-        - text: 
-          EventType: 3
-          encounterFile: {fileID: 0}
+        Enchant: 0

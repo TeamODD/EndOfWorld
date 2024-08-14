@@ -7,6 +7,8 @@ TagManager:
   - EncounterUI
   - PrintManager
   - EncounterManager
+  - PlayerData
+  - EnchantManager
   layers:
   - Default
   - TransparentFX

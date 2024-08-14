@@ -257,8 +257,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: -2923372151906784170}
-        m_TargetAssemblyTypeName: EncounterButtonStats, Assembly-CSharp
-        m_MethodName: GiveSelectedChoiceIndex
+        m_TargetAssemblyTypeName: EndOfWorld.EncounterSystem.EncounterButtonStats,
+          Assembly-CSharp
+        m_MethodName: OnGiveSelectedChoiceIndex
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
