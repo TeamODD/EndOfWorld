@@ -30,6 +30,7 @@ public class CombatHUDManager : MonoBehaviour
         int index = 0;
 
         //당장은 테스트를 위해 위치상관없이 생성만
+        //왼쪽은 공격, 오른쪽은 이동스킬들만 모아둔 그룹을 2개 생성하여 만들 예정
         foreach (SkillDB skill in skills)
         {
             Button button = Instantiate(skillButton);
@@ -37,7 +38,7 @@ public class CombatHUDManager : MonoBehaviour
             button.onClick.AddListener(CombatSystemManager.Instance.OnSkillButton);
 
             SkillButtonInfo info = button.GetComponent<SkillButtonInfo>();
-            info.InfoInit(index, skill.NAME, skill.USES);
+            info.InfoInit(index, skill);
 
 
             index++;
