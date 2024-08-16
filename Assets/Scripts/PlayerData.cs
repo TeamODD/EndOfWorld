@@ -1,7 +1,5 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 public class PlayerData : MonoBehaviour
 {
@@ -15,8 +13,6 @@ public class PlayerData : MonoBehaviour
     private int defencePoint;
     [SerializeField]
     private int speedPoint;
-
-    public Text MaxHPUI;
 
     public int MaxHP
     {
