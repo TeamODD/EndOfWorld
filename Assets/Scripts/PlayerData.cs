@@ -1,67 +1,93 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class PlayerData : MonoBehaviour
 {
-    public int MaxHP { get; private set; }
+    [SerializeField]
+    private int maxHP;
+    [SerializeField]
+    private int currentHP;
+    [SerializeField]
+    private int attackPoint;
+    [SerializeField]
+    private int defencePoint;
+    [SerializeField]
+    private int speedPoint;
 
-    public int HP { get; private set; }
+    public Text MaxHPUI;
 
-    public int ATK { get; private set; }
-
-    public int DEF { get; private set; }
-
-    public int DEX { get; private set; }
-
-    public int Distance;
-
-    public MonsterName MonsterName { get; private set; }
+    public int MaxHP
+    {
+        get => maxHP;
+        set
+        {
+            int gap=value-maxHP;
+            maxHP=value;
+            if(gap>0)
+            {
+                CurrentHP+=gap;
+            }
+            else
+            {
+                CurrentHP=MaxHP<CurrentHP? MaxHP : CurrentHP;
+            }
+        }
+    }
+    public int CurrentHP
+    {
+        get => currentHP;
+        set
+        {
+            currentHP=value<=MaxHP ? value : MaxHP;
+            OnHPChanged.Invoke(MaxHP, CurrentHP);
+        }
+    }
+    public int AttackPoint
+    {
+        get => attackPoint;
+        set
+        {
+            attackPoint=value>=0 ? value : 0;
+            OnAttackPointChanged.Invoke(AttackPoint);
+        }
+    }
+    public int DefencePoint
+    {
+        get => defencePoint;
+        set
+        {
+            defencePoint=value>=0 ? value : 0;
+            OnDefencePointChanged.Invoke(DefencePoint);
+        }
+    }
+    public int SpeedPoint
+    {
+        get => speedPoint;
+        set
+        {
+            speedPoint=value>=0 ? value : 0;
+            OnSpeedPointChanged.Invoke(SpeedPoint);
+        }
+    }
     
     private void Awake()
     {
-        init();
-    }
-
-    private void init()
-    {
         DontDestroyOnLoad(this.gameObject);
 
-        MaxHP = 0;
-        HP = 0;
-        ATK = 0;
-        DEF = 0;
-        DEX = 0;
-        Distance = 0;
+        MaxHP+=100;
+        CurrentHP-=50;
+        MaxHP+=50;
+        MaxHP-=30;
+        MaxHP-=30;
+        AttackPoint=10;
+        DefencePoint=10;
+        SpeedPoint=10;
     }
 
-    public void SetMaxHP(int amount)
-    {
-        this.MaxHP += amount;
-        Debug.Log("MaxHp " + amount);
-    }
-
-    public void SetHP(int amount)
-    {
-        this.HP += amount;
-        Debug.Log("Hp " + amount);
-    }
-
-    public void SetATK(int amount)
-    {
-        this.ATK += amount;
-        Debug.Log("ATK " + amount);
-    }
-
-    public void SetDEF(int amount)
-    {
-        this.DEF += amount;
-        Debug.Log("DEF " + amount);
-    }
-
-    public void SetDEX(int amount)
-    {
-        this.DEX += amount;
-        Debug.Log("DEX " + amount);
-    }
+    public UnityEvent<int, int> OnHPChanged;
+    public UnityEvent<int> OnAttackPointChanged;
+    public UnityEvent<int> OnDefencePointChanged;
+    public UnityEvent<int> OnSpeedPointChanged;
 }
