@@ -106,8 +106,16 @@ public class SkillSO : ScriptableObject
     private int cooltime;
     public int COOLTIME { get { return cooltime; } }
 
-    [SerializeField, Space(), Header("대사")]
-    private string text;
-    public string TEXT { get { return text; } }
+    [SerializeField, Space(1), Header("사용 시 대사")]
+    private string usingtext;
+    public string USINGTEXT { get { return usingtext; } }
+
+    [SerializeField, Space(1), Header("적중 시 대사")]
+    private string hittext;
+    public string HITTEXT { get { return hittext; } }
+
+    [SerializeField, Space(1), Header("비 적중 시 대사")]
+    private string misstext;
+    public string MISSTEXT { get { return misstext; } }
 }
 

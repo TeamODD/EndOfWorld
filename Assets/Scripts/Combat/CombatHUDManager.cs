@@ -10,7 +10,10 @@ public class CombatHUDManager : MonoBehaviour
     [SerializeField] private TMP_Text DEF_Text;
     [SerializeField] private Slider hpSlider;
     [SerializeField] private Button skillButton;
-    [SerializeField] private GameObject skillButtonParent;
+    [SerializeField] private GameObject CombatSkillParent;
+    [SerializeField] private GameObject MoveSkillParent;
+
+    private List<Button> skillButtons = new List<Button>();
 
     public void SetHUD(StatSystem unit)
     {
@@ -29,20 +32,35 @@ public class CombatHUDManager : MonoBehaviour
     {
         int index = 0;
 
-        //당장은 테스트를 위해 위치상관없이 생성만
-        //왼쪽은 공격, 오른쪽은 이동스킬들만 모아둔 그룹을 2개 생성하여 만들 예정
         foreach (SkillDB skill in skills)
         {
             Button button = Instantiate(skillButton);
-            button.transform.SetParent(skillButtonParent.transform);
-            button.onClick.AddListener(CombatSystemManager.Instance.OnSkillButton);
-
+            skillButtons.Add(button);
             SkillButtonInfo info = button.GetComponent<SkillButtonInfo>();
-            info.InfoInit(index, skill);
+            if(skill.TYPE == SkillSO.SkillType.combatSkill)
+            {
+                button.transform.SetParent(CombatSkillParent.transform);
+            }
 
+            else if(skill.TYPE == SkillSO.SkillType.moveSkill)
+            {
+                button.transform.SetParent(MoveSkillParent.transform);
+            }
 
-            index++;
+            info.InfoInit(index++, skill);
+            button.onClick.AddListener(CombatSystemManager.Instance.OnSkillButton);
         }
     }
+
+    public void SetButtonActivated()
+    {
+        foreach(Button skill in  skillButtons)
+        {
+            if (skill.GetComponent<SkillButtonInfo>().skill.USES < 1 || skill.GetComponent<SkillButtonInfo>().skill.COOLTIME > 0) skill.interactable = false;
+            else skill.interactable = true;
+        }
+    }
+
+    //거리에 따른 적 이미지 크기 조절 함수 만들기
 
 }

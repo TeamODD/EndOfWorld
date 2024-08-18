@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34fe107c39d1b174ba3e58cd696dfc92, type: 3}
-  m_Name: Attack
+  m_Name: testLink
   m_EditorClassIdentifier: 
-  skillname: Attack
-  skilltype: 0
-  skillattacktype: 1
+  skillname: link
+  skilltype: 2
+  skillattacktype: 3
   target: 0
   coefficienttype: 1
   minAttackRange: 1
-  maxAttackRange: 2
+  maxAttackRange: 5
   numberOfAttack: 1
   damage: 80
-  minDistance: 2
-  maxDistance: 2
+  minDistance: 0
+  maxDistance: 0
   move: 0
   effect: []
-  linkskill: {fileID: 11400000, guid: 93a39dfdc0148974bbe199396fa2d138, type: 2}
+  linkskill: {fileID: 0}
   skillicon: {fileID: 0}
   uses: 3
   cooltime: 0
-  usingtext: "\uACF5\uACA9!"
-  hittext: "\uC801\uC911!"
-  misstext: "\uD68C\uD53C!"
+  usingtext: 
+  hittext: 
+  misstext: 
