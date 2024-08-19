@@ -17,7 +17,7 @@ MonoBehaviour:
   ProgressLevel: 0
   ItemList:
   - rid: 5294809602512388099
-  SpecialEncounterFile: {fileID: 0}
+  - rid: 5294809736215265280
   references:
     version: 2
     RefIds:
@@ -27,3 +27,9 @@ MonoBehaviour:
         text: "\uB2F9\uC2E0\uC740 \uC5B4\uB290\uC0C8 \uC190\uC5D0 \uB4E4\uB824\uC788\uB358
           \uBB34\uAE30\uC640 \uD568\uAED8, \uB545\uC5D0\uC11C\uBD80\uD130 \uC19F\uC544\uC788\uB294
           \uAC70\uB300\uD55C \uBFCC\uB9AC \uC0AC\uC774\uB85C \uAC77\uAE30 \uC2DC\uC791\uD588\uB2E4."
+    - rid: 5294809736215265280
+      type: {class: ChoiceItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        choiceList:
+        - text: "\uACC4\uC18D\uD55C\uB2E4."
+          encounterFile: {fileID: 0}

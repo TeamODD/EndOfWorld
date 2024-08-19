@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,6 +14,8 @@ public class PlayerData : MonoBehaviour
     private int defencePoint;
     [SerializeField]
     private int speedPoint;
+
+    public List<SkillSO> Skill = new List<SkillSO>();
 
     public int MaxHP
     {

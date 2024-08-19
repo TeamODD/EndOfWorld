@@ -6,6 +6,20 @@ using EndOfWorld.EncounterSystem;
 using Unity.VisualScripting;
 using TMPro;
 
+
+[System.Serializable]
+public class StatsImageData
+{
+    public Sprite MaxHPImage;
+
+    public Sprite AttackPointImage;
+
+    public Sprite DefensePointImage;
+
+    public Sprite SpeedPointImage;
+}
+
+
 public class EnchantManager : MonoBehaviour
 {
     private enum Stats
@@ -16,34 +30,81 @@ public class EnchantManager : MonoBehaviour
         DEX
     }
 
-    [SerializeField]
-    private Image _background;
+    private enum SkillType
+    {
+        Fire,
+        Water,
+        Earth,
+        Wind
+    }
+
+    /// <summary>
+    /// 인챈트 UI 오브젝트
+    /// </summary>
+    [Header("UI Objects")]
 
     [SerializeField]
-    private Image _foreground;
+    private Image _backgroundBlackScreen;
+
+    [SerializeField]
+    private Image _UIbackground;
 
     [SerializeField]
     private Image _choiceA;
     [SerializeField]
     private Image _choiceB;
+    [SerializeField]
+    private Image _choiceC;
+
+    [SerializeField]
+    private StatsImageData _statsImageData;
 
     private TMP_Text _textA;
     private TMP_Text _textB;
+    private TMP_Text _textC;
 
     private CanvasGroup _canvasGroup;
+
+    /// <summary>
+    /// 랜덤으로 뽑아서 PlayerData에 전달할 SkillSO 리스트
+    /// </summary>
+    [Header("SkillSO")]
+
+    [SerializeField]
+    private List<SkillSO> _fireSkills;
+
+    [SerializeField]
+    private List<SkillSO> _waterSkills;
+
+    [SerializeField]
+    private List<SkillSO> _earthSkills;
+
+    [SerializeField]
+    private List<SkillSO> _windSkills;
+
+
+    
+    private SkillSO _skillSO1;
+
+    private SkillSO _skillSO2;
+
+    /// <summary>
+    /// 스크립트 내부 지역 필드
+    /// </summary>
+
+    [HideInInspector]
+    public bool IsEnchantDone = false;
 
     private int[,] _statsAmount = new int[4, 3];
 
     private string _statsA;
-    private string _statsB;
 
     private int _amountA;
-    private int _amountB;
 
     private PlayerData _playerData;
 
-    [HideInInspector]
-    public bool IsEnchantDone = false;
+    private SkillType _skillType;
+
 
     private void Start()
     {
@@ -68,9 +129,12 @@ public class EnchantManager : MonoBehaviour
 
         _textA = _choiceA.gameObject.transform.GetChild(0).GetComponent<TMP_Text>();
         _textB = _choiceB.gameObject.transform.GetChild(0).GetComponent<TMP_Text>();
+        _textC = _choiceC.gameObject.transform.GetChild(0).GetComponent<TMP_Text>();
+
         _canvasGroup = this.gameObject.transform.parent.GetComponent<CanvasGroup>();
         _playerData = GameObject.FindWithTag("PlayerData").GetComponent<PlayerData>();
 
+        
 
         if(this.gameObject.transform.parent.gameObject.activeSelf)
         {
@@ -80,22 +144,22 @@ public class EnchantManager : MonoBehaviour
 
     public void StartEnchantManager()
     {
-        DrawTwoRandomStats();
+        DrawRandomSkillType();
+        DrawRandomStats();
         StartCoroutine(FadeOut());
     }
 
 
-    private void DrawTwoRandomStats()
+    private void DrawRandomSkillType()
+    {
+        int enumNum = Random.Range(0, 4);
+
+        _skillType = (SkillType)enumNum;
+    }
+
+    private void DrawRandomStats()
     {
         int choiceA = Random.Range(0, 4);
-        int choiceB = Random.Range(0, 4);
-
-        //중복 방지
-        while(choiceA == choiceB)
-        {
-            choiceA = Random.Range(0, 4);
-            choiceB = Random.Range(0, 4);
-        }
 
         switch(choiceA)
         {
@@ -113,33 +177,113 @@ public class EnchantManager : MonoBehaviour
                 break;
         }
 
-        switch (choiceB)
-        {
-            case 0:
-                _statsB = "최대 체력";
-                break;
-            case 1:
-                _statsB = "공격력";
-                break;
-            case 2:
-                _statsB = "방어력";
-                break;
-            case 3:
-                _statsB = "민첩성";
-                break;
-        }
+        PrintAbilityImage(choiceA);
 
         _amountA = _statsAmount[choiceA, Random.Range(0, 3)];
-        _amountB = _statsAmount[choiceB, Random.Range(0, 3)];
+    }
+
+    private void PrintAbilityImage(int index)
+    {
+        switch(index)
+        {
+            case 0:
+                _choiceA.sprite = _statsImageData.MaxHPImage;
+                break;
+            case 1:
+                _choiceA.sprite = _statsImageData.AttackPointImage;
+                break;
+            case 2:
+                _choiceA.sprite = _statsImageData.DefensePointImage;
+                break;
+            case 3:
+                _choiceA.sprite = _statsImageData.SpeedPointImage; 
+                break;
+        }
+    }
+
+    private void DrawRandomTwoSkills()
+    {
+        int randomNumber1;
+        int randomNumber2;
+
+        switch(_skillType)
+        {
+            case SkillType.Fire:
+                if (_fireSkills.Count == 0) break;
+
+                randomNumber1 = Random.Range(0, _fireSkills.Count + 1);
+                randomNumber2 = Random.Range(0, _fireSkills.Count + 1);
+                while (randomNumber2 == randomNumber1)
+                {
+                    if (_fireSkills.Count < 2) break;
+
+                    randomNumber2 = Random.Range(0, _fireSkills.Count + 1);
+                }
+
+                _skillSO1 = _fireSkills[randomNumber1];
+                _skillSO2 = _fireSkills[randomNumber2];
+                break;
+
+            case SkillType.Water:
+                if (_waterSkills.Count == 0) break;
+
+                randomNumber1 = Random.Range(0, _waterSkills.Count + 1);
+                randomNumber2 = Random.Range(0, _waterSkills.Count + 1);
+                while (randomNumber2 == randomNumber1)
+                {
+                    if (_waterSkills.Count < 2) break;
+
+                    randomNumber2 = Random.Range(0, _waterSkills.Count + 1);
+                }
+
+                _skillSO1 = _waterSkills[randomNumber1];
+                _skillSO2 = _waterSkills[randomNumber2];
+                break;
+
+            case SkillType.Earth:
+                if (_earthSkills.Count == 0) break;
+
+                randomNumber1 = Random.Range(0, _earthSkills.Count + 1);
+                randomNumber2 = Random.Range(0, _earthSkills.Count + 1);
+                while (randomNumber2 == randomNumber1)
+                {
+                    if (_earthSkills.Count < 2) break;
+
+                    randomNumber2 = Random.Range(0, _earthSkills.Count + 1);
+                }
+
+                _skillSO1 = _earthSkills[randomNumber1];
+                _skillSO2 = _earthSkills[randomNumber2];
+                break;
+
+            case SkillType.Wind:
+                if (_windSkills.Count == 0) break;
+
+                randomNumber1 = Random.Range(0, _windSkills.Count + 1);
+                randomNumber2 = Random.Range(0, _windSkills.Count + 1);
+                while (randomNumber2 == randomNumber1)
+                {
+                    if (_windSkills.Count < 2) break;
+
+                    randomNumber2 = Random.Range(0, _windSkills.Count + 1);
+                }
+
+                _skillSO1 = _windSkills[randomNumber1];
+                _skillSO2 = _windSkills[randomNumber2];
+                break;
+        }
     }
 
     private void PrintText()
     {
         _textA.text = _statsA + "+" + _amountA;
-        _textB.text = _statsB + "+" + _amountB;
+
+        if(_skillSO1 != null)
+        _textB.text = _skillSO1.SKILLNAME;
+
+        if(_skillSO2 != null)
+        _textC.text = _skillSO2.SKILLNAME;
     }
-
-
 
     IEnumerator FadeIn()
     {
@@ -177,22 +321,21 @@ public class EnchantManager : MonoBehaviour
     }
 
 
-
     public void SelectA()
     {
         switch(_statsA)
         {
             case "최대 체력":
-                _playerData.SetMaxHP(_amountA);
+                _playerData.MaxHP += _amountA;
                 break;
             case "공격력":
-                _playerData.SetATK(_amountA);
+                _playerData.AttackPoint += _amountA;
                 break;
             case "방어력":
-                _playerData.SetDEF(_amountA);
+                _playerData.DefencePoint += _amountA;
                 break;
             case "민첩성":
-                _playerData.SetDEX(_amountA);
+                _playerData.SpeedPoint += _amountA;
                 break;
         }
 
@@ -201,23 +344,17 @@ public class EnchantManager : MonoBehaviour
 
     public void SelectB()
     {
-        switch (_statsB)
-        {
-            case "최대 체력":
-                _playerData.SetMaxHP(_amountB);
-                break;
-            case "공격력":
-                _playerData.SetATK(_amountB);
-                break;
-            case "방어력":
-                _playerData.SetDEF(_amountB);
-                break;
-            case "민첩성":
-                _playerData.SetDEX(_amountB);
-                break;
-        }
+        _playerData.Skill.Add(_skillSO1);
+
+        StartCoroutine(FadeIn());
+    }
+
+    public void SelectC()
+    {
+        _playerData.Skill.Add(_skillSO2);
 
         StartCoroutine(FadeIn());
     }
 }
+
 

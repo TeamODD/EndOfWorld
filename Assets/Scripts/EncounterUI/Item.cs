@@ -107,7 +107,7 @@ namespace EndOfWorld.EncounterSystem
         {
             _playerData = GameObject.FindWithTag("PlayerData").GetComponent<PlayerData>();
 
-            _playerData.SetHP(amount);
+            _playerData.CurrentHP += amount;
         }
 
         public SetHPItem() : base(ItemType.SetHP)
@@ -125,7 +125,7 @@ namespace EndOfWorld.EncounterSystem
         {
             _playerData = GameObject.FindWithTag("PlayerData").GetComponent<PlayerData>();
 
-            _playerData.SetDEF(amount);
+            _playerData.DefencePoint += amount;
         }
 
         public UpgradeArmorItem() : base(ItemType.UpgradeArmor) { }

@@ -40,6 +40,8 @@ namespace EndOfWorld.EncounterSystem
 
         private EnchantManager _enchantManager;
 
+        private bool IsConneting = false;
+
         private void Awake()
         {
             _printManager = GameObject.FindWithTag("PrintManager").GetComponent<PrintManager>();
@@ -170,16 +172,19 @@ namespace EndOfWorld.EncounterSystem
         public void TakeAChoice(int index)
         {
             ConveyToUsedList();
-            
+
             if (_choiceItemList[index].encounterFile != null)
             {
                 _encounterFile = _choiceItemList[index].encounterFile;
+                IsConneting = true;
+
                 CopyItems();
                 ConnectEncounter();
             }
             else
             {
                 _thisProgressLevel += 1;
+                IsConneting = false;
 
                 SelectRandomEncounterFile();
                 CopyItems();
@@ -269,6 +274,8 @@ namespace EndOfWorld.EncounterSystem
 
         private void ConveyToUsedList()
         {
+            if (IsConneting) return;
+
             _usedEncounterFileList.Add(_unusedEncounterFileList[_encounterFileIndex]);
             _unusedEncounterFileList.RemoveAt(_encounterFileIndex);
         }
