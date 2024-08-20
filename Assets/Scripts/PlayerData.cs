@@ -76,10 +76,6 @@ public class PlayerData : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
 
         MaxHP+=100;
-        CurrentHP-=50;
-        MaxHP+=50;
-        MaxHP-=30;
-        MaxHP-=30;
         AttackPoint=10;
         DefencePoint=10;
         SpeedPoint=10;

@@ -26,6 +26,9 @@ namespace EndOfWorld.EncounterSystem
         [SerializeField]
         private EncounterFileListForAcquiredFiles _encounterFileListForAcquiredFiles;
 
+        [SerializeField]
+        private PlayerData _playerData;
+
         private EncounterFile _encounterFile;
 
         private PrintManager _printManager;
@@ -140,9 +143,11 @@ namespace EndOfWorld.EncounterSystem
                         break;
 
                     case ItemType.SetHP:
+                        ((AddHPItem)item).AddHpPoint(((AddHPItem)item).HpPoint);
                         break;
 
                     case ItemType.UpgradeArmor:
+                        ((UpgradeArmorItem)item).AddDefensePoint(((UpgradeArmorItem)item).DefensePoint);
                         break;
 
                     case ItemType.Enchant:

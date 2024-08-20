@@ -18,6 +18,7 @@ MonoBehaviour:
   ItemList:
   - rid: 5294809602512388100
   - rid: 5294809628353232898
+  - rid: 5294809758905925632
   references:
     version: 2
     RefIds:
@@ -29,3 +30,7 @@ MonoBehaviour:
       type: {class: EnchantItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
       data:
         Enchant: 0
+    - rid: 5294809758905925632
+      type: {class: UpgradeArmorItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        DefensePoint: 0

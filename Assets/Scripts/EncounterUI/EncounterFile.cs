@@ -49,7 +49,7 @@ namespace EndOfWorld.EncounterSystem
         [ContextMenu("AddSetHP")]
         public void AddSetHP()
         {
-            ItemList.Add(new SetHPItem());
+            ItemList.Add(new AddHPItem());
         }
 
         [ContextMenu("AddUpgradeArmor")]

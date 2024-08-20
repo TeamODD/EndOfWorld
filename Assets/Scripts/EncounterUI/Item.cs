@@ -97,31 +97,33 @@ namespace EndOfWorld.EncounterSystem
     }
 
     [System.Serializable]
-    public class SetHPItem : Item
+    public class AddHPItem : Item
     {
-        public bool _SetHP;
+        [Header("AddHpItem")]
+        public int HpPoint;
 
         PlayerData _playerData;
 
-        public void SetHP(int amount)
+        public void AddHpPoint(int amount)
         {
             _playerData = GameObject.FindWithTag("PlayerData").GetComponent<PlayerData>();
 
             _playerData.CurrentHP += amount;
         }
 
-        public SetHPItem() : base(ItemType.SetHP)
+        public AddHPItem() : base(ItemType.SetHP)
         { }
     }
 
     [System.Serializable]
     public class UpgradeArmorItem : Item
     {
-        public bool UpgradeArmor;
+        [Header("UpgradeArmorItem")]
+        public int DefensePoint;
 
         PlayerData _playerData;
 
-        public void SetDef(int amount)
+        public void AddDefensePoint(int amount)
         {
             _playerData = GameObject.FindWithTag("PlayerData").GetComponent<PlayerData>();
 
@@ -148,6 +150,7 @@ namespace EndOfWorld.EncounterSystem
     [System.Serializable]
     public class SpecialEncounterItem : Item
     {
+        [Header("AddSpecialEncounterItem")]
         public EncounterFile SpecialEncounterFile;
 
         public SpecialEncounterItem() : base(ItemType.SpecialEncounter) { }
