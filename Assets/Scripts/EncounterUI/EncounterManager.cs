@@ -59,7 +59,7 @@ namespace EndOfWorld.EncounterSystem
 
 
             SelectRandomEncounterFile();
-            StartCoroutine(PrintEncounter());
+            StartCoroutine(PrintEncounter(false));
         }
 
 
@@ -116,9 +116,13 @@ namespace EndOfWorld.EncounterSystem
             }
         }
 
-        IEnumerator PrintEncounter()
+        IEnumerator PrintEncounter(bool IsNeedToWait)
         {
             CopyItems();
+
+            //오브젝트를 지울 때 걸리는 시간을 기다려주기 위함
+            if (IsNeedToWait)
+                yield return new WaitForSeconds(1f);
 
 
             foreach (var item in _itemList)
@@ -214,13 +218,13 @@ namespace EndOfWorld.EncounterSystem
         private void SkipEncounter()
         {
             _printManager.ReturnObjects();
-            StartCoroutine(PrintEncounter());
+            StartCoroutine(PrintEncounter(true));
         }
 
         private void ConnectEncounter()
         {
             _printManager.ReturnChoiceObjects();
-            StartCoroutine(PrintEncounter());
+            StartCoroutine(PrintEncounter(true));
         }
 
         private void CopyItems()
