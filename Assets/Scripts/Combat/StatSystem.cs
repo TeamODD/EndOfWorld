@@ -176,9 +176,19 @@ public abstract class StatSystem : MonoBehaviour
                 return skillDamage;
 
             case SkillSO.SkillAttackType.Heal:
-                if (currentHitPoint + skillDamage > maxHitPoint) currentHitPoint = maxHitPoint;
-                else currentHitPoint += skillDamage;
-                return skillDamage;
+                if (currentHitPoint + skillDamage > maxHitPoint)
+                {
+                    currentHitPoint = maxHitPoint;
+                    return (currentHitPoint + skillDamage - maxHitPoint);
+                }
+
+                else
+                {
+                    currentHitPoint += skillDamage;
+                    return skillDamage;
+
+                } 
+
 
             case SkillSO.SkillAttackType.None: break;
         }

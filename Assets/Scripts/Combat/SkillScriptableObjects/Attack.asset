@@ -29,6 +29,6 @@ MonoBehaviour:
   skillicon: {fileID: 0}
   uses: 3
   cooltime: 0
-  usingtext: "\uACF5\uACA9!"
-  hittext: "\uC801\uC911!"
-  misstext: "\uD68C\uD53C!"
+  usingtext: Attack!
+  hittext: HIT!
+  misstext: MISS!

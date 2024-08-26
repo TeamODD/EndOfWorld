@@ -17,6 +17,8 @@ public class CombatSystemManager : MonoBehaviour
     private CombatHUDManager playerHUD;
     [SerializeField]
     private CombatHUDManager enemyHUD;
+    [SerializeField]
+    private CombatLogSystemManager logSystemManager;
 
     //현재 전투 상태 및 자원 변수
     private BattleState state;
@@ -114,6 +116,8 @@ public class CombatSystemManager : MonoBehaviour
         player.TurnResetStat();
         player.ActivateEffect();
 
+        playerHUD.SetButtonActivated(distance);
+
         setHUDAll();
 
         state = BattleState.PLAYERTURN;
@@ -133,17 +137,16 @@ public class CombatSystemManager : MonoBehaviour
 
         if (enemy.isFrightened || enemy.isEnsnared || enemy.isParalysus) enemyReservationSkill = enemy.ReservationSkill(distance);
 
+        isHit = CheckHitAttackDistance(enemyReservationSkill) ? true : false;
+        logSystemManager.setTextInContents(enemyReservationSkill, isHit);
+        
         if (enemyReservationSkill != null)
         {
-            isHit = CheckHitAttackDistance(enemyReservationSkill) ? true : false;
             if(isHit) CaculateCombat(enemyReservationSkill);
             SkillCooltimeAndUsesSet(enemyReservationSkill);
-
+            
         }
-
-        if (enemyReservationSkill == null) Debug.Log("아무 행동 안함! 경축!");
         
-        //뭐 여따가 값을 넘길건데 예약스킬이 null이면 아무행동하지않았다! isHit도 넘겨서 적중시 비적중시 체크, 그냥 스킬도 넘겨지므로 사용시 대사까지 한꺼번에
         setHUDAll();
 
         if(enemyReservationSkill != null && enemyReservationSkill.LINKSKILL != null)
@@ -186,7 +189,10 @@ public class CombatSystemManager : MonoBehaviour
         playerHUD.SetHPSlider(player.currentHitPoint);
         enemyHUD.SetHUD(enemy);
         enemyHUD.SetHPSlider(enemy.currentHitPoint);
+        enemyHUD.SetEnemySprite(enemy, distance);
         //여따가 적 이미지 거리 계산하는 함수 넣기
+        //음 이거는 각 적마다 이미지를 넣어놔야겠지?
+        //그리고 그걸 가져와서 하는게 편할듯하다.
     }
 
     //사거리 체크
@@ -204,6 +210,7 @@ public class CombatSystemManager : MonoBehaviour
             for (int i = 0; i < usingSkill.NUMOFATTACK; i++)
             {
                 reservedDamageOrHealAmount = usingSkill.TARGET == SkillSO.Target.Player ? player.CombatSkillActivate(usingSkill) : enemy.CombatSkillActivate(usingSkill);
+                logSystemManager.SetDamageText(usingSkill, reservedDamageOrHealAmount);
                 if (usingSkill.EFFECT.Length > 0)
                 {
                     Debug.Log("버프/디버프 발동");
@@ -243,14 +250,13 @@ public class CombatSystemManager : MonoBehaviour
             SkillDB usingSkill = skillType == SkillSO.SkillType.combatSkill ? player.combatSkillList[skillIndex] : player.moveSkillList[skillIndex];
 
             isHit = CheckHitAttackDistance(usingSkill) ? true : false;
-            
+            logSystemManager.setTextInContents(usingSkill, isHit);
+
             if(isHit) CaculateCombat(usingSkill);
             SkillCooltimeAndUsesSet(usingSkill);
 
             setHUDAll();
-
             clickButton.GetComponent<SkillButtonInfo>().UsedSkillSet(usingSkill);
-            playerHUD.SetButtonActivated();
 
             if (enemy.currentHitPoint <= 0)
             {

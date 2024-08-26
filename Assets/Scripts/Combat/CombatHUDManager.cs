@@ -52,15 +52,23 @@ public class CombatHUDManager : MonoBehaviour
         }
     }
 
-    public void SetButtonActivated()
+    public void SetButtonActivated(int distance)
     {
         foreach(Button skill in  skillButtons)
         {
-            if (skill.GetComponent<SkillButtonInfo>().skill.USES < 1 || skill.GetComponent<SkillButtonInfo>().skill.COOLTIME > 0) skill.interactable = false;
+            if (skill.GetComponent<SkillButtonInfo>().skill.USES < 1 || 
+                skill.GetComponent<SkillButtonInfo>().skill.COOLTIME > 0 ||
+                skill.GetComponent<SkillButtonInfo>().skill.MINDISTANCE > distance ||
+                skill.GetComponent<SkillButtonInfo>().skill.MAXDISTANCE < distance) skill.interactable = false;
+
             else skill.interactable = true;
         }
     }
 
+    public void SetEnemySprite(Enemy enemy, int distance)
+    {
+        enemy.GetComponent<SpriteRenderer>().sprite = enemy.enemySprites[distance - 1];
+    }
     //거리에 따른 적 이미지 크기 조절 함수 만들기
 
 }

@@ -21,14 +21,14 @@ MonoBehaviour:
   maxAttackRange: 5
   numberOfAttack: 1
   damage: 80
-  minDistance: 0
-  maxDistance: 0
+  minDistance: 1
+  maxDistance: 1
   move: 0
   effect: []
   linkskill: {fileID: 0}
   skillicon: {fileID: 0}
   uses: 3
   cooltime: 0
-  usingtext: 
-  hittext: 
-  misstext: 
+  usingtext: HEAL!
+  hittext: GOTTCHA!
+  misstext: WHAT
