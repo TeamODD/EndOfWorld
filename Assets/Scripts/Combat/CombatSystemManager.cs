@@ -1,7 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.iOS.Xcode;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -17,30 +17,27 @@ public class CombatSystemManager : MonoBehaviour
     private CombatHUDManager playerHUD;
     [SerializeField]
     private CombatHUDManager enemyHUD;
+    [SerializeField]
+    private CombatLogSystemManager logSystemManager;
 
     //현재 전투 상태 및 자원 변수
     private BattleState state;
     private int distance;
+    private bool isHit;
+    private int reservedDamageOrHealAmount;
 
     //플레이어, 적 스킬 및 상태 정보를 가져오기 위한 변수
     private Player player;
     private Enemy enemy;
 
-    private List<SkillDB> playerSkillList;
     //임시
     public SkillSO playerSkill;
-    public SkillSO playerSkill2;
+    public SkillSO playerSkill2; 
+    public SkillSO playerSkill3;
+    public SkillSO playerSkill4;
 
-    private void Awake()
-    {
-        if(instance == null)
-            instance = this;
-
-        else
-        {
-            Destroy(this.gameObject);
-        }
-    }
+    //적 예약 스킬
+    private SkillDB enemyReservationSkill;
 
     public static CombatSystemManager Instance
     {
@@ -53,7 +50,21 @@ public class CombatSystemManager : MonoBehaviour
             return instance;
         }
     }
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
 
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        BattleStart();
+    }
 
     private void BattleStart()
     {
@@ -65,50 +76,165 @@ public class CombatSystemManager : MonoBehaviour
     {
         player = GameObject.FindObjectOfType<Player>();
         enemy = GameObject.FindObjectOfType<Enemy>();
-        
+
         //임시로 스탯, 스킬 설정
         player.InitStat(100, 10, 5, 3);
-        enemy.InitStat(100, 10, 2, 1);
-        player.ApplySkill(playerSkill);
-        player.ApplySkill(playerSkill2);
+        enemy.InitStat(100, 10, 2, 5);
+        player.setSkill(playerSkill);
+        player.setSkill(playerSkill2); 
+        player.setSkill(playerSkill3);
+        player.setSkill(playerSkill4);
 
         //현재 스탯 설정
         player.BattleStartStat();
         enemy.BattleStartStat();
 
-        //플레이어 스킬 가져오기
-        playerSkillList = player.GetSkillList();
-        
-        //HUD 설정
-        playerHUD.SetHUD(player);
-        playerHUD.SetSkillButton(playerSkillList);
-        enemyHUD.SetHUD(enemy);
-
         //거리 설정 지금은 임의로 정하지만 후에 어떻게 설정할 것인지
-        distance = 2;
+        distance = SetDistance();
+
+        //적 첫 스킬 예약
+        enemy.EnemySkillListReady();
+        enemyReservationSkill = enemy.ReservationSkill(distance);
+
+        //HUD 설정
+        setHUDAll();
+        playerHUD.SetSkillButton(player.combatSkillList);
+        playerHUD.SetSkillButton(player.moveSkillList);
 
         //속도 비교 후 선공권
         state = CompareSpeed();
+
         if (state == BattleState.PLAYERTURN) PlayerTurn();
         else EnemyTurn();
     }
 
-    private BattleState CompareSpeed()
-    {
-        if(player.speed >= enemy.speed) return BattleState.PLAYERTURN;
-        else return BattleState.ENEMYTURN;
-    }
-
     private void PlayerTurn()
     {
+        Debug.Log("플레이어 턴!");
+        player.CoolTimeSet();
         player.DicreaseEffectDuration();
         player.TurnResetStat();
         player.ActivateEffect();
-        playerHUD.SetHUD(player);
-        enemyHUD.SetHUD(enemy);
+
+        playerHUD.SetButtonActivated(distance);
+
+        setHUDAll();
 
         state = BattleState.PLAYERTURN;
-        Debug.Log("플레이어 턴!");
+    }
+
+    private void EnemyTurn()
+    {
+        Debug.Log("적의 턴");
+        enemy.CoolTimeSet();
+        enemy.DicreaseEffectDuration();
+        enemy.TurnResetStat();
+        enemy.ActivateEffect();
+
+        setHUDAll();
+
+        state = BattleState.ENEMYTURN;
+
+        if (enemy.isFrightened || enemy.isEnsnared || enemy.isParalysus) enemyReservationSkill = enemy.ReservationSkill(distance);
+
+        isHit = CheckHitAttackDistance(enemyReservationSkill) ? true : false;
+        logSystemManager.setTextInContents(enemyReservationSkill, isHit);
+        
+        if (enemyReservationSkill != null)
+        {
+            if(isHit) CaculateCombat(enemyReservationSkill);
+            SkillCooltimeAndUsesSet(enemyReservationSkill);
+            
+        }
+        
+        setHUDAll();
+
+        if(enemyReservationSkill != null && enemyReservationSkill.LINKSKILL != null)
+        { 
+            enemyReservationSkill = enemy.linkSkillList.Find(x => x.NAME == enemyReservationSkill.LINKSKILL.SKILLNAME);
+        }
+
+        else
+        {
+            enemyReservationSkill = enemy.ReservationSkill(distance);
+        }
+
+        if (player.currentHitPoint <= 0)
+        {
+            Debug.Log("적의 승리");
+            //패배 이벤트
+        }
+
+        else
+        {
+            PlayerTurn();
+        }
+    }
+
+    private int SetDistance()
+    {
+        int temp = 2;
+        return temp;
+    }
+
+    private BattleState CompareSpeed()
+    {
+        if (player.speed >= enemy.speed) return BattleState.PLAYERTURN;
+        else return BattleState.ENEMYTURN;
+    }
+
+    private void setHUDAll()
+    {
+        playerHUD.SetHUD(player);
+        playerHUD.SetHPSlider(player.currentHitPoint);
+        enemyHUD.SetHUD(enemy);
+        enemyHUD.SetHPSlider(enemy.currentHitPoint);
+        enemyHUD.SetEnemySprite(enemy, distance);
+        //여따가 적 이미지 거리 계산하는 함수 넣기
+        //음 이거는 각 적마다 이미지를 넣어놔야겠지?
+        //그리고 그걸 가져와서 하는게 편할듯하다.
+    }
+
+    //사거리 체크
+    private bool CheckHitAttackDistance(SkillDB usingSkill)
+    {
+        if (usingSkill.MINRANGE <= distance && usingSkill.MAXRANGE >= distance) return true;
+        
+        return false;
+    }
+
+    private void CaculateCombat(SkillDB usingSkill)
+    {
+        if (usingSkill != null)
+        {
+            for (int i = 0; i < usingSkill.NUMOFATTACK; i++)
+            {
+                reservedDamageOrHealAmount = usingSkill.TARGET == SkillSO.Target.Player ? player.CombatSkillActivate(usingSkill) : enemy.CombatSkillActivate(usingSkill);
+                logSystemManager.SetDamageText(usingSkill, reservedDamageOrHealAmount);
+                if (usingSkill.EFFECT.Length > 0)
+                {
+                    Debug.Log("버프/디버프 발동");
+                    foreach (var effect in usingSkill.EFFECT)
+                    {
+                        if (effect.TARGET == StatusEffetSO.Target.Player) player.ApplyEffect(effect);
+                        else enemy.ApplyEffect(effect);
+                    }
+                }
+            }
+
+            //이동 확인
+            if (!player.isEnsnared)
+            {
+                distance = Mathf.Abs(distance + usingSkill.MOVE);
+                if (distance == 0) distance = 1;
+            }
+        }
+    }
+
+    private void SkillCooltimeAndUsesSet(SkillDB usingSkill)
+    {
+        usingSkill.COOLTIME = usingSkill.MAXCOOLTIME;
+        usingSkill.USES--;
     }
 
     public void OnSkillButton()
@@ -117,58 +243,31 @@ public class CombatSystemManager : MonoBehaviour
             return;
 
         GameObject clickButton = EventSystem.current.currentSelectedGameObject;
-        if(clickButton != null)
+        if (clickButton != null)
         {
-            int skillIndex = clickButton.GetComponent<SkillButtonInfo>().getSkillIndex();
-            SkillDB usingSkill = playerSkillList[skillIndex];
+            int skillIndex = clickButton.GetComponent<SkillButtonInfo>().skillIndex;
+            SkillSO.SkillType skillType = clickButton.GetComponent<SkillButtonInfo>().skill.TYPE;
+            SkillDB usingSkill = skillType == SkillSO.SkillType.combatSkill ? player.combatSkillList[skillIndex] : player.moveSkillList[skillIndex];
 
-            //사용한 스킬에 따라 공격, 버프, 디버프 등을 설정해줘야함
-            bool isDead = enemy.AttackedByEnemy(usingSkill.DAMAGE);
-            if (usingSkill.EFFECT != null) player.ApplyEffect(usingSkill.EFFECT);
-            playerHUD.SetHUD(player);
+            isHit = CheckHitAttackDistance(usingSkill) ? true : false;
+            logSystemManager.setTextInContents(usingSkill, isHit);
 
-            //이동은 추후에 그리고 이런 공격은 플레이어 공격, 적 공격 함수로 따로 떼어낼 예정
-            //스킬 사용하면 적체력체크, 버프체크, HUD설정이 한꺼번에 이루어져야한다.
-            enemyHUD.SetHPSlider(enemy.currentHitPoint);
+            if(isHit) CaculateCombat(usingSkill);
+            SkillCooltimeAndUsesSet(usingSkill);
 
-            if(isDead)
+            setHUDAll();
+            clickButton.GetComponent<SkillButtonInfo>().UsedSkillSet(usingSkill);
+
+            if (enemy.currentHitPoint <= 0)
             {
-                Debug.Log("플레이어 승리!");
+                Debug.Log("플레이어 승리");
+                //승리 이벤트 추가
             }
 
             else
             {
                 EnemyTurn();
             }
-
         }
-
-        //클릭한 버튼의 인덱스 번호를 가져온다. 인덱스 번호는 버튼을 생성할때 따로 0부터 변수로 설정할 예정
-        //그럼 버튼인포 클래스는 버튼의 이미지, 사용횟수, 쿨타임, 사용가능불가능 등을 맡도록 하자
-
-        //그럼 내일 할일은 플레이어 현재 가지고 있는 스킬 개수에 따라 버튼 생성
-        //각 버튼에다 버튼인포를 에드컴포넌트 해주고 정보 넣기
-        //이후 그 버튼을 누르면 인덱스가 반환되며 인덱스로 어떤 스킬인지 가져오기
-        //사용한 스킬에 대한 정보도 따로 저장하고 전투가 끝나면 플레이어 스크립트의 list를 지금 정보로 덮어씌우자 이게맞다
-
-        //가져온 스킬들을 UI 배치할 예정
-        //배치는 버튼을 생성하고 거기에 정보를 담을 것
-        //그럴려면 버튼에서 정보를 가져와야한다.
-        //그럼 버튼에 있는 정보를 고쳤을 때 player의 리스트에도 영향이 가야함
-        //index로? 1번 버튼 2번 버튼 눌리면 1번 스킬 2번 스킬 이런식으로? 이렇게 해야겠다 그럼 음 
-    }
-
-    private void EnemyTurn()
-    {
-        state = BattleState.ENEMYTURN;
-        Debug.Log("적 턴!");
-        player.AttackedByEnemy(enemy.Attack(distance).DAMAGE);
-        playerHUD.SetHPSlider(player.currentHitPoint);
-        PlayerTurn();
-    }
-
-    private void Start()
-    {
-        BattleStart();
     }
 }

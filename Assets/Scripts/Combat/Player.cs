@@ -4,24 +4,20 @@ using UnityEngine;
 
 public class Player : StatSystem
 {
-    private List<SkillDB> skillList = new List<SkillDB>();
-
-    public void ApplySkill(SkillSO skill)
+    //임시 스킬 넣는방법
+    public void setSkill(SkillSO skill) { ApplySkill(skill); }
+    
+    private void RemoveAllUsedSkill()
     {
-        SkillDB skillDB = new SkillDB(
-            skill.SKILLNAME, 
-            skill.DAMAGE, 
-            skill.DISTANCE, 
-            skill.EFFECT, 
-            skill.MOVE, 
-            skill.SKILLICON, 
-            skill.USES,
-            skill.COOLTIME
-            );
+        foreach(SkillDB skillDB in combatSkillList)
+        {
+            if (skillDB.USES < 1) combatSkillList.Remove(skillDB);
+        }
 
-        skillList.Add(skillDB);
+        foreach(SkillDB skillDB in moveSkillList)
+        {
+            if (skillDB.USES < 1) moveSkillList.Remove(skillDB);
+        }
     }
-
-    public List<SkillDB> GetSkillList() { return skillList; }
 
 }
