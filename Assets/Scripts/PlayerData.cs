@@ -15,6 +15,7 @@ public class PlayerData : MonoBehaviour
     [SerializeField]
     private int speedPoint;
 
+    [SerializeField]
     public List<SkillSO> Skill = new List<SkillSO>();
 
     public int MaxHP

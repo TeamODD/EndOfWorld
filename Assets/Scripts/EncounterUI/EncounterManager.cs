@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using static UnityEngine.GraphicsBuffer;
 using UnityEditor;
+using UnityEditor.UI;
+using UnityEngine.UI;
 
 
 namespace EndOfWorld.EncounterSystem
@@ -29,6 +31,9 @@ namespace EndOfWorld.EncounterSystem
         [SerializeField]
         private PlayerData _playerData;
 
+        [SerializeField]
+        private VerticalLayoutGroup _verticalLayoutGroup;
+
         private EncounterFile _encounterFile;
 
         private PrintManager _printManager;
@@ -43,13 +48,21 @@ namespace EndOfWorld.EncounterSystem
 
         private EnchantManager _enchantManager;
 
+        [SerializeField]
+        private Canvas _enchantUICanvas;
+
         private bool IsConneting = false;
+
+        private bool _isWaitingPrint = true;
 
         private void Awake()
         {
             _printManager = GameObject.FindWithTag("PrintManager").GetComponent<PrintManager>();
 
             _enchantManager = GameObject.FindWithTag("EnchantManager").GetComponent<EnchantManager>();
+
+            if (_playerData == null)
+                _playerData = GameObject.FindWithTag("PlayerData").GetComponent<PlayerData>();
         }
 
         private void Start()
@@ -62,6 +75,12 @@ namespace EndOfWorld.EncounterSystem
             StartCoroutine(PrintEncounter(false));
         }
 
+        private void Update()
+        {
+            //정렬 버그 fix를 위한 코드
+            _verticalLayoutGroup.enabled = false;
+            _verticalLayoutGroup.enabled = true;
+        }
 
         /// <summary>
         /// 특정한 조건에 의해 추가된 EncounterFile을 가져오는 함수
@@ -135,10 +154,12 @@ namespace EndOfWorld.EncounterSystem
 
                         CallPrintManager(item);
 
+                        _isWaitingPrint = true;
                         yield return new WaitUntil(() => _printManager.isPrintDone == true);
                         yield return null;
 
                         _printManager.isPrintDone = false;
+                        _isWaitingPrint = false;
                         yield return null;
 
                         break;
@@ -155,14 +176,14 @@ namespace EndOfWorld.EncounterSystem
                         break;
 
                     case ItemType.Enchant:
-                        _enchantManager.gameObject.transform.parent.gameObject.SetActive(true);
+                        _enchantUICanvas.gameObject.SetActive(true);
                         _enchantManager.StartEnchantManager();
 
                         yield return new WaitUntil(() => _enchantManager.IsEnchantDone == true);
                         yield return null;
 
                         _enchantManager.IsEnchantDone = false;
-                        _enchantManager.gameObject.transform.parent.gameObject.SetActive(false);
+                        _enchantUICanvas.gameObject.SetActive(false);
                         yield return null;
 
                         break;
@@ -180,6 +201,10 @@ namespace EndOfWorld.EncounterSystem
         //선택지에서 골랐을 시
         public void TakeAChoice(int index)
         {
+            //페이드 효과가 끝나지 않았는 데 눌렀을시 반환
+            if (_isWaitingPrint == true) return;
+
+
             ConveyToUsedList();
 
             if (_choiceItemList[index].encounterFile != null)

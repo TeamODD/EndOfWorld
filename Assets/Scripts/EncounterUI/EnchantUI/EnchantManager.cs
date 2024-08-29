@@ -57,13 +57,15 @@ namespace EndOfWorld.EncounterSystem
         private Image _choiceC;
 
         [SerializeField]
+        private CanvasGroup _canvasGroup;
+
+        [SerializeField]
         private StatsImageData _statsImageData;
 
         private TMP_Text _textA;
         private TMP_Text _textB;
         private TMP_Text _textC;
 
-        private CanvasGroup _canvasGroup;
 
         /// <summary>
         /// 랜덤으로 뽑아서 PlayerData에 전달할 SkillSO 리스트
@@ -131,14 +133,13 @@ namespace EndOfWorld.EncounterSystem
             _textB = _choiceB.gameObject.transform.GetChild(0).GetComponent<TMP_Text>();
             _textC = _choiceC.gameObject.transform.GetChild(0).GetComponent<TMP_Text>();
 
-            _canvasGroup = this.gameObject.transform.parent.GetComponent<CanvasGroup>();
             _playerData = GameObject.FindWithTag("PlayerData").GetComponent<PlayerData>();
 
 
 
-            if (this.gameObject.transform.parent.gameObject.activeSelf)
+            if (_canvasGroup.gameObject.activeSelf)
             {
-                this.gameObject.transform.parent.gameObject.SetActive(false);
+                _canvasGroup.gameObject.SetActive(false);
             }
         }
 
@@ -177,26 +178,28 @@ namespace EndOfWorld.EncounterSystem
                     break;
             }
 
-            PrintAbilityImage(choiceA);
+            int imageNum = Random.Range(0, 3);
 
-            _amountA = _statsAmount[choiceA, Random.Range(0, 3)];
+            _amountA = _statsAmount[choiceA, imageNum];
+
+            PrintAbilityImage(choiceA, imageNum);
         }
 
-        private void PrintAbilityImage(int index)
+        private void PrintAbilityImage(int index, int imageNum)
         {
             switch (index)
             {
                 case 0:
-                    _choiceA.sprite = _statsImageData.MaxHPImage[index];
+                    _choiceA.sprite = _statsImageData.MaxHPImage[imageNum];
                     break;
                 case 1:
-                    _choiceA.sprite = _statsImageData.AttackPointImage[index];
+                    _choiceA.sprite = _statsImageData.AttackPointImage[imageNum];
                     break;
                 case 2:
-                    _choiceA.sprite = _statsImageData.DefensePointImage[index];
+                    _choiceA.sprite = _statsImageData.DefensePointImage[imageNum];
                     break;
                 case 3:
-                    _choiceA.sprite = _statsImageData.SpeedPointImage[index];
+                    _choiceA.sprite = _statsImageData.SpeedPointImage[imageNum];
                     break;
             }
         }
