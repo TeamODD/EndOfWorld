@@ -27,7 +27,7 @@ MonoBehaviour:
   effect:
   - {fileID: 11400000, guid: fb9c3a0a24bb43a4181b5dd776fbad1f, type: 2}
   linkskill: {fileID: 0}
-  skillicon: {fileID: 0}
+  skillicon: {fileID: 21300000, guid: 3ac654576dac414498dfa51130b0648b, type: 3}
   uses: 3
   cooltime: 0
   usingtext: 

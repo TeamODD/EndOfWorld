@@ -69,6 +69,23 @@ public class CombatHUDManager : MonoBehaviour
     {
         enemy.GetComponent<SpriteRenderer>().sprite = enemy.enemySprites[distance - 1];
     }
-    //거리에 따른 적 이미지 크기 조절 함수 만들기
 
+    //상태이상 표시
+    public void SetCharaterStatus(StatSystem unit)
+    {
+        if (unit == null) return;
+
+        //매번 턴이 올때마다 체크해야할거 같다.
+        //턴이 오면 상태이상 오브젝트 들어가서 자식 오브젝트 모두 삭제 후 다시 현재 상태이상에 따라 생성해서 부모오브젝트에 붙히기
+        //좌우 스크롤이 되도록 해야하나? 그것도 물어봐야겠다.
+
+        if (unit.isEnsnared) { }
+        if (unit.isFrightened) { }
+        if (unit.isParalysus) { }
+
+        foreach(EffectDB effect in unit.effectList)
+        {
+            //아이콘만 가져와서 생성후 보여주기 생성하기 전 저번에 있었던 것들은 전부 삭제
+        }
+    }
 }

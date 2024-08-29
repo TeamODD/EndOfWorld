@@ -17,7 +17,7 @@ public abstract class StatSystem : MonoBehaviour
     public bool isEnsnared { get; private set; }
     public bool isParalysus { get; private set; }
 
-    private List<EffectDB> effectList = new List<EffectDB>();
+    public List<EffectDB> effectList { get; private set; } = new List<EffectDB>();
     public List<SkillDB> combatSkillList { get; private set; } = new List<SkillDB>();
     public List<SkillDB> moveSkillList { get; private set; } = new List<SkillDB>();
     public List<SkillDB> linkSkillList { get; private set; } = new List<SkillDB>();
@@ -141,7 +141,8 @@ public abstract class StatSystem : MonoBehaviour
     public void ApplyEffect(StatusEffetSO statusEffect)
     {
         EffectDB effectDB = new EffectDB(
-            statusEffect.EFFECTNAME, 
+            statusEffect.EFFECTNAME,
+            statusEffect.EFFECTICON,
             statusEffect.TARGET,
             statusEffect.HP, 
             statusEffect.ATTACK, 

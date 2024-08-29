@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SkillButtonInfo : MonoBehaviour
 {
@@ -13,12 +14,12 @@ public class SkillButtonInfo : MonoBehaviour
     [SerializeField]
     private TMP_Text skillUses;
 
-
     public void InfoInit(int index, SkillDB _skill)
     {
         skillIndex = index;
         skill = _skill;
         skillName.text = skill.NAME;
+        this.GetComponent<Image>().sprite = skill.ICON;
         setUsesText();
     }
 
