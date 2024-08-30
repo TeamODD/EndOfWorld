@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2955849413205747929
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4918014505337212047}
+  - component: {fileID: 4979533634810419503}
+  - component: {fileID: -6341695401831619051}
+  m_Layer: 0
+  m_Name: Spider_ambush
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4918014505337212047
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2955849413205747929}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 128.35938, y: 258.37955, z: -4.203685}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4979533634810419503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2955849413205747929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5d93ef05bf33a14aa614c05cc561cb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allSkillList:
+  - {fileID: 11400000, guid: 402b162dcd54a4e8c88f0c9bb6e7663d, type: 2}
+  - {fileID: 11400000, guid: 056e51f640ea44eeea7a4e66234601b0, type: 2}
+  - {fileID: 11400000, guid: 584497a2e2518462d8f2bd5c2a35b195, type: 2}
+  - {fileID: 11400000, guid: 14d5a01182ca74c1d86e26daa82b23c0, type: 2}
+  - {fileID: 11400000, guid: 9bfb43d341e844d979c854a4508570bd, type: 2}
+  - {fileID: 11400000, guid: ad190740c2fde4f29ad178111b68fb98, type: 2}
+  - {fileID: 11400000, guid: 643e71d06731041cebcbba6b7cdaf31f, type: 2}
+  firstPreferenceDistance: 1
+  secondPreferenceDistance: 2
+  enemySprites:
+  - {fileID: 21300000, guid: d9f6c51dfd12a4c5da28d0868a33d050, type: 3}
+  - {fileID: 21300000, guid: 7885a958d3882446f878923cd5aa6c03, type: 3}
+  - {fileID: 21300000, guid: d649c512733fd432c89b637866a5592c, type: 3}
+  - {fileID: 21300000, guid: 8c9d0dabaa58749e5ab96c07fc1b2294, type: 3}
+  - {fileID: 21300000, guid: 0eeab80134ac24f1f9c41aef771e5dcf, type: 3}
+--- !u!114 &-6341695401831619051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2955849413205747929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c584091a97814090982f5b5cea963db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHP: 47
+  CurrentHP: 47
+  AttackPoint: 10
+  DefencePoint: 5
+  SpeedPoint: 50
+  StartingDistance: 1
+  StartingSkill: {fileID: 11400000, guid: 584497a2e2518462d8f2bd5c2a35b195, type: 2}
