@@ -57,11 +57,11 @@ public class SkillSO : ScriptableObject
     private CoefficientType coefficienttype;
     public CoefficientType COEFFICIENTTYPE { get { return coefficienttype; } }
 
-    [SerializeField, Space(2), Header("최소 공격범위 거리")]
+    [SerializeField, Space(3), Header("최소 공격범위 거리"), Range(1, 5)]
     private int minAttackRange;
     public int MINATTACKRANGE { get { return minAttackRange; } }
 
-    [SerializeField, Space(1), Header("최대 공격범위 거리")]
+    [SerializeField, Space(1), Header("최대 공격범위 거리"), Range(1, 5)]
     private int maxAttackRange;
     public int MAXATTACKRANGE { get { return maxAttackRange; } }
 
@@ -74,11 +74,11 @@ public class SkillSO : ScriptableObject
     private int damage;
     public int DAMAGE { get { return damage; } }
 
-    [SerializeField, Space(1), Header("최소 사용 거리")]
+    [SerializeField, Space(1), Header("최소 사용 거리"), Range(1, 5)]
     private int minDistance;
     public int MINDISTANCE { get { return minDistance; } }
     
-    [SerializeField, Space(1), Header("최대 사용 거리")]
+    [SerializeField, Space(1), Header("최대 사용 거리"), Range(1, 5)]
     private int maxDistance;
     public int MAXDISTANCE { get { return maxDistance; } }
 
@@ -94,7 +94,7 @@ public class SkillSO : ScriptableObject
     private SkillSO linkskill;
     public SkillSO LINKSKILL { get { return linkskill; } }
 
-    [SerializeField, Space(2), Header("스킬 아이콘")]
+    [SerializeField, Space(3), Header("스킬 아이콘")]
     private Sprite skillicon;
     public Sprite SKILLICON { get { return skillicon; } }
 
@@ -106,8 +106,16 @@ public class SkillSO : ScriptableObject
     private int cooltime;
     public int COOLTIME { get { return cooltime; } }
 
-    [SerializeField, Space(), Header("대사")]
-    private string text;
-    public string TEXT { get { return text; } }
+    [SerializeField, Space(1), Header("사용 시 대사")]
+    private string usingtext;
+    public string USINGTEXT { get { return usingtext; } }
+
+    [SerializeField, Space(1), Header("적중 시 대사")]
+    private string hittext;
+    public string HITTEXT { get { return hittext; } }
+
+    [SerializeField, Space(1), Header("비 적중 시 대사")]
+    private string misstext;
+    public string MISSTEXT { get { return misstext; } }
 }
 

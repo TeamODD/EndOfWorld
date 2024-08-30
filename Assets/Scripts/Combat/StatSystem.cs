@@ -17,10 +17,10 @@ public abstract class StatSystem : MonoBehaviour
     public bool isEnsnared { get; private set; }
     public bool isParalysus { get; private set; }
 
-    private List<EffectDB> effectList = new List<EffectDB>();
-    protected List<SkillDB> combatSkillList = new List<SkillDB>();
-    protected List<SkillDB> moveSkillList = new List<SkillDB>();
-    protected List<SkillDB> linkSkillList = new List<SkillDB>();
+    public List<EffectDB> effectList { get; private set; } = new List<EffectDB>();
+    public List<SkillDB> combatSkillList { get; private set; } = new List<SkillDB>();
+    public List<SkillDB> moveSkillList { get; private set; } = new List<SkillDB>();
+    public List<SkillDB> linkSkillList { get; private set; } = new List<SkillDB>();
 
     protected void ApplySkill(SkillSO skill)
     {
@@ -42,7 +42,9 @@ public abstract class StatSystem : MonoBehaviour
             skill.SKILLICON,
             skill.USES,
             skill.COOLTIME,
-            skill.TEXT
+            skill.USINGTEXT,
+            skill.HITTEXT,
+            skill.MISSTEXT
             );
 
         if (skillDB.TYPE == SkillSO.SkillType.combatSkill) combatSkillList.Add(skillDB);
@@ -124,6 +126,7 @@ public abstract class StatSystem : MonoBehaviour
 
     }
 
+    //적용된 버프 턴 감소, 턴이 0일시 삭제 까지
     public void DicreaseEffectDuration()
     {
         for(int i =0; i< effectList.Count; i++)
@@ -138,7 +141,8 @@ public abstract class StatSystem : MonoBehaviour
     public void ApplyEffect(StatusEffetSO statusEffect)
     {
         EffectDB effectDB = new EffectDB(
-            statusEffect.EFFECTNAME, 
+            statusEffect.EFFECTNAME,
+            statusEffect.EFFECTICON,
             statusEffect.TARGET,
             statusEffect.HP, 
             statusEffect.ATTACK, 
@@ -154,15 +158,18 @@ public abstract class StatSystem : MonoBehaviour
     {
         int coefficient = GetCoefficient(skill);
         int skillDamage = (int)((float)skill.DAMAGE / 100 * coefficient);
+
         switch(skill.ATTACKTYPE)
         {
             case SkillSO.SkillAttackType.Attack:
                 bool isNoDamage = currentShieldPoint >= skillDamage ? true : false;
+
                 if(!isNoDamage)
                 {
                     currentHitPoint -= (skillDamage - currentShieldPoint);
                     return (skillDamage - currentShieldPoint);
                 }
+
                 else return 0;
 
             case SkillSO.SkillAttackType.Defense:
@@ -170,9 +177,19 @@ public abstract class StatSystem : MonoBehaviour
                 return skillDamage;
 
             case SkillSO.SkillAttackType.Heal:
-                if (currentHitPoint + skillDamage > maxHitPoint) currentHitPoint = maxHitPoint;
-                else currentHitPoint += skillDamage;
-                return skillDamage;
+                if (currentHitPoint + skillDamage > maxHitPoint)
+                {
+                    currentHitPoint = maxHitPoint;
+                    return (currentHitPoint + skillDamage - maxHitPoint);
+                }
+
+                else
+                {
+                    currentHitPoint += skillDamage;
+                    return skillDamage;
+
+                } 
+
 
             case SkillSO.SkillAttackType.None: break;
         }

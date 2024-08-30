@@ -24,7 +24,9 @@ public class SkillDB
     public int MAXCOOLTIME {  get; private set; }
     public int USES;
     public int COOLTIME;
-    public string TEXT { get; private set; }
+    public string USINGTEXT { get; private set; }
+    public string HITTEXT { get; private set; }
+    public string MISSTEXT { get; private set; }
 
     public SkillDB(string name,
                    SkillType skillType,
@@ -43,7 +45,9 @@ public class SkillDB
                    Sprite icon,
                    int uses,
                    int cooltime,
-                   string text)
+                   string usingtext,
+                   string hITTEXT,
+                   string mISSTEXT)
     {
         NAME = name;
         TYPE = skillType;
@@ -64,6 +68,8 @@ public class SkillDB
         MAXUSES = uses;
         COOLTIME = 0;
         MAXCOOLTIME = cooltime;
-        TEXT = text;
+        USINGTEXT = usingtext;
+        HITTEXT = hITTEXT;
+        MISSTEXT = mISSTEXT;
     }
 }

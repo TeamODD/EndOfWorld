@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - EncounterUI
+  - PrintManager
+  - EncounterManager
+  - PlayerData
+  - EnchantManager
   layers:
   - Default
   - TransparentFX
