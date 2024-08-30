@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8a1cd31fa423ef409a822f46b285cfc, type: 3}
+  m_Name: Sample6
+  m_EditorClassIdentifier: 
+  ChaperLevel: 1
+  ProgressLevel: 0
+  ItemList:
+  - rid: 5294809987886612488
+  references:
+    version: 2
+    RefIds:
+    - rid: 5294809987886612488
+      type: {class: TextItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 0
+        text: "\uB2F9\uC2E0\uC740 \uC5B4\uB290 \uC232\uC758 \uC785\uAD6C\uC5D0 \uB2E4\uB2E4\uB790\uB2E4.
+          \uC232\uC758 \uC548 \uCABD\uC740 \uBE5B \uD55C \uC904\uAE30 \uB4E4\uC9C0
+          \uC54A\uC744 \uC815\uB3C4\uB85C \uAC00\uC2DC\uB369\uAD74\uC774 \uBE7C\uACE1\uD588\uB2E4.\r\n
+          \uADF8 \uB369\uAD74\uB4E4\uC740 \uB9C8\uCE58 \uC0B4\uC544 \uC788\uB294
+          \uC0DD\uBA85\uCCB4\uCC98\uB7FC, \uBBF8\uB85C\uCC98\uB7FC \uC5BD\uD600 \uC788\uC5C8\uACE0,
+          \uC798\uBABB\uB41C \uD55C \uAC78\uC74C\uC774 \uD568\uC815\uC73C\uB85C \uC774\uC5B4\uC9C8
+          \uAC83 \uAC19\uC740 \uBD88\uAE38\uD55C \uB290\uB08C\uC774 \uB4E4\uC5C8\uB2E4. "

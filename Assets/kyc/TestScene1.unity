@@ -1263,6 +1263,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 358893677}
   m_CullTransparentMesh: 1
+--- !u!1 &385881740
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 385881741}
+  - component: {fileID: 385881742}
+  m_Layer: 0
+  m_Name: SceneTransitionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &385881741
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385881740}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1531981084}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &385881742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385881740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19c2b73720877b84d85d1c6c32c6a8ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyData: {fileID: 0}
+  encounterUI: {fileID: 1180027192}
+  OnCombatEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &447360257
 GameObject:
   m_ObjectHideFlags: 0
@@ -4433,6 +4482,7 @@ Transform:
   - {fileID: 990138876}
   - {fileID: 584594929}
   - {fileID: 1013143149}
+  - {fileID: 385881741}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1551031096
@@ -4698,14 +4748,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _chaperIndex: 0
   _unusedEncounterFileList:
-  - {fileID: 0}
-  - {fileID: 11400000, guid: 32e297e65e5744f4c9a79f716f9d896b, type: 2}
+  - {fileID: 11400000, guid: d52dd53e716e6f14c961414f5147397c, type: 2}
+  - {fileID: 11400000, guid: 6a8d6333f0e1b144faeb910666e5221d, type: 2}
   _usedEncounterFileList: []
   _savedData: {fileID: 11400000, guid: 5a3bf68a9fa93e34ba367f9dfb5c6be1, type: 2}
   _encounterFileListForAcquiredFiles: {fileID: 11400000, guid: 19cf2b3e929542e47b8ff3054e7abb48, type: 2}
   _playerData: {fileID: 1943800720}
   _verticalLayoutGroup: {fileID: 1861725913}
+  _sceneTransitionManager: {fileID: 385881742}
   _enchantUICanvas: {fileID: 2042204189}
+  CombatResult: 0
 --- !u!4 &1669018924
 Transform:
   m_ObjectHideFlags: 0
@@ -5191,7 +5243,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000013844658}
+  m_AnchoredPosition: {x: 0, y: 0.000559847}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1861725913

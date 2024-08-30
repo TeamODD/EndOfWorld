@@ -34,6 +34,9 @@ namespace EndOfWorld.EncounterSystem
         [SerializeField]
         private VerticalLayoutGroup _verticalLayoutGroup;
 
+        [SerializeField]
+        private SceneTransitionManager _sceneTransitionManager;
+
         private EncounterFile _encounterFile;
 
         private PrintManager _printManager;
@@ -54,6 +57,11 @@ namespace EndOfWorld.EncounterSystem
         private bool IsConneting = false;
 
         private bool _isWaitingPrint = true;
+
+        private bool _isCombatEnd = false;
+
+        [HideInInspector]
+        public CombatResult CombatResult;
 
         private void Awake()
         {
@@ -165,6 +173,27 @@ namespace EndOfWorld.EncounterSystem
                         break;
 
                     case ItemType.Encounter:
+                        GameObject _enemy = ((EncounterItem)item).Enemy;
+                        //_sceneTransitionManager.EnemyData = _enemy;
+                        _sceneTransitionManager.LoadCombatScene(_enemy);
+
+                        //전투가 끝날 때까지 대기
+                        yield return new WaitUntil(() => this._isCombatEnd == true);
+                        yield return null;
+
+                        this._isCombatEnd = false;
+
+
+                        for(int i = 0; i < 3; i++)
+                        {
+                            if( ((EncounterItem)item).CombatResultReportList[i].combatResult == this.CombatResult )
+                            {
+                                this._encounterFile = ((EncounterItem)item).CombatResultReportList[i].encounterFile;
+
+                                ConnectEncounter();
+                            }
+                        }
+
                         break;
 
                     case ItemType.SetHP:
@@ -205,7 +234,20 @@ namespace EndOfWorld.EncounterSystem
             if (_isWaitingPrint == true) return;
 
 
+            //선택지가 다음 encounterFile이 아닌 팝업 오브젝트를 가지고 있다면
+            if (_choiceItemList[index].PopupObject != null)
+            {
+                GameObject popupObject = GameObject.Instantiate(_choiceItemList[index].PopupObject) as GameObject;
+
+                popupObject.transform.SetParent(_verticalLayoutGroup.gameObject.transform, false);
+
+                return;
+            } 
+            //팝업 오브젝트의 삭제는 오브젝트 내에서 이루어지도록 하겠음
+
+
             ConveyToUsedList();
+
 
             if (_choiceItemList[index].encounterFile != null)
             {

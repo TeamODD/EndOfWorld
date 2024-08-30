@@ -33,13 +33,13 @@ namespace EndOfWorld.EncounterSystem
         public ItemType ItemType
         {
             get => itemType;
-        } 
+        }
     }
 
     [System.Serializable]
     public class TextItem : Item
     {
-        [TextArea (3, 8)]
+        [TextArea(3, 8)]
         public string text;
 
         public TextItem(/*string text*/) : base(ItemType.Text)
@@ -76,25 +76,43 @@ namespace EndOfWorld.EncounterSystem
 
         public ChoiceItem() : base(ItemType.Choice)
         { }
-
-
     }
 
     [System.Serializable]
     public class ChoiceContents
     {
         public string text;
+
         public EncounterFile encounterFile;
+
+        //선택지 클릭시 팝업 화면이 떠야할 경우에 나오게 할 팝업 UI 오브젝트
+        public GameObject PopupObject;
     }
 
     [System.Serializable]
     public class EncounterItem : Item
     {
-        public GameObject Monster;
+        public GameObject Enemy;
+
+        public List<CombatResultReport> CombatResultReportList;
+
+        [System.Serializable]
+        public class CombatResultReport
+        {
+            public CombatResult combatResult;
+
+            public EncounterFile encounterFile;
+        }
 
         public EncounterItem() : base(ItemType.Encounter)
         {
-            Monster = new GameObject();
+            CombatResultReportList = new List<CombatResultReport>();
+
+            for (int i = 0; i < 3; i++) CombatResultReportList.Add(new CombatResultReport());
+
+            CombatResultReportList[0].combatResult = CombatResult.Win;
+            CombatResultReportList[1].combatResult = CombatResult.Lose;
+            CombatResultReportList[2].combatResult = CombatResult.Escape;
         }
     }
 
@@ -138,7 +156,7 @@ namespace EndOfWorld.EncounterSystem
     {
         EnchantManager _enchantManager;
 
-        public EnchantItem() : base(ItemType.Enchant) 
+        public EnchantItem() : base(ItemType.Enchant)
         {
 
         }

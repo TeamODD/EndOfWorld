@@ -12,6 +12,7 @@ namespace EndOfWorld.EncounterSystem
         public void OnGiveSelectedChoiceIndex()
         {
             encounterManager = GameObject.FindWithTag("EncounterManager").GetComponent<EncounterManager>();
+
             encounterManager.TakeAChoice(myIndex);
         }
     }

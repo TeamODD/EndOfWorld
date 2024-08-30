@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a1cd31fa423ef409a822f46b285cfc, type: 3}
   m_Name: Sample1-A
   m_EditorClassIdentifier: 
-  ChaperLevel: 0
+  ChaperLevel: 1
   ProgressLevel: 0
   ItemList:
   - rid: 5294809984500236304

@@ -11,7 +11,7 @@ namespace EndOfWorld.EncounterSystem
     {
 
         [Tooltip("챕터 번호")]
-        public short ChaperLevel;
+        public short ChaperLevel = 1;
         [Tooltip("진행도 번호")]
         public short ProgressLevel;
         [Space(10f)]
