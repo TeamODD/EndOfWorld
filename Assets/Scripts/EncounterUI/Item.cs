@@ -23,10 +23,10 @@ namespace EndOfWorld.EncounterSystem
     [System.Serializable]
     public class Item
     {
-        [SerializeField]
-        protected readonly ItemType itemType;
+        [HideInInspector]
+        public ItemType itemType;
 
-        protected Item(ItemType itemType)
+        public Item(ItemType itemType)
         {
             this.itemType = itemType;
         }
@@ -90,16 +90,17 @@ namespace EndOfWorld.EncounterSystem
     [System.Serializable]
     public class EncounterItem : Item
     {
-        public bool Encounter;
+        public GameObject Monster;
 
         public EncounterItem() : base(ItemType.Encounter)
-        { }
+        {
+            Monster = new GameObject();
+        }
     }
 
     [System.Serializable]
     public class AddHPItem : Item
     {
-        [Header("AddHpItem")]
         public int HpPoint;
 
         PlayerData _playerData;
@@ -118,7 +119,6 @@ namespace EndOfWorld.EncounterSystem
     [System.Serializable]
     public class UpgradeArmorItem : Item
     {
-        [Header("UpgradeArmorItem")]
         public int DefensePoint;
 
         PlayerData _playerData;
@@ -136,10 +136,7 @@ namespace EndOfWorld.EncounterSystem
     [System.Serializable]
     public class EnchantItem : Item
     {
-        public bool Enchant;
-
         EnchantManager _enchantManager;
-
 
         public EnchantItem() : base(ItemType.Enchant) 
         {
@@ -150,7 +147,6 @@ namespace EndOfWorld.EncounterSystem
     [System.Serializable]
     public class SpecialEncounterItem : Item
     {
-        [Header("AddSpecialEncounterItem")]
         public EncounterFile SpecialEncounterFile;
 
         public SpecialEncounterItem() : base(ItemType.SpecialEncounter) { }

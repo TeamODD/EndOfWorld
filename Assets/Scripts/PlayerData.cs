@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -16,7 +17,17 @@ public class PlayerData : MonoBehaviour
     private int speedPoint;
 
     [SerializeField]
-    public List<SkillSO> Skill = new List<SkillSO>();
+    public List<SkillDB> MoveSkill = new List<SkillDB>();
+
+    [SerializeField]
+    public List<SkillDB> CombatSkill = new List<SkillDB>();
+
+    public void DeleteDuplication()
+    {
+        MoveSkill = MoveSkill.Distinct().ToList();
+
+        CombatSkill = CombatSkill.Distinct().ToList();
+    }
 
     public int MaxHP
     {

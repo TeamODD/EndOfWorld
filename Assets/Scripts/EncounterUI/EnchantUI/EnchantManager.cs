@@ -70,25 +70,25 @@ namespace EndOfWorld.EncounterSystem
         /// <summary>
         /// 랜덤으로 뽑아서 PlayerData에 전달할 SkillSO 리스트
         /// </summary>
-        [Header("SkillSO")]
+        [Header("SkillDB")]
 
         [SerializeField]
-        private List<SkillSO> _fireSkills;
+        private List<SkillDB> _fireSkills;
 
         [SerializeField]
-        private List<SkillSO> _waterSkills;
+        private List<SkillDB> _waterSkills;
 
         [SerializeField]
-        private List<SkillSO> _earthSkills;
+        private List<SkillDB> _earthSkills;
 
         [SerializeField]
-        private List<SkillSO> _windSkills;
+        private List<SkillDB> _windSkills;
 
 
 
-        private SkillSO _skillSO1;
+        private SkillDB _skillDB1;
 
-        private SkillSO _skillSO2;
+        private SkillDB _skillDB2;
 
         /// <summary>
         /// 스크립트 내부 지역 필드
@@ -147,6 +147,10 @@ namespace EndOfWorld.EncounterSystem
         {
             DrawRandomSkillType();
             DrawRandomStats();
+
+            ///스킬 랜덤 선택 후 출력하는 함수 
+            ///
+
             StartCoroutine(FadeOut());
         }
 
@@ -209,6 +213,7 @@ namespace EndOfWorld.EncounterSystem
             int randomNumber1;
             int randomNumber2;
 
+
             switch (_skillType)
             {
                 case SkillType.Fire:
@@ -223,8 +228,8 @@ namespace EndOfWorld.EncounterSystem
                         randomNumber2 = Random.Range(0, _fireSkills.Count + 1);
                     }
 
-                    _skillSO1 = _fireSkills[randomNumber1];
-                    _skillSO2 = _fireSkills[randomNumber2];
+                    _skillDB1 = _fireSkills[randomNumber1];
+                    _skillDB2 = _fireSkills[randomNumber2];
                     break;
 
                 case SkillType.Water:
@@ -239,8 +244,8 @@ namespace EndOfWorld.EncounterSystem
                         randomNumber2 = Random.Range(0, _waterSkills.Count + 1);
                     }
 
-                    _skillSO1 = _waterSkills[randomNumber1];
-                    _skillSO2 = _waterSkills[randomNumber2];
+                    _skillDB1 = _waterSkills[randomNumber1];
+                    _skillDB2 = _waterSkills[randomNumber2];
                     break;
 
                 case SkillType.Earth:
@@ -255,8 +260,8 @@ namespace EndOfWorld.EncounterSystem
                         randomNumber2 = Random.Range(0, _earthSkills.Count + 1);
                     }
 
-                    _skillSO1 = _earthSkills[randomNumber1];
-                    _skillSO2 = _earthSkills[randomNumber2];
+                    _skillDB1 = _earthSkills[randomNumber1];
+                    _skillDB2 = _earthSkills[randomNumber2];
                     break;
 
                 case SkillType.Wind:
@@ -271,8 +276,8 @@ namespace EndOfWorld.EncounterSystem
                         randomNumber2 = Random.Range(0, _windSkills.Count + 1);
                     }
 
-                    _skillSO1 = _windSkills[randomNumber1];
-                    _skillSO2 = _windSkills[randomNumber2];
+                    _skillDB1 = _windSkills[randomNumber1];
+                    _skillDB2 = _windSkills[randomNumber2];
                     break;
             }
         }
@@ -286,16 +291,16 @@ namespace EndOfWorld.EncounterSystem
 
             ///
 
-            if (_skillSO1 != null)
-                _textB.text = _skillSO1.SKILLNAME;
+            if (_skillDB1 != null)
+                _textB.text = _skillDB1.NAME;
 
             if (_textB.color.a < 255)
                 _textB.color = new Color(_textB.color.r, _textB.color.g, _textB.color.b, 255);
 
             ///
 
-            if (_skillSO2 != null)
-                _textC.text = _skillSO2.SKILLNAME;
+            if (_skillDB2 != null)
+                _textC.text = _skillDB2.NAME;
 
             if (_textC.color.a < 255)
                 _textC.color = new Color(_textC.color.r, _textC.color.g, _textC.color.b, 255);
@@ -360,14 +365,42 @@ namespace EndOfWorld.EncounterSystem
 
         public void SelectB()
         {
-            _playerData.Skill.Add(_skillSO1);
+            if(_playerData.MoveSkill.Contains(_skillDB1) || _playerData.CombatSkill.Contains(_skillDB1))
+            {
+                return;
+            }
+
+            switch(_skillDB1.TYPE)
+            {
+                case SkillSO.SkillType.moveSkill:
+                    _playerData.MoveSkill.Add(_skillDB1);
+                    break;
+
+                case SkillSO.SkillType.combatSkill:
+                    _playerData.CombatSkill.Add(_skillDB1);
+                    break;
+            }
 
             StartCoroutine(FadeIn());
         }
 
         public void SelectC()
         {
-            _playerData.Skill.Add(_skillSO2);
+            if (_playerData.MoveSkill.Contains(_skillDB2) || _playerData.CombatSkill.Contains(_skillDB2))
+            {
+                return;
+            }
+
+            switch (_skillDB2.TYPE)
+            {
+                case SkillSO.SkillType.moveSkill:
+                    _playerData.MoveSkill.Add(_skillDB2);
+                    break;
+
+                case SkillSO.SkillType.combatSkill:
+                    _playerData.CombatSkill.Add(_skillDB2);
+                    break;
+            }
 
             StartCoroutine(FadeIn());
         }

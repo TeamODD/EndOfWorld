@@ -9,8 +9,6 @@ namespace EndOfWorld.EncounterSystem
     [System.Serializable]
     public class EncounterFile : ScriptableObject
     {
-        [HideInInspector]
-        public ItemType ItemType;
 
         [Tooltip("Ã©ÅÍ ¹øÈ£")]
         public short ChaperLevel;
@@ -19,6 +17,7 @@ namespace EndOfWorld.EncounterSystem
         [Space(10f)]
 
         [SerializeReference]
+        [ArrayElementTitle("itemType")]
         public List<Item> ItemList = new List<Item>();
 
 
