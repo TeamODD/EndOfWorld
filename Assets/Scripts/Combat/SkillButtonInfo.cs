@@ -18,14 +18,14 @@ public class SkillButtonInfo : MonoBehaviour
     {
         skillIndex = index;
         skill = _skill;
-        skillName.text = skill.NAME;
+        skillName.text = "" + skill.NAME;
         this.GetComponent<Image>().sprite = skill.ICON;
         setUsesText();
     }
 
     private void setUsesText()
     {
-        skillUses.text = "" + skill.USES;
+        skillUses.text = skill.USES + " / " + skill.MAXUSES;
     }
 
     public void UsedSkillSet(SkillDB _skill)

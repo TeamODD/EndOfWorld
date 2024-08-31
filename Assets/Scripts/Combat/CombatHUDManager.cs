@@ -6,8 +6,7 @@ using TMPro;
 
 public class CombatHUDManager : MonoBehaviour
 {
-    [SerializeField] private TMP_Text ATK_Text;
-    [SerializeField] private TMP_Text DEF_Text;
+    [SerializeField] private TMP_Text monsterName;
     [SerializeField] private Slider hpSlider;
     [SerializeField] private Button skillButton;
     [SerializeField] private GameObject CombatSkillParent;
@@ -17,8 +16,7 @@ public class CombatHUDManager : MonoBehaviour
 
     public void SetHUD(StatSystem unit)
     {
-        ATK_Text.text = "" + unit.currentAttackPoint;
-        DEF_Text.text = "" + unit.currentDefensePoint;
+        if(monsterName != null) monsterName.text = unit.name;
         hpSlider.maxValue = unit.maxHitPoint;
         hpSlider.value = unit.currentHitPoint;
     }
