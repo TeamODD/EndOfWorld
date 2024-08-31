@@ -45,7 +45,7 @@ namespace EndOfWorld.EncounterSystem
 
         private List<ChoiceContents> _choiceItemList;
 
-        private int _thisProgressLevel = 0;
+        private int _thisProgressLevel = 1;
 
         private int _encounterFileIndex;
 

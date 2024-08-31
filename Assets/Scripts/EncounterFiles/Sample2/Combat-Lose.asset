@@ -10,28 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8a1cd31fa423ef409a822f46b285cfc, type: 3}
-  m_Name: Sample1-A
+  m_Name: Combat-Lose
   m_EditorClassIdentifier: 
   ChaperLevel: 1
-  ProgressLevel: 0
+  ProgressLevel: 2
   ItemList:
-  - rid: 5294809984500236304
-  - rid: 5294809984500236305
+  - rid: 5294810006568566800
+  - rid: 5294810006568566801
   references:
     version: 2
     RefIds:
-    - rid: 5294809984500236304
+    - rid: 5294810006568566800
       type: {class: TextItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
       data:
         itemType: 0
-        text: " \uB2F9\uC2E0\uC740 \uC5B4\uB290\uC0C8 \uC190\uC5D0 \uB4E4\uB824\uC788\uB358
-          \uBB34\uAE30\uC640 \uD568\uAED8, \uB545\uC5D0\uC11C\uBD80\uD130 \uC19F\uC544\uC788\uB294
-          \uAC70\uB300\uD55C \uBFCC\uB9AC \uC0AC\uC774\uB85C \uAC77\uAE30 \uC2DC\uC791\uD588\uB2E4.
-          \r"
-    - rid: 5294809984500236305
+        text: "\uB2F9\uC2E0\uC740 \uC801\uC758 \uACF5\uACA9\uC5D0 \uC4F0\uB7EC\uC84C\uB2E4.
+          \uB208\uC774 \uD798\uC5C6\uC774 \uAC10\uACA8\uC84C\uB2E4."
+    - rid: 5294810006568566801
       type: {class: ChoiceItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
       data:
         itemType: 2
         choiceList:
-        - text: "\uACC4\uC18D\uD55C\uB2E4."
+        - text: "\uB2E4\uC2DC\uD558\uAE30"
           encounterFile: {fileID: 0}
+          PopupObject: {fileID: 0}

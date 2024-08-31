@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Sample2
   m_EditorClassIdentifier: 
   ChaperLevel: 1
-  ProgressLevel: 1
+  ProgressLevel: 2
   ItemList:
   - rid: 5294809987886612484
+  - rid: 5294810006568566785
+  - rid: 5294810006568566786
   references:
     version: 2
     RefIds:
@@ -31,3 +33,19 @@ MonoBehaviour:
           \uB4E4\uB824\uC654\uB2E4.\r\n \uACE0\uAC1C\uB97C \uB3CC\uB824\uBCF4\uB2C8,
           \uBA70\uCE60\uC740 \uAD76\uC740 \uB4EF\uD55C \uD1A0\uB07C\uAC00 \uB2F9\uC2E0\uC744
           \uBCF4\uBA70 \uB4B7\uAC78\uC74C\uC9C8 \uCE58\uACE0 \uC788\uC5C8\uB2E4."
+    - rid: 5294810006568566785
+      type: {class: SpriteItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 1
+        sprite: {fileID: 21300000, guid: c3576216b2352a24d8f32c2ec355fbd7, type: 3}
+    - rid: 5294810006568566786
+      type: {class: ChoiceItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 2
+        choiceList:
+        - text: "\uC804\uD22C \uC2DC\uC791"
+          encounterFile: {fileID: 11400000, guid: 2f441d3067d49474090e22e80ecb39b5, type: 2}
+          PopupObject: {fileID: 0}
+        - text: "\uC870\uC6A9\uD788 \uC9C0\uB098\uCCD0 \uAC04\uB2E4"
+          encounterFile: {fileID: 11400000, guid: 264cdbe3d9eeec943a3c954f83f7d9d9, type: 2}
+          PopupObject: {fileID: 0}
