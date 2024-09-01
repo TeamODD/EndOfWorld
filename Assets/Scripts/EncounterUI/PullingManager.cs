@@ -58,6 +58,9 @@ public abstract class PullingManager : MonoBehaviour
 
         pulledObjectList[nextPullingIndex].transform.SetSiblingIndex(_hierarchyIndex++);
         nextPullingIndex++;
+
+        Debug.Log(initObject + ", index : " + _hierarchyIndex);
+        Debug.Log(initObject + ", nextPullingIndex : " + nextPullingIndex);
     }
 
     private void CheckIndex()
@@ -79,8 +82,10 @@ public abstract class PullingManager : MonoBehaviour
     {
         for (int i = nextPullingIndex - 1; i >= 0; i--)
         {
-            StartCoroutine(FadeAction(i));
+            StartCoroutine(FadeInAction(i));
         }
+
+        ObjectActiveFalse();
 
         CheckIndex();
     }
@@ -90,12 +95,13 @@ public abstract class PullingManager : MonoBehaviour
         for (int i = nextPullingIndex - 1; i >= 0; i--)
         {
             pulledObjectList[i].SetActive(false);
-            pulledObjectList[i].transform.SetSiblingIndex((pulledObjectList.Count - 1) - _hierarchyIndex);
+            //pulledObjectList[i].transform.SetSiblingIndex((pulledObjectList.Count - 1) - _hierarchyIndex);
             _hierarchyIndex -= 1;
+            Debug.Log(initObject + "hierarchy minus : " + _hierarchyIndex);
         }
     }
 
-    IEnumerator FadeAction(int index)
+    IEnumerator FadeInAction(int index)
     {
 
         if(initObject.GetComponent<TMP_Text>() != null)
@@ -111,7 +117,6 @@ public abstract class PullingManager : MonoBehaviour
             }
 
             _textComponent.color = new Color(_textComponent.color.r, _textComponent.color.g, _textComponent.color.b, 0);
-            ObjectActiveFalse();
         }
 
 
@@ -132,7 +137,6 @@ public abstract class PullingManager : MonoBehaviour
 
             _buttonImageComponent.color = new Color(_buttonImageComponent.color.r, _buttonImageComponent.color.g, _buttonImageComponent.color.b, 0);
             _textComponent.color = new Color(_textComponent.color.r, _textComponent.color.g, _textComponent.color.b, 0);
-            ObjectActiveFalse();
         }
 
 
@@ -150,7 +154,6 @@ public abstract class PullingManager : MonoBehaviour
             }
 
             _ImageComponent.color = new Color(_ImageComponent.color.r, _ImageComponent.color.g, _ImageComponent.color.b, 0);
-            ObjectActiveFalse();
         }
 
 

@@ -19,6 +19,6 @@ public class SavedData : ScriptableObject
     {
         this.UnusedEncounterFiles = new List<EncounterFile>();
         this.UsedEncounterFiles = new List<EncounterFile>();
-        this.ProgressLevel = 0;
+        this.ProgressLevel = 1;
     }
 }

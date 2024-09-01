@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EncounterFilesSavingObject
   m_EditorClassIdentifier: 
   UnusedEncounterFiles:
-  - {fileID: 11400000, guid: d52dd53e716e6f14c961414f5147397c, type: 2}
   - {fileID: 11400000, guid: 6a8d6333f0e1b144faeb910666e5221d, type: 2}
-  UsedEncounterFiles: []
-  ProgressLevel: 1
+  UsedEncounterFiles:
+  - {fileID: 11400000, guid: d52dd53e716e6f14c961414f5147397c, type: 2}
+  ProgressLevel: 2

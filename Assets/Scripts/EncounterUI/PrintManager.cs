@@ -32,6 +32,8 @@ public class PrintManager : MonoBehaviour
         imageManager = GetComponent<ImagePrintManager>();
         choiceManager = GetComponent<ChoicePrintManager>();
         encounterUICanvas = GameObject.Find("EncounterUICanvas").GetComponent<Canvas>();
+
+        isPrintDone = false;
     }
 
     public void PrintContent(string text)
@@ -47,7 +49,7 @@ public class PrintManager : MonoBehaviour
         choiceManager.PrintChoice(choiceList);
     }
 
-    public void ReturnObjects()
+    public void ReturnAllObjects()
     {
         textManager.ReturnAllObject();
         imageManager.ReturnAllObject();

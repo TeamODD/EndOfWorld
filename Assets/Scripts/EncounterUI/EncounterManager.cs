@@ -113,7 +113,7 @@ namespace EndOfWorld.EncounterSystem
 
         private void BringSavedData()
         {
-            if (_savedData.ProgressLevel > 0) //저장 된적이 있는지 없는지 구분
+            if (_savedData.ProgressLevel > 1) //저장 된적이 있는지 없는지 구분
             {
                 this._unusedEncounterFileList = _savedData.UnusedEncounterFiles;
                 this._usedEncounterFileList = _savedData.UsedEncounterFiles;
@@ -284,7 +284,7 @@ namespace EndOfWorld.EncounterSystem
 
         private void SkipEncounter()
         {
-            _printManager.ReturnObjects();
+            _printManager.ReturnAllObjects();
             StartCoroutine(PrintEncounter(true));
         }
 
