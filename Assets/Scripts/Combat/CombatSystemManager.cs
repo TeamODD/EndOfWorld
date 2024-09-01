@@ -25,16 +25,11 @@ public class CombatSystemManager : MonoBehaviour
     private int distance;
     private bool isHit;
     private int reservedDamageOrHealAmount;
+    private SceneTransitionManager dataManager;
 
     //플레이어, 적 스킬 및 상태 정보를 가져오기 위한 변수
     private Player player;
     private Enemy enemy;
-
-    //임시
-    public SkillSO playerSkill;
-    public SkillSO playerSkill2; 
-    public SkillSO playerSkill3;
-    public SkillSO playerSkill4;
 
     //적 예약 스킬
     private SkillDB enemyReservationSkill;
@@ -74,27 +69,33 @@ public class CombatSystemManager : MonoBehaviour
 
     private void SetupBattle()
     {
-        player = GameObject.FindObjectOfType<Player>();
+        //몬스터 데이터 및 전투 상황 가져오기
+        dataManager = GameObject.FindObjectOfType<SceneTransitionManager>();
+        Instantiate(dataManager.EnemyData);
         enemy = GameObject.FindObjectOfType<Enemy>();
+        InitialStat initialStat = enemy.GetComponent<InitialStat>();
 
-        //임시로 스탯, 스킬 설정
-        player.InitStat(100, 10, 5, 3);
-        enemy.InitStat(100, 10, 2, 5);
-        player.setSkill(playerSkill);
-        player.setSkill(playerSkill2); 
-        player.setSkill(playerSkill3);
-        player.setSkill(playerSkill4);
+        enemy.InitStat(initialStat.MaxHP, initialStat.AttackPoint, initialStat.DefencePoint, initialStat.SpeedPoint);
+        distance = initialStat.StartingDistance;
+
+        //플레이어 데이터 가져오기
+        PlayerData playerData = GameObject.FindObjectOfType<PlayerData>();
+        player = GameObject.FindObjectOfType<Player>();
+        player.InitStat(playerData.MaxHP, playerData.AttackPoint, playerData.DefencePoint, playerData.SpeedPoint);
+
+        //플레이어 스킬 설정
+
+        //일케 하면 안되고 플레이어데이터에서 DB형태의 리스트를 그대로 가져와서 복사하기
+        player.setSkill(playerData.Skill);
 
         //현재 스탯 설정
         player.BattleStartStat();
         enemy.BattleStartStat();
 
-        //거리 설정 지금은 임의로 정하지만 후에 어떻게 설정할 것인지
-        distance = SetDistance();
-
         //적 첫 스킬 예약
         enemy.EnemySkillListReady();
-        enemyReservationSkill = enemy.ReservationSkill(distance);
+        if (initialStat.StartingSkill != null) enemyReservationSkill = enemy.findSkill(initialStat.StartingSkill);
+        else enemyReservationSkill = enemy.ReservationSkill(distance);
 
         //HUD 설정
         setHUDAll();
@@ -162,7 +163,10 @@ public class CombatSystemManager : MonoBehaviour
         if (player.currentHitPoint <= 0)
         {
             Debug.Log("적의 승리");
-            //패배 이벤트
+            GetComponent<PlayerData>().CurrentHP = player.currentHitPoint;
+
+            //현재 체력 넣기, 스킬 리스트 넣기
+            dataManager.UnLoadCombatScene(CombatResult.Lose);
         }
 
         else
@@ -190,9 +194,6 @@ public class CombatSystemManager : MonoBehaviour
         enemyHUD.SetHUD(enemy);
         enemyHUD.SetHPSlider(enemy.currentHitPoint);
         enemyHUD.SetEnemySprite(enemy, distance);
-        //여따가 적 이미지 거리 계산하는 함수 넣기
-        //음 이거는 각 적마다 이미지를 넣어놔야겠지?
-        //그리고 그걸 가져와서 하는게 편할듯하다.
     }
 
     //사거리 체크
@@ -261,7 +262,11 @@ public class CombatSystemManager : MonoBehaviour
             if (enemy.currentHitPoint <= 0)
             {
                 Debug.Log("플레이어 승리");
-                //승리 이벤트 추가
+                GetComponent<PlayerData>().CurrentHP = 0;
+                player.RemoveAllUsedSkill();
+                //playerData 변수 고치기
+                //현재 체력, 현재 스킬 리스트 플레이어 데이터 변수에 붙여넣기
+                dataManager.UnLoadCombatScene(CombatResult.Win);
             }
 
             else

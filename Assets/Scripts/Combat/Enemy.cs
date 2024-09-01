@@ -149,4 +149,22 @@ public abstract class Enemy : StatSystem
     {
         return Random.Range(0, count);
     }
+
+    public SkillDB findSkill(SkillSO findSkill)
+    {
+        int findIndex = -1;
+        if (findSkill.SKILLTYPE == SkillSO.SkillType.combatSkill)
+        {
+            findIndex = combatSkillList.FindIndex(x => x.NAME == findSkill.name);
+            if (findIndex != -1) return combatSkillList[findIndex];
+        }
+        
+        else
+        {
+            findIndex = moveSkillList.FindIndex(x => x.NAME == findSkill.name);
+            if(findIndex != -1) return moveSkillList[findIndex];
+        }
+        
+        return null;
+    }
 }

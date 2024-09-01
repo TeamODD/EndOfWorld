@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class Player : StatSystem
 {
-    //임시 스킬 넣는방법
-    public void setSkill(SkillSO skill) { ApplySkill(skill); }
+    public void setSkill(List<SkillSO> skill)
+    {
+        foreach(SkillSO s in skill)
+        {
+            ApplySkill(s);
+        }
+    }
     
-    private void RemoveAllUsedSkill()
+    public void RemoveAllUsedSkill()
     {
         foreach(SkillDB skillDB in combatSkillList)
         {
