@@ -16,11 +16,12 @@ public class PlayerData : MonoBehaviour
     [SerializeField]
     private int speedPoint;
 
-    [SerializeField]
-    public List<SkillDB> MoveSkill = new List<SkillDB>();
+    [HideInInspector]
+    public List<SkillDB> MoveSkill;
 
-    [SerializeField]
-    public List<SkillDB> CombatSkill = new List<SkillDB>();
+    [HideInInspector]
+    public List<SkillDB> CombatSkill;
+
 
     public void DeleteDuplication()
     {
@@ -87,14 +88,18 @@ public class PlayerData : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
 
+        CombatSkill = new List<SkillDB>();
+        MoveSkill = new List<SkillDB>();
+
         MaxHP+=100;
         AttackPoint=10;
         DefencePoint=10;
         SpeedPoint=10;
     }
 
+
     public UnityEvent<int, int> OnHPChanged;
     public UnityEvent<int> OnAttackPointChanged;
     public UnityEvent<int> OnDefencePointChanged;
-    public UnityEvent<int> OnSpeedPointChanged;
+    public UnityEvent<int> OnSpeedPointChanged; 
 }

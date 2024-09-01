@@ -23,7 +23,7 @@ MonoBehaviour:
       type: {class: EncounterItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
       data:
         itemType: 3
-        Enemy: {fileID: 0}
+        Enemy: {fileID: 2955849413205747929, guid: aa48de0ebaa14ee44860f2f12efc721a, type: 3}
         CombatResultReportList:
         - combatResult: 0
           encounterFile: {fileID: 11400000, guid: 22bfcc6e85f9bc744a7a845ab464f52b, type: 2}

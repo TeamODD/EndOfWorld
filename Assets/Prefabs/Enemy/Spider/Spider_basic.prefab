@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4918014505337212047}
   - component: {fileID: 4979533634810419503}
-  - component: {fileID: 4134305477598223262}
+  - component: {fileID: 2807925386481502942}
   - component: {fileID: -2907228708218300672}
   m_Layer: 0
   m_Name: Spider_basic
@@ -47,22 +47,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allSkillList:
-  - {fileID: 11400000, guid: dbac8cf017689d345acf0906012f11f4, type: 2}
-  - {fileID: 11400000, guid: 9641ab3539773fd4b8e3330c818e93be, type: 2}
-  - {fileID: 11400000, guid: fb8added424cd704d8487279610912b8, type: 2}
-  - {fileID: 11400000, guid: 64ba78b303e7dff4f9e94621a94672bd, type: 2}
-  - {fileID: 11400000, guid: 5acc85ab416ceac4595825cf7dacd198, type: 2}
-  - {fileID: 11400000, guid: c0dfdb66908465848b80835fa8cdf90a, type: 2}
-  - {fileID: 11400000, guid: 6e9a267c9b58dc24e897f4e1f9078a91, type: 2}
+  - {fileID: 11400000, guid: 9cbaeadc3b6b07b46a03530c96a474e2, type: 2}
+  - {fileID: 11400000, guid: a1e888817adacc944997a9dc12f503cd, type: 2}
+  - {fileID: 11400000, guid: 507f0cce70c2c2048b3932bdc1f77747, type: 2}
+  - {fileID: 11400000, guid: 384eb4fec34c4534b9a6d81d82e2ca65, type: 2}
+  - {fileID: 11400000, guid: 4692d0e773873a1429a0d070aebdf805, type: 2}
+  - {fileID: 11400000, guid: be9ff1ebbeb29d842947f6cca914e0de, type: 2}
+  - {fileID: 11400000, guid: 24e8336b2cfcaad499020e34e9e1111a, type: 2}
   firstPreferenceDistance: 1
   secondPreferenceDistance: 2
   enemySprites:
-  - {fileID: 21300000, guid: e2ed1fd4d40c7014ba9b3ee43b75cf39, type: 3}
-  - {fileID: 21300000, guid: 3500fa33e957506459cae25f2bb40838, type: 3}
-  - {fileID: 21300000, guid: d4cb01fbadf2a9440ab0b36ee9ae6138, type: 3}
-  - {fileID: 21300000, guid: c1dfd2f3a23261b4897a3bbb608ee32e, type: 3}
-  - {fileID: 21300000, guid: 9cadcc0edd6e0864eb15b5833b50a239, type: 3}
---- !u!114 &4134305477598223262
+  - {fileID: 21300000, guid: 48b74d0caee9e0f47be13795d1b5c4e9, type: 3}
+  - {fileID: 21300000, guid: f4652822465a1a04da756453bb2f420d, type: 3}
+  - {fileID: 21300000, guid: d4fc68b6d87b1dc4e88c53f52d340836, type: 3}
+  - {fileID: 21300000, guid: 1910a407d56a96e4f8f07b9888c7beb2, type: 3}
+  - {fileID: 21300000, guid: 572ec3cd29573c64495c0ca79e1b2ba1, type: 3}
+--- !u!114 &2807925386481502942
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -71,15 +71,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2955849413205747929}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fc0ee21cbca9fe4f910193a266a8402, type: 3}
+  m_Script: {fileID: 11500000, guid: f4a6057c55afab9409f379856f9fd72d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 47
   CurrentHP: 47
   AttackPoint: 10
   DefencePoint: 5
-  SpeedPoint: 11
-  StartingDistance: 3
+  SpeedPoint: 50
+  StartingDistance: 1
   StartingSkill: {fileID: 0}
 --- !u!212 &-2907228708218300672
 SpriteRenderer:

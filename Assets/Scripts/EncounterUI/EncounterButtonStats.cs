@@ -9,11 +9,24 @@ namespace EndOfWorld.EncounterSystem
 
         public int myIndex;
 
+        private bool isClick = false;
+
         public void OnGiveSelectedChoiceIndex()
         {
+            //중복 클릭 방지
+            if (isClick) return;
+
             encounterManager = GameObject.FindWithTag("EncounterManager").GetComponent<EncounterManager>();
 
             encounterManager.TakeAChoice(myIndex);
+
+            this.isClick = true;
+            Invoke("ResetClick", 1.1f);
+        }
+
+        private void ResetClick()
+        {
+            isClick = false;
         }
     }
 }

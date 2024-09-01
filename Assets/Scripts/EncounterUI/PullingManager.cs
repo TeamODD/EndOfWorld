@@ -85,9 +85,8 @@ public abstract class PullingManager : MonoBehaviour
             StartCoroutine(FadeInAction(i));
         }
 
-        ObjectActiveFalse();
-
-        CheckIndex();
+        Invoke("ObjectActiveFalse", 1f);
+        Invoke("CheckIndex", 1.1f);
     }
 
     void ObjectActiveFalse()
