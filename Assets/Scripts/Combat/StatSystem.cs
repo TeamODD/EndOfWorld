@@ -18,8 +18,8 @@ public abstract class StatSystem : MonoBehaviour
     public bool isParalysus { get; private set; }
 
     public List<EffectDB> effectList { get; private set; } = new List<EffectDB>();
-    public List<SkillDB> combatSkillList { get; private set; } = new List<SkillDB>();
-    public List<SkillDB> moveSkillList { get; private set; } = new List<SkillDB>();
+    public List<SkillDB> combatSkillList { get; protected set; } = new List<SkillDB>();
+    public List<SkillDB> moveSkillList { get; protected set; } = new List<SkillDB>();
     public List<SkillDB> linkSkillList { get; private set; } = new List<SkillDB>();
 
     protected void ApplySkill(SkillSO skill)

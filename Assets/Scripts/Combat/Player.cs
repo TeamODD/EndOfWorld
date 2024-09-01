@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class Player : StatSystem
 {
-    public void setSkill(List<SkillSO> skill)
+
+    public void setPlayerSkillList(List<SkillDB> combat, List<SkillDB> move)
     {
-        foreach(SkillSO s in skill)
-        {
-            ApplySkill(s);
-        }
+        combatSkillList = combat;
+        moveSkillList = move;
     }
-    
+
+    public List<SkillDB> getCombatSkillList() { return combatSkillList; }
+
+    public List<SkillDB> getMoveSkillList() { return moveSkillList; }
+
+
     public void RemoveAllUsedSkill()
     {
         foreach(SkillDB skillDB in combatSkillList)

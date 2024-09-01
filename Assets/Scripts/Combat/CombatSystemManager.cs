@@ -19,6 +19,8 @@ public class CombatSystemManager : MonoBehaviour
     private CombatHUDManager enemyHUD;
     [SerializeField]
     private CombatLogSystemManager logSystemManager;
+    [SerializeField]
+    private GameObject enemyParent;
 
     //현재 전투 상태 및 자원 변수
     private BattleState state;
@@ -71,7 +73,7 @@ public class CombatSystemManager : MonoBehaviour
     {
         //몬스터 데이터 및 전투 상황 가져오기
         dataManager = GameObject.FindObjectOfType<SceneTransitionManager>();
-        Instantiate(dataManager.EnemyData);
+        Instantiate(dataManager.EnemyData, enemyParent.transform);
         enemy = GameObject.FindObjectOfType<Enemy>();
         InitialStat initialStat = enemy.GetComponent<InitialStat>();
 
@@ -84,9 +86,7 @@ public class CombatSystemManager : MonoBehaviour
         player.InitStat(playerData.MaxHP, playerData.AttackPoint, playerData.DefencePoint, playerData.SpeedPoint);
 
         //플레이어 스킬 설정
-
-        //일케 하면 안되고 플레이어데이터에서 DB형태의 리스트를 그대로 가져와서 복사하기
-        player.setSkill(playerData.Skill);
+        player.setPlayerSkillList(playerData.CombatSkill, playerData.MoveSkill);
 
         //현재 스탯 설정
         player.BattleStartStat();
@@ -163,9 +163,10 @@ public class CombatSystemManager : MonoBehaviour
         if (player.currentHitPoint <= 0)
         {
             Debug.Log("적의 승리");
-            GetComponent<PlayerData>().CurrentHP = player.currentHitPoint;
-
-            //현재 체력 넣기, 스킬 리스트 넣기
+            GetComponent<PlayerData>().CurrentHP = 0;
+            player.RemoveAllUsedSkill();
+            GetComponent<PlayerData>().CombatSkill = player.getCombatSkillList();
+            GetComponent<PlayerData>().MoveSkill = player.getMoveSkillList();
             dataManager.UnLoadCombatScene(CombatResult.Lose);
         }
 
@@ -262,10 +263,10 @@ public class CombatSystemManager : MonoBehaviour
             if (enemy.currentHitPoint <= 0)
             {
                 Debug.Log("플레이어 승리");
-                GetComponent<PlayerData>().CurrentHP = 0;
+                GetComponent<PlayerData>().CurrentHP = player.currentHitPoint;
                 player.RemoveAllUsedSkill();
-                //playerData 변수 고치기
-                //현재 체력, 현재 스킬 리스트 플레이어 데이터 변수에 붙여넣기
+                GetComponent<PlayerData>().CombatSkill = player.getCombatSkillList();
+                GetComponent<PlayerData>().MoveSkill = player.getMoveSkillList();
                 dataManager.UnLoadCombatScene(CombatResult.Win);
             }
 
