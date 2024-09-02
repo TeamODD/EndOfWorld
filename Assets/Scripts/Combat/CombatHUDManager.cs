@@ -6,7 +6,11 @@ using TMPro;
 
 public class CombatHUDManager : MonoBehaviour
 {
+    [Space(1), Header("몬스터 전용")]
     [SerializeField] private TMP_Text monsterName;
+    [SerializeField] private GameObject enemyImage;
+
+    [Space(1), Header("플레이어 전용")]
     [SerializeField] private Slider hpSlider;
     [SerializeField] private Button skillButton;
     [SerializeField] private GameObject CombatSkillParent;
@@ -16,9 +20,13 @@ public class CombatHUDManager : MonoBehaviour
 
     public void SetHUD(StatSystem unit)
     {
-        if(monsterName != null) monsterName.text = unit.name;
         hpSlider.maxValue = unit.maxHitPoint;
         hpSlider.value = unit.currentHitPoint;
+    }
+
+    public void SetEnemyName(Enemy enemy)
+    {
+        monsterName.text = enemy.enemyName;
     }
 
     public void SetHPSlider(int currentHP)
@@ -65,7 +73,8 @@ public class CombatHUDManager : MonoBehaviour
 
     public void SetEnemySprite(Enemy enemy, int distance)
     {
-        enemy.GetComponent<SpriteRenderer>().sprite = enemy.enemySprites[distance - 1];
+        enemyImage.GetComponent<Image>().sprite = enemy.enemySprites[distance - 1];
+        enemyImage.GetComponent<Image>().SetNativeSize();
     }
 
     //상태이상 표시

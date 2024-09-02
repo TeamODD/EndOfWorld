@@ -8,7 +8,6 @@ public abstract class StatSystem : MonoBehaviour
     public int attackPoint { get; private set; }
     public int defensePoint { get; private set; }
     public int speed { get; private set; }
-
     public int currentHitPoint { get; private set; }
     public int currentAttackPoint { get; private set; }
     public int currentDefensePoint { get; private set; }
@@ -21,6 +20,7 @@ public abstract class StatSystem : MonoBehaviour
     public List<SkillDB> combatSkillList { get; protected set; } = new List<SkillDB>();
     public List<SkillDB> moveSkillList { get; protected set; } = new List<SkillDB>();
     public List<SkillDB> linkSkillList { get; private set; } = new List<SkillDB>();
+
 
     protected void ApplySkill(SkillSO skill)
     {

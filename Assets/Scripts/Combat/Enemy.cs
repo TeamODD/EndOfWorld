@@ -5,6 +5,10 @@ public abstract class Enemy : StatSystem
     private const int MAXDISTANCE = 5;
 
     //기획자가 사용하기 편하도록 사용할 모든 스킬을 이 리스트에 넣고 내부함수로 구분하기
+
+    [Space(1), Header("몬스터 이름")]
+    public string enemyName;
+
     [SerializeField, Space(1), Header("전체 스킬 리스트")]
     private SkillSO[] allSkillList;
 
@@ -34,6 +38,7 @@ public abstract class Enemy : StatSystem
             int index = getRandomIndex(combatSkillList.Count);
             for (int i = 0; i < combatSkillList.Count; i++)
             {
+                Debug.Log(combatSkillList[index].NAME);
                 if (combatSkillList[index].MINDISTANCE <= distance && combatSkillList[index].MAXDISTANCE >= distance
                      && combatSkillList[index].COOLTIME == 0
                      && combatSkillList[index].USES > 0)

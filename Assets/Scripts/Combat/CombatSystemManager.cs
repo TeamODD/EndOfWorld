@@ -76,10 +76,12 @@ public class CombatSystemManager : MonoBehaviour
         Instantiate(dataManager.EnemyData, enemyParent.transform);
         enemy = GameObject.FindObjectOfType<Enemy>();
         InitialStat initialStat = enemy.GetComponent<InitialStat>();
-
         enemy.InitStat(initialStat.MaxHP, initialStat.AttackPoint, initialStat.DefencePoint, initialStat.SpeedPoint);
-        distance = initialStat.StartingDistance;
+        enemyHUD.SetEnemyName(enemy);
 
+        //거리
+        distance = initialStat.StartingDistance;
+        
         //플레이어 데이터 가져오기
         PlayerData playerData = GameObject.FindObjectOfType<PlayerData>();
         player = GameObject.FindObjectOfType<Player>();
@@ -94,6 +96,7 @@ public class CombatSystemManager : MonoBehaviour
 
         //적 첫 스킬 예약
         enemy.EnemySkillListReady();
+
         if (initialStat.StartingSkill != null) enemyReservationSkill = enemy.findSkill(initialStat.StartingSkill);
         else enemyReservationSkill = enemy.ReservationSkill(distance);
 
@@ -107,6 +110,15 @@ public class CombatSystemManager : MonoBehaviour
 
         if (state == BattleState.PLAYERTURN) PlayerTurn();
         else EnemyTurn();
+    }
+
+    private void setHUDAll()
+    {
+        playerHUD.SetHUD(player);
+        playerHUD.SetHPSlider(player.currentHitPoint);
+        enemyHUD.SetHUD(enemy);
+        enemyHUD.SetHPSlider(enemy.currentHitPoint);
+        enemyHUD.SetEnemySprite(enemy, distance);
     }
 
     private void PlayerTurn()
@@ -137,6 +149,7 @@ public class CombatSystemManager : MonoBehaviour
         state = BattleState.ENEMYTURN;
 
         if (enemy.isFrightened || enemy.isEnsnared || enemy.isParalysus) enemyReservationSkill = enemy.ReservationSkill(distance);
+
 
         isHit = CheckHitAttackDistance(enemyReservationSkill) ? true : false;
         logSystemManager.setTextInContents(enemyReservationSkill, isHit);
@@ -188,14 +201,7 @@ public class CombatSystemManager : MonoBehaviour
         else return BattleState.ENEMYTURN;
     }
 
-    private void setHUDAll()
-    {
-        playerHUD.SetHUD(player);
-        playerHUD.SetHPSlider(player.currentHitPoint);
-        enemyHUD.SetHUD(enemy);
-        enemyHUD.SetHPSlider(enemy.currentHitPoint);
-        enemyHUD.SetEnemySprite(enemy, distance);
-    }
+
 
     //사거리 체크
     private bool CheckHitAttackDistance(SkillDB usingSkill)
@@ -209,6 +215,7 @@ public class CombatSystemManager : MonoBehaviour
     {
         if (usingSkill != null)
         {
+            Debug.Log("asdf");
             for (int i = 0; i < usingSkill.NUMOFATTACK; i++)
             {
                 reservedDamageOrHealAmount = usingSkill.TARGET == SkillSO.Target.Player ? player.CombatSkillActivate(usingSkill) : enemy.CombatSkillActivate(usingSkill);
@@ -224,12 +231,12 @@ public class CombatSystemManager : MonoBehaviour
                 }
             }
 
+            //나중에 상태이상 체크
+            distance = Mathf.Abs(distance + usingSkill.MOVE);
+            if (distance == 0) distance = 1;
+
+            //이거 몬스터도 해야함!!
             //이동 확인
-            if (!player.isEnsnared)
-            {
-                distance = Mathf.Abs(distance + usingSkill.MOVE);
-                if (distance == 0) distance = 1;
-            }
         }
     }
 

@@ -26,7 +26,7 @@ MonoBehaviour:
   move: 0
   effect:
   - {fileID: 11400000, guid: 2ba017d026d29044bb7d1d37307823e5, type: 2}
-  linkskill: {fileID: 11400000, guid: be9ff1ebbeb29d842947f6cca914e0de, type: 2}
+  linkskill: {fileID: 11400000, guid: 3d1743d7a96b23d4db1b9e3b1bebc09e, type: 2}
   skillicon: {fileID: 0}
   uses: 3
   cooltime: 2

@@ -291,7 +291,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 98.97, y: -85}
-  m_SizeDelta: {x: 197.94, y: 50}
+  m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &20962762
 MonoBehaviour:
@@ -1643,7 +1643,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 92.125, y: -205}
-  m_SizeDelta: {x: 184.25, y: 50}
+  m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &561446818
 MonoBehaviour:
@@ -3900,7 +3900,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 63.16, y: -25}
-  m_SizeDelta: {x: 126.32, y: 50}
+  m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1311570301
 MonoBehaviour:
@@ -5419,8 +5419,6 @@ MonoBehaviour:
   attackPoint: 0
   defencePoint: 0
   speedPoint: 0
-  MoveSkill: []
-  CombatSkill: []
   OnHPChanged:
     m_PersistentCalls:
       m_Calls: []
