@@ -12,23 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34fe107c39d1b174ba3e58cd696dfc92, type: 3}
   m_Name: RetreatingStrike
   m_EditorClassIdentifier: 
-  skillname: 
+  skillname: "\uD68C\uD53C \uACF5\uACA9"
   skilltype: 0
-  skillattacktype: 0
-  target: 0
-  coefficienttype: 0
+  skillattacktype: 1
+  target: 1
+  coefficienttype: 1
   minAttackRange: 1
-  maxAttackRange: 1
-  numberOfAttack: 0
-  damage: 0
+  maxAttackRange: 2
+  numberOfAttack: 1
+  damage: 100
   minDistance: 1
-  maxDistance: 1
-  move: 0
+  maxDistance: 2
+  move: 1
   effect: []
   linkskill: {fileID: 0}
-  skillicon: {fileID: 0}
-  uses: 0
+  skillicon: {fileID: 21300000, guid: be5c26e3b0a6f47b89c25afaaad1fc16, type: 3}
+  uses: 3
   cooltime: 0
-  usingtext: 
+  usingtext: "\uACF5\uACA9 \uD6C4 \uC2E0\uC18D\uD558\uAC8C \uAC70\uB9AC\uB97C \uBC8C\uB838\uB2E4."
   hittext: 
   misstext: 
