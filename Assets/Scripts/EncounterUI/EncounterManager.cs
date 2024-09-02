@@ -58,7 +58,7 @@ namespace EndOfWorld.EncounterSystem
 
         private bool _isWaitingPrint = true;
 
-        private bool _isCombatEnd = false;
+        public bool _isCombatEnd = false;
 
         [HideInInspector]
         public CombatResult CombatResult;
@@ -182,7 +182,6 @@ namespace EndOfWorld.EncounterSystem
                         yield return null;
 
                         this._isCombatEnd = false;
-
 
                         for(int i = 0; i < 3; i++)
                         {
@@ -346,6 +345,11 @@ namespace EndOfWorld.EncounterSystem
                 _unusedEncounterFileList[k] = _unusedEncounterFileList[n];
                 _unusedEncounterFileList[n] = value;
             }
+        }
+
+        public void EndCombat()
+        {
+            this._isCombatEnd = true;
         }
 
         private void ConveyToUsedList()

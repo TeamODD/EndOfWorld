@@ -66,6 +66,13 @@ namespace EndOfWorld.EncounterSystem
         private TMP_Text _textB;
         private TMP_Text _textC;
 
+        [SerializeField]
+        private Sprite[] _elfSprite = new Sprite[4];
+
+        [SerializeField]
+        private Image _elfImage;
+
+        private float _elfImageAlpha;
 
         /// <summary>
         /// 랜덤으로 뽑아서 PlayerData에 전달할 SkillSO 리스트
@@ -83,6 +90,7 @@ namespace EndOfWorld.EncounterSystem
 
         [SerializeField]
         private List<SkillSO> _windSkills;
+
 
 
 
@@ -135,7 +143,7 @@ namespace EndOfWorld.EncounterSystem
 
             _playerData = GameObject.FindWithTag("PlayerData").GetComponent<PlayerData>();
 
-
+            _elfImageAlpha = _elfImage.color.a;
 
             if (_canvasGroup.gameObject.activeSelf)
             {
@@ -149,7 +157,11 @@ namespace EndOfWorld.EncounterSystem
             DrawRandomStats();
 
             ///스킬 랜덤 선택 후 출력하는 함수 
-            ///
+            DrawRandomTwoSkills();
+
+            PrintText();
+            ShowElfimage();
+
 
             StartCoroutine(FadeOut());
         }
@@ -219,67 +231,124 @@ namespace EndOfWorld.EncounterSystem
                 case SkillType.Fire:
                     if (_fireSkills.Count == 0) break;
 
-                    randomNumber1 = Random.Range(0, _fireSkills.Count + 1);
-                    randomNumber2 = Random.Range(0, _fireSkills.Count + 1);
+                    randomNumber1 = Random.Range(0, _fireSkills.Count);
+                    randomNumber2 = Random.Range(0, _fireSkills.Count);
                     while (randomNumber2 == randomNumber1)
                     {
                         if (_fireSkills.Count < 2) break;
 
-                        randomNumber2 = Random.Range(0, _fireSkills.Count + 1);
+                        randomNumber2 = Random.Range(0, _fireSkills.Count);
                     }
 
                     _skillSO1 = _fireSkills[randomNumber1];
                     _skillSO2 = _fireSkills[randomNumber2];
+
+                    ShowSkillImage(randomNumber1, randomNumber2);
                     break;
 
                 case SkillType.Water:
                     if (_waterSkills.Count == 0) break;
 
-                    randomNumber1 = Random.Range(0, _waterSkills.Count + 1);
-                    randomNumber2 = Random.Range(0, _waterSkills.Count + 1);
+                    randomNumber1 = Random.Range(0, _waterSkills.Count);
+                    randomNumber2 = Random.Range(0, _waterSkills.Count);
                     while (randomNumber2 == randomNumber1)
                     {
                         if (_waterSkills.Count < 2) break;
 
-                        randomNumber2 = Random.Range(0, _waterSkills.Count + 1);
+                        randomNumber2 = Random.Range(0, _waterSkills.Count);
                     }
 
                     _skillSO1 = _waterSkills[randomNumber1];
                     _skillSO2 = _waterSkills[randomNumber2];
+
+                    ShowSkillImage(randomNumber1, randomNumber2);
                     break;
 
                 case SkillType.Earth:
                     if (_earthSkills.Count == 0) break;
 
-                    randomNumber1 = Random.Range(0, _earthSkills.Count + 1);
-                    randomNumber2 = Random.Range(0, _earthSkills.Count + 1);
+                    randomNumber1 = Random.Range(0, _earthSkills.Count);
+                    randomNumber2 = Random.Range(0, _earthSkills.Count);
                     while (randomNumber2 == randomNumber1)
                     {
                         if (_earthSkills.Count < 2) break;
 
-                        randomNumber2 = Random.Range(0, _earthSkills.Count + 1);
+                        randomNumber2 = Random.Range(0, _earthSkills.Count);
                     }
 
                     _skillSO1 = _earthSkills[randomNumber1];
                     _skillSO2 = _earthSkills[randomNumber2];
+
+                    ShowSkillImage(randomNumber1, randomNumber2);
                     break;
 
                 case SkillType.Wind:
                     if (_windSkills.Count == 0) break;
 
-                    randomNumber1 = Random.Range(0, _windSkills.Count + 1);
-                    randomNumber2 = Random.Range(0, _windSkills.Count + 1);
+                    randomNumber1 = Random.Range(0, _windSkills.Count);
+                    randomNumber2 = Random.Range(0, _windSkills.Count);
                     while (randomNumber2 == randomNumber1)
                     {
                         if (_windSkills.Count < 2) break;
 
-                        randomNumber2 = Random.Range(0, _windSkills.Count + 1);
+                        randomNumber2 = Random.Range(0, _windSkills.Count);
                     }
 
                     _skillSO1 = _windSkills[randomNumber1];
                     _skillSO2 = _windSkills[randomNumber2];
+
+                    ShowSkillImage(randomNumber1, randomNumber2);
                     break;
             }
+        }
+
+        private void ShowSkillImage(int randomNumber1, int randomNumber2)
+        {
+            switch(_skillType)
+            {
+                case SkillType.Fire:
+                    _choiceB.sprite = _fireSkills[randomNumber1].SKILLICON;
+                    _choiceC.sprite = _fireSkills[randomNumber2].SKILLICON;
+                    break;
+                case SkillType.Wind:
+                    _choiceB.sprite = _windSkills[randomNumber1].SKILLICON;
+                    _choiceC.sprite = _windSkills[randomNumber2].SKILLICON;
+                    break;
+                case SkillType.Water:
+                    _choiceB.sprite = _waterSkills[randomNumber1].SKILLICON;
+                    _choiceC.sprite = _waterSkills[randomNumber2].SKILLICON;
+                    break;
+                case SkillType.Earth:
+                    _choiceB.sprite = _earthSkills[randomNumber1].SKILLICON;
+                    _choiceC.sprite = _earthSkills[randomNumber2].SKILLICON;
+                    break;
+            }
+        }
+
+        private void ShowElfimage()
+        {
+            _elfImage.color = new Color(1, 1, 1, _elfImageAlpha);
+
+            switch (_skillType)
+            {
+                case SkillType.Fire:
+                    _elfImage.sprite = _elfSprite[0];
+                    break;
+                case SkillType.Water:
+                    _elfImage.sprite = _elfSprite[1];
+                    break;
+                case SkillType.Earth:
+                    _elfImage.sprite = _elfSprite[2];
+                    break;
+                case SkillType.Wind:
+                    _elfImage.sprite = _elfSprite[3];
+                    break;
+            }
+        }
+
+        private void HideElfImage()
+        {
+            _elfImage.color = new Color(1, 1, 1, 0);
         }
 
         private void ApplySkill(SkillSO skill)
@@ -348,6 +417,7 @@ namespace EndOfWorld.EncounterSystem
 
             _canvasGroup.alpha = 0;
 
+            HideElfImage();
             this.IsEnchantDone = true;
             yield return null;
         }

@@ -41,7 +41,7 @@ MonoBehaviour:
       type: {class: SpriteItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
       data:
         itemType: 1
-        sprite: {fileID: 21300000, guid: 30a3e1740b7546e439837f762644913b, type: 3}
+        sprite: {fileID: 21300000, guid: c71218625509bda489c8087f3edaadb6, type: 3}
     - rid: 5294809984500236302
       type: {class: ChoiceItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
       data:

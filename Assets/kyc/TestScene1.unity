@@ -1212,7 +1212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.3137255}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.5882353}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1361,7 +1361,19 @@ MonoBehaviour:
   screenUI: {fileID: 866330536}
   OnCombatEnd:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1669018923}
+        m_TargetAssemblyTypeName: EndOfWorld.EncounterSystem.EncounterManager, Assembly-CSharp
+        m_MethodName: EndCombat
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &447360257
 GameObject:
   m_ObjectHideFlags: 0
@@ -3157,6 +3169,12 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 72843d703dbcfcc4798622e077260ec1, type: 3}
     - {fileID: 21300000, guid: 72843d703dbcfcc4798622e077260ec1, type: 3}
     - {fileID: 21300000, guid: 72843d703dbcfcc4798622e077260ec1, type: 3}
+  _elfSprite:
+  - {fileID: 21300000, guid: 9f208bec3def9154d929a9b6a3ce48fe, type: 3}
+  - {fileID: 21300000, guid: 9d5426b44bcb5a549b2e2072bb085c0c, type: 3}
+  - {fileID: 21300000, guid: e827d21c342060947a72094d1b0eb241, type: 3}
+  - {fileID: 21300000, guid: 9d5426b44bcb5a549b2e2072bb085c0c, type: 3}
+  _elfImage: {fileID: 1028496081}
   _fireSkills:
   - {fileID: 11400000, guid: 14c49376c1d29794db938d975accd742, type: 2}
   - {fileID: 11400000, guid: 14c49376c1d29794db938d975accd742, type: 2}
@@ -3167,8 +3185,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 62ee51a711881654da6c854c410890c3, type: 2}
   - {fileID: 11400000, guid: 62ee51a711881654da6c854c410890c3, type: 2}
   _windSkills:
-  - {fileID: 11400000, guid: 93a39dfdc0148974bbe199396fa2d138, type: 2}
-  - {fileID: 11400000, guid: 93a39dfdc0148974bbe199396fa2d138, type: 2}
+  - {fileID: 11400000, guid: 14c49376c1d29794db938d975accd742, type: 2}
+  - {fileID: 11400000, guid: 14c49376c1d29794db938d975accd742, type: 2}
   IsEnchantDone: 0
 --- !u!1 &1013143148
 GameObject:
@@ -3217,6 +3235,81 @@ MonoBehaviour:
   _playerData: {fileID: 0}
   _data: {fileID: 1479640289}
   _canvas: {fileID: 876185588}
+--- !u!1 &1028496079
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1028496080}
+  - component: {fileID: 1028496082}
+  - component: {fileID: 1028496081}
+  m_Layer: 5
+  m_Name: ElfImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1028496080
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028496079}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 9.1, y: 11.9, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1285865165}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -14, y: 8}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1028496081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028496079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5882353}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1028496082
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028496079}
+  m_CullTransparentMesh: 1
 --- !u!1 &1052771586
 GameObject:
   m_ObjectHideFlags: 0
@@ -3853,6 +3946,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 312396655}
+  - {fileID: 2115474421}
+  - {fileID: 1028496080}
   - {fileID: 1672365790}
   - {fileID: 15603795}
   - {fileID: 601505098}
@@ -4818,6 +4913,7 @@ MonoBehaviour:
   _verticalLayoutGroup: {fileID: 1861725913}
   _sceneTransitionManager: {fileID: 385881742}
   _enchantUICanvas: {fileID: 2042204189}
+  _isCombatEnd: 0
   CombatResult: 0
 --- !u!4 &1669018924
 Transform:
@@ -4846,7 +4942,7 @@ GameObject:
   - component: {fileID: 1672365792}
   - component: {fileID: 1672365791}
   m_Layer: 5
-  m_Name: Enchant Background
+  m_Name: EnchantRound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4861,7 +4957,7 @@ RectTransform:
   m_GameObject: {fileID: 1672365789}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.4, y: 1.25, z: 1}
+  m_LocalScale: {x: 1.6449999, y: 3.679883, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1285865165}
@@ -4900,7 +4996,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 2
+  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1672365792
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5184,7 +5280,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 300.00003}
+  m_AnchoredPosition: {x: 0, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1861725913
@@ -5419,8 +5515,6 @@ MonoBehaviour:
   attackPoint: 0
   defencePoint: 0
   speedPoint: 0
-  MoveSkill: []
-  CombatSkill: []
   OnHPChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -5668,6 +5762,81 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!1 &2115474420
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2115474421}
+  - component: {fileID: 2115474423}
+  - component: {fileID: 2115474422}
+  m_Layer: 5
+  m_Name: ElfImageBackGround
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &2115474421
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115474420}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 9.1, y: 11.9, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1285865165}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -14, y: 8}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2115474422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115474420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 0.5882353}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2115474423
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115474420}
+  m_CullTransparentMesh: 1
 --- !u!1 &2143970734
 GameObject:
   m_ObjectHideFlags: 0
