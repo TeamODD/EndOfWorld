@@ -10,17 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ad015dd0aa596e4b9a219960d245315, type: 3}
-<<<<<<<< HEAD:Assets/Prefabs/Enemy/Spider/Paralyse.asset
-  m_Name: Paralyse
-========
-  m_Name: Paralysis
->>>>>>>> feature/enemy:Assets/Prefabs/Enemy/Spider/Paralysis.asset
+  m_Name: Ensnared Effect
   m_EditorClassIdentifier: 
-  effectname: "\uB9C8\uBE44"
-  effecticon: {fileID: 0}
-  target: 0
+  effectname: "\uC18D\uBC15"
+  effecticon: {fileID: 21300000, guid: 5a1f9d7a322ea4db8bdbf3bc0c607b3f, type: 3}
+  target: 1
   hp: 0
   attack: 0
   defense: 0
-  meze: 3
-  duration: 1
+  meze: 2
+  duration: 2
