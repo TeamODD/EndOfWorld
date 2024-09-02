@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/kyc/TestScene1.unity
+    path: Assets/Scenes/TestScene1.unity
     guid: 8daa88583b7bdf44bbd0c3582e1ee0d0
   - enabled: 1
     path: Assets/Scenes/CombatScene.unity

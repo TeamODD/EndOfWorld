@@ -37,12 +37,12 @@ MonoBehaviour:
       type: {class: SpriteItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
       data:
         itemType: 1
-        sprite: {fileID: 21300000, guid: 28c0219e23f3ec54fb52a26e19fae664, type: 3}
+        sprite: {fileID: 21300000, guid: 0bd4bf8523566d0459e59a12e9be1ece, type: 3}
     - rid: 5294810006568566796
       type: {class: ChoiceItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
       data:
         itemType: 2
         choiceList:
         - text: "\uC804\uD22C \uC2DC\uC791"
-          encounterFile: {fileID: 0}
+          encounterFile: {fileID: 11400000, guid: 8901f3bf44509fa409b9486172ba9f4d, type: 2}
           PopupObject: {fileID: 0}

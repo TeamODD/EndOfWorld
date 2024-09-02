@@ -58,6 +58,7 @@ namespace EndOfWorld.EncounterSystem
 
         private bool _isWaitingPrint = true;
 
+        [HideInInspector]
         public bool _isCombatEnd = false;
 
         [HideInInspector]
@@ -71,6 +72,8 @@ namespace EndOfWorld.EncounterSystem
 
             if (_playerData == null)
                 _playerData = GameObject.FindWithTag("PlayerData").GetComponent<PlayerData>();
+
+            _sceneTransitionManager.OnCombatEnd.AddListener(GetCombatResult);
         }
 
         private void Start()
@@ -80,7 +83,7 @@ namespace EndOfWorld.EncounterSystem
 
 
             SelectRandomEncounterFile();
-            StartCoroutine(PrintEncounter(false));
+            StartCoroutine(PrintEncounter(true));
         }
 
         private void Update()
@@ -219,6 +222,43 @@ namespace EndOfWorld.EncounterSystem
                     case ItemType.SpecialEncounter:
                         SaveSpecialEncounter( (SpecialEncounterItem)item );
                         break;
+
+                    case ItemType.ProgressLevel:
+                        this._thisProgressLevel += ((AddProgressLevel)item).ProgressLevelRisingCount;
+                        break;
+
+                    case ItemType.SkipEncounterItem:
+                        ConveyToUsedList();
+
+                        SelectRandomEncounterFile();
+                        CopyItems();
+                        SkipEncounter();
+                        break;
+
+                    case ItemType.StatIncreaseItem:
+
+                        switch( ((AddStatIncreaseItem)item).StatType )
+                        {
+                            case StatType.ATK:
+                                _playerData.AttackPoint += ((AddStatIncreaseItem)item).StatPoint;
+                                break;
+
+                            case StatType.DEF:
+                                _playerData.DefencePoint += ((AddStatIncreaseItem)item).StatPoint;
+                                break;
+
+                            case StatType.DEX:
+                                _playerData.SpeedPoint += ((AddStatIncreaseItem)item).StatPoint;
+                                break;
+                        }
+                        break;
+
+
+                    case ItemType.SkillItem:
+                        SkillSO skill = ((AddSkillItem)item).Skill;
+                        _playerData.ApplySkill(skill);
+                        break;
+
                 }
 
             }
@@ -258,7 +298,6 @@ namespace EndOfWorld.EncounterSystem
             }
             else
             {
-                _thisProgressLevel += 1;
                 IsConneting = false;
 
                 SelectRandomEncounterFile();
@@ -350,6 +389,11 @@ namespace EndOfWorld.EncounterSystem
         public void EndCombat()
         {
             this._isCombatEnd = true;
+        }
+
+        public void GetCombatResult(CombatResult combatResult)
+        {
+            this.CombatResult = combatResult;
         }
 
         private void ConveyToUsedList()

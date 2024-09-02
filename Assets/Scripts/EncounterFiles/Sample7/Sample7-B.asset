@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8a1cd31fa423ef409a822f46b285cfc, type: 3}
+  m_Name: Sample7-B
+  m_EditorClassIdentifier: 
+  ChaperLevel: 1
+  ProgressLevel: 5
+  ItemList:
+  - rid: 1965081327255420959
+  - rid: 1965081327255420960
+  - rid: 1965081327255420973
+  - rid: 1965081327255420964
+  - rid: 1965081327255420970
+  references:
+    version: 2
+    RefIds:
+    - rid: 1965081327255420959
+      type: {class: TextItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 0
+        text: "\uBC29\uC5B4\uB825 +3!"
+    - rid: 1965081327255420960
+      type: {class: AddStatIncreaseItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 10
+        StatType: 1
+        StatPoint: 3
+    - rid: 1965081327255420964
+      type: {class: TextItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 0
+        text: "\uB2F9\uC2E0\uC740 \uAC00\uC2DC\uB369\uAD74 \uC232\uC744 \uAC00\uAE4C\uC2A4\uB85C
+          \uBE60\uC838\uB098\uC654\uB2E4."
+    - rid: 1965081327255420970
+      type: {class: ChoiceItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 2
+        choiceList:
+        - text: "\uACC4\uC18D\uD558\uAE30"
+          encounterFile: {fileID: 0}
+          PopupObject: {fileID: 0}
+    - rid: 1965081327255420973
+      type: {class: AddProgressLevel, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 8
+        ProgressLevelRisingCount: 1
