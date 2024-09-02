@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8a1cd31fa423ef409a822f46b285cfc, type: 3}
+  m_Name: Sample8
+  m_EditorClassIdentifier: 
+  ChaperLevel: 1
+  ProgressLevel: 5
+  ItemList:
+  - rid: 1965081327255420975
+  - rid: 1965081327255420976
+  references:
+    version: 2
+    RefIds:
+    - rid: 1965081327255420975
+      type: {class: TextItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 0
+        text: "\uD639\uC5EC\uB098 \uAC00\uC2DC\uC5D0 \uCC14\uB9B4\uAE4C \uC870\uC2EC\uD788
+          \uBC1C\uAC78\uC74C\uC744 \uC62E\uAE30\uB358 \uADF8\uB54C, \uC800 \uBA40\uB9AC
+          \uD76C\uBBF8\uD55C \uBE5B\uC774 \uC11C\uC11C\uD788 \uBAA8\uC2B5\uC744 \uB4DC\uB7EC\uB0C8\uB2E4."
+    - rid: 1965081327255420976
+      type: {class: ChoiceItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 2
+        choiceList:
+        - text: "\uACBD\uACC4\uD558\uBA70 \uB2E4\uAC00\uAC04\uB2E4."
+          encounterFile: {fileID: 11400000, guid: d54fba63cf9aa7c4a90adbbc0e6d042e, type: 2}
+          PopupObject: {fileID: 0}

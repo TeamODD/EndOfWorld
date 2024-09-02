@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34fe107c39d1b174ba3e58cd696dfc92, type: 3}
+  m_Name: spider_skill4
+  m_EditorClassIdentifier: 
+  skillname: "\uC2E4\uBFDC\uAE30"
+  skilltype: 0
+  skillattacktype: 1
+  target: 0
+  coefficienttype: 1
+  minAttackRange: 2
+  maxAttackRange: 2
+  numberOfAttack: 0
+  damage: 0
+  minDistance: 2
+  maxDistance: 2
+  move: 0
+  effect:
+  - {fileID: 11400000, guid: 4d4127a08e25ad94bae92b58233e6b5b, type: 2}
+  linkskill: {fileID: 11400000, guid: c0dfdb66908465848b80835fa8cdf90a, type: 2}
+  skillicon: {fileID: 0}
+  uses: 3
+  cooltime: 2
+  usingtext: "\uC801\uC774 \uB048\uC801\uD55C \uC2E4\uC744 \uBC49\uC5B4\uB0C8\uB2E4."
+  hittext: "\uB2E4\uB9AC\uAC00 \uBB36\uC5EC \uC6C0\uC9C1\uC77C \uC218 \uC5C6\uC5B4\uC84C\uB2E4."
+  misstext: "\uC2E4\uC774 \uAC00\uAE4C\uC2A4\uB85C \uC2A4\uCCD0 \uC9C0\uB098\uAC14\uB2E4."

@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using static UnityEngine.GraphicsBuffer;
 using UnityEditor;
+using UnityEditor.UI;
+using UnityEngine.UI;
 
 
 namespace EndOfWorld.EncounterSystem
@@ -26,6 +28,15 @@ namespace EndOfWorld.EncounterSystem
         [SerializeField]
         private EncounterFileListForAcquiredFiles _encounterFileListForAcquiredFiles;
 
+        [SerializeField]
+        private PlayerData _playerData;
+
+        [SerializeField]
+        private VerticalLayoutGroup _verticalLayoutGroup;
+
+        [SerializeField]
+        private SceneTransitionManager _sceneTransitionManager;
+
         private EncounterFile _encounterFile;
 
         private PrintManager _printManager;
@@ -34,17 +45,35 @@ namespace EndOfWorld.EncounterSystem
 
         private List<ChoiceContents> _choiceItemList;
 
-        private int _thisProgressLevel = 0;
+        private int _thisProgressLevel = 1;
 
         private int _encounterFileIndex;
 
         private EnchantManager _enchantManager;
+
+        [SerializeField]
+        private Canvas _enchantUICanvas;
+
+        private bool IsConneting = false;
+
+        private bool _isWaitingPrint = true;
+
+        [HideInInspector]
+        public bool _isCombatEnd = false;
+
+        [HideInInspector]
+        public CombatResult CombatResult;
 
         private void Awake()
         {
             _printManager = GameObject.FindWithTag("PrintManager").GetComponent<PrintManager>();
 
             _enchantManager = GameObject.FindWithTag("EnchantManager").GetComponent<EnchantManager>();
+
+            if (_playerData == null)
+                _playerData = GameObject.FindWithTag("PlayerData").GetComponent<PlayerData>();
+
+            _sceneTransitionManager.OnCombatEnd.AddListener(GetCombatResult);
         }
 
         private void Start()
@@ -54,9 +83,15 @@ namespace EndOfWorld.EncounterSystem
 
 
             SelectRandomEncounterFile();
-            StartCoroutine(PrintEncounter());
+            StartCoroutine(PrintEncounter(true));
         }
 
+        private void Update()
+        {
+            //정렬 버그 fix를 위한 코드
+            _verticalLayoutGroup.enabled = false;
+            _verticalLayoutGroup.enabled = true;
+        }
 
         /// <summary>
         /// 특정한 조건에 의해 추가된 EncounterFile을 가져오는 함수
@@ -81,7 +116,7 @@ namespace EndOfWorld.EncounterSystem
 
         private void BringSavedData()
         {
-            if (_savedData.ProgressLevel > 0) //저장 된적이 있는지 없는지 구분
+            if (_savedData.ProgressLevel > 1) //저장 된적이 있는지 없는지 구분
             {
                 this._unusedEncounterFileList = _savedData.UnusedEncounterFiles;
                 this._usedEncounterFileList = _savedData.UsedEncounterFiles;
@@ -111,9 +146,13 @@ namespace EndOfWorld.EncounterSystem
             }
         }
 
-        IEnumerator PrintEncounter()
+        IEnumerator PrintEncounter(bool IsNeedToWait)
         {
             CopyItems();
+
+            //오브젝트를 지울 때 걸리는 시간을 기다려주기 위함
+            if (IsNeedToWait)
+                yield return new WaitForSeconds(1f);
 
 
             foreach (var item in _itemList)
@@ -126,32 +165,56 @@ namespace EndOfWorld.EncounterSystem
 
                         CallPrintManager(item);
 
+                        _isWaitingPrint = true;
                         yield return new WaitUntil(() => _printManager.isPrintDone == true);
                         yield return null;
 
                         _printManager.isPrintDone = false;
+                        _isWaitingPrint = false;
                         yield return null;
 
                         break;
 
                     case ItemType.Encounter:
+                        GameObject _enemy = ((EncounterItem)item).Enemy;
+                        //_sceneTransitionManager.EnemyData = _enemy;
+                        _sceneTransitionManager.LoadCombatScene(_enemy);
+
+                        //전투가 끝날 때까지 대기
+                        yield return new WaitUntil(() => this._isCombatEnd == true);
+                        yield return null;
+
+                        this._isCombatEnd = false;
+
+                        for(int i = 0; i < 3; i++)
+                        {
+                            if( ((EncounterItem)item).CombatResultReportList[i].combatResult == this.CombatResult )
+                            {
+                                this._encounterFile = ((EncounterItem)item).CombatResultReportList[i].encounterFile;
+
+                                ConnectEncounter();
+                            }
+                        }
+
                         break;
 
                     case ItemType.SetHP:
+                        ((AddHPItem)item).AddHpPoint(((AddHPItem)item).HpPoint);
                         break;
 
                     case ItemType.UpgradeArmor:
+                        ((UpgradeArmorItem)item).AddDefensePoint(((UpgradeArmorItem)item).DefensePoint);
                         break;
 
                     case ItemType.Enchant:
-                        _enchantManager.gameObject.transform.parent.gameObject.SetActive(true);
+                        _enchantUICanvas.gameObject.SetActive(true);
                         _enchantManager.StartEnchantManager();
 
                         yield return new WaitUntil(() => _enchantManager.IsEnchantDone == true);
                         yield return null;
 
                         _enchantManager.IsEnchantDone = false;
-                        _enchantManager.gameObject.transform.parent.gameObject.SetActive(false);
+                        _enchantUICanvas.gameObject.SetActive(false);
                         yield return null;
 
                         break;
@@ -159,6 +222,43 @@ namespace EndOfWorld.EncounterSystem
                     case ItemType.SpecialEncounter:
                         SaveSpecialEncounter( (SpecialEncounterItem)item );
                         break;
+
+                    case ItemType.ProgressLevel:
+                        this._thisProgressLevel += ((AddProgressLevel)item).ProgressLevelRisingCount;
+                        break;
+
+                    case ItemType.SkipEncounterItem:
+                        ConveyToUsedList();
+
+                        SelectRandomEncounterFile();
+                        CopyItems();
+                        SkipEncounter();
+                        break;
+
+                    case ItemType.StatIncreaseItem:
+
+                        switch( ((AddStatIncreaseItem)item).StatType )
+                        {
+                            case StatType.ATK:
+                                _playerData.AttackPoint += ((AddStatIncreaseItem)item).StatPoint;
+                                break;
+
+                            case StatType.DEF:
+                                _playerData.DefencePoint += ((AddStatIncreaseItem)item).StatPoint;
+                                break;
+
+                            case StatType.DEX:
+                                _playerData.SpeedPoint += ((AddStatIncreaseItem)item).StatPoint;
+                                break;
+                        }
+                        break;
+
+
+                    case ItemType.SkillItem:
+                        SkillSO skill = ((AddSkillItem)item).Skill;
+                        _playerData.ApplySkill(skill);
+                        break;
+
                 }
 
             }
@@ -169,17 +269,36 @@ namespace EndOfWorld.EncounterSystem
         //선택지에서 골랐을 시
         public void TakeAChoice(int index)
         {
+            //페이드 효과가 끝나지 않았는 데 눌렀을시 반환
+            if (_isWaitingPrint == true) return;
+
+
+            //선택지가 다음 encounterFile이 아닌 팝업 오브젝트를 가지고 있다면
+            if (_choiceItemList[index].PopupObject != null)
+            {
+                GameObject popupObject = GameObject.Instantiate(_choiceItemList[index].PopupObject) as GameObject;
+
+                popupObject.transform.SetParent(_verticalLayoutGroup.gameObject.transform, false);
+
+                return;
+            } 
+            //팝업 오브젝트의 삭제는 오브젝트 내에서 이루어지도록 하겠음
+
+
             ConveyToUsedList();
-            
+
+
             if (_choiceItemList[index].encounterFile != null)
             {
                 _encounterFile = _choiceItemList[index].encounterFile;
+                IsConneting = true;
+
                 CopyItems();
                 ConnectEncounter();
             }
             else
             {
-                _thisProgressLevel += 1;
+                IsConneting = false;
 
                 SelectRandomEncounterFile();
                 CopyItems();
@@ -203,14 +322,14 @@ namespace EndOfWorld.EncounterSystem
 
         private void SkipEncounter()
         {
-            _printManager.ReturnObjects();
-            StartCoroutine(PrintEncounter());
+            _printManager.ReturnAllObjects();
+            StartCoroutine(PrintEncounter(true));
         }
 
         private void ConnectEncounter()
         {
             _printManager.ReturnChoiceObjects();
-            StartCoroutine(PrintEncounter());
+            StartCoroutine(PrintEncounter(true));
         }
 
         private void CopyItems()
@@ -267,8 +386,20 @@ namespace EndOfWorld.EncounterSystem
             }
         }
 
+        public void EndCombat()
+        {
+            this._isCombatEnd = true;
+        }
+
+        public void GetCombatResult(CombatResult combatResult)
+        {
+            this.CombatResult = combatResult;
+        }
+
         private void ConveyToUsedList()
         {
+            if (IsConneting) return;
+
             _usedEncounterFileList.Add(_unusedEncounterFileList[_encounterFileIndex]);
             _unusedEncounterFileList.RemoveAt(_encounterFileIndex);
         }

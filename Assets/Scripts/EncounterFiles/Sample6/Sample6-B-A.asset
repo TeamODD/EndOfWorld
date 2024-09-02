@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8a1cd31fa423ef409a822f46b285cfc, type: 3}
+  m_Name: Sample6-B-A
+  m_EditorClassIdentifier: 
+  ChaperLevel: 1
+  ProgressLevel: 5
+  ItemList:
+  - rid: 1965081327255420990
+  - rid: 1965081327255420993
+  - rid: 1965081327255420998
+  - rid: 1965081327255420997
+  - rid: 1965081327255420999
+  - rid: 1965081327255420995
+  - rid: 1965081327255420994
+  references:
+    version: 2
+    RefIds:
+    - rid: 1965081327255420990
+      type: {class: TextItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 0
+        text: "\uB2F9\uC2E0\uC744 \uBCF4\uACE0 \uB180\uB780 \uB4EF \uBCF4\uC600\uC9C0\uB9CC,
+          \uACE7 \uD65C\uB825\uC774 \uB3CB\uB294 \uC8FC\uBB38\uC744 \uC678\uAE30
+          \uC2DC\uC791\uD588\uB2E4."
+    - rid: 1965081327255420993
+      type: {class: AddHPItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 4
+        HpPoint: 50
+    - rid: 1965081327255420994
+      type: {class: ChoiceItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 2
+        choiceList:
+        - text: "\uACC4\uC18D\uD558\uAE30"
+          encounterFile: {fileID: 0}
+          PopupObject: {fileID: 0}
+    - rid: 1965081327255420995
+      type: {class: AddProgressLevel, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 8
+        ProgressLevelRisingCount: 1
+    - rid: 1965081327255420997
+      type: {class: AddSkillItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 11
+        Skill: {fileID: 0}
+    - rid: 1965081327255420998
+      type: {class: TextItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 0
+        text: "\uD604\uC7AC \uCCB4\uB825 50 \uC99D\uAC00!"
+    - rid: 1965081327255420999
+      type: {class: TextItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 0
+        text: "\uD68C\uBCF5 \uC2A4\uD0AC \uD68D\uB4DD!"

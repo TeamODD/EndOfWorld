@@ -105,6 +105,12 @@ public class TextPrintManager : PullingManager
                 {
                     startingCharacterRange += 1;
 
+                    //.과 공백은 인식이 안 되고 startingCharacterRange가 증가하지 않아서 생기는 버그 예외 처리
+                    if(startingCharacterRange == characterCount - 1)
+                    {
+                        startingCharacterRange += 1;
+                    }
+
                     if (startingCharacterRange == characterCount)
                     {
                         // Update mesh vertex data one last time.
@@ -127,6 +133,7 @@ public class TextPrintManager : PullingManager
             yield return new WaitForSeconds(0.25f - FadeSpeed * 0.01f);
         }
 
+        Debug.Log("Text Print Animation has done");
         EndPrint();
         yield return null;
     }

@@ -6,16 +6,20 @@ using UnityEngine.UI;
 
 public class ImagePrintManager : PullingManager
 {
-    Image imageComponent;
+    Image _imageComponent;
 
     private PrintManager _printManager;
 
     public float FadeSpeed = 1.0f;
 
+    private float _imageRectHeight;
+
 
     private void Start()
     {
         _printManager = this.gameObject.GetComponent<PrintManager>();
+
+        _imageRectHeight = 800;
     }
 
     public void PrintImage(Sprite sprite)
@@ -23,20 +27,33 @@ public class ImagePrintManager : PullingManager
         PullObject();
         SetImageObject();
         SetImageContents(sprite);
+        SetResolution(sprite);
         StartCoroutine(ImageFadeAnimation());
     }
 
     private void SetImageObject()
     {
-        imageComponent = pulledObjectList[nextPullingIndex - 1].GetComponent<Image>();
+        _imageComponent = pulledObjectList[nextPullingIndex - 1].GetComponent<Image>();
     }
 
     private void SetImageContents(Sprite sprite)
     {
-        if (imageComponent.color.a != 0)
-            imageComponent.color = new Color(1, 1, 1, 0);
+        if (_imageComponent.color.a != 0)
+            _imageComponent.color = new Color(1, 1, 1, 0);
 
-        imageComponent.sprite = sprite;
+        _imageComponent.sprite = sprite;
+    }
+
+    private void SetResolution(Sprite sprite)
+    {
+        float boundX = sprite.bounds.size.x;
+        float boundY = sprite.bounds.size.y;
+
+        boundY = boundY / boundX;
+        boundY = boundY * _imageRectHeight;
+
+        RectTransform rectTransform = _imageComponent.gameObject.GetComponent<RectTransform>();
+        rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, boundY);
     }
 
     private void EndPrint()
@@ -48,14 +65,14 @@ public class ImagePrintManager : PullingManager
     {
         float alpha = 0;
 
-        while(imageComponent.color.a < 1)
+        while(_imageComponent.color.a < 1)
         {
-            imageComponent.color = new Color(1, 1, 1, alpha);
+            _imageComponent.color = new Color(1, 1, 1, alpha);
             alpha += Time.deltaTime;
             yield return null;
         }
 
-        imageComponent.color = new Color(1, 1, 1, alpha);
+        _imageComponent.color = new Color(1, 1, 1, alpha);
 
         EndPrint();
 

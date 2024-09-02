@@ -4,24 +4,29 @@ using UnityEngine;
 
 public class Player : StatSystem
 {
-    private List<SkillDB> skillList = new List<SkillDB>();
 
-    public void ApplySkill(SkillSO skill)
+    public void setPlayerSkillList(List<SkillDB> combat, List<SkillDB> move)
     {
-        SkillDB skillDB = new SkillDB(
-            skill.SKILLNAME, 
-            skill.DAMAGE, 
-            skill.DISTANCE, 
-            skill.EFFECT, 
-            skill.MOVE, 
-            skill.SKILLICON, 
-            skill.USES,
-            skill.COOLTIME
-            );
-
-        skillList.Add(skillDB);
+        combatSkillList = combat;
+        moveSkillList = move;
     }
 
-    public List<SkillDB> GetSkillList() { return skillList; }
+    public List<SkillDB> getCombatSkillList() { return combatSkillList; }
+
+    public List<SkillDB> getMoveSkillList() { return moveSkillList; }
+
+
+    public void RemoveAllUsedSkill()
+    {
+        foreach(SkillDB skillDB in combatSkillList)
+        {
+            if (skillDB.USES < 1) combatSkillList.Remove(skillDB);
+        }
+
+        foreach(SkillDB skillDB in moveSkillList)
+        {
+            if (skillDB.USES < 1) moveSkillList.Remove(skillDB);
+        }
+    }
 
 }

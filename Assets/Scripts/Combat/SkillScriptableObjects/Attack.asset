@@ -13,10 +13,22 @@ MonoBehaviour:
   m_Name: Attack
   m_EditorClassIdentifier: 
   skillname: Attack
-  damage: 5
-  distance: 1
-  effect: {fileID: 0}
+  skilltype: 0
+  skillattacktype: 1
+  target: 0
+  coefficienttype: 1
+  minAttackRange: 1
+  maxAttackRange: 2
+  numberOfAttack: 1
+  damage: 80
+  minDistance: 2
+  maxDistance: 2
   move: 0
-  skillicon: {fileID: 0}
+  effect: []
+  linkskill: {fileID: 11400000, guid: 93a39dfdc0148974bbe199396fa2d138, type: 2}
+  skillicon: {fileID: 21300000, guid: c78df54510228b345b28ae0246751ce8, type: 3}
   uses: 3
   cooltime: 0
+  usingtext: Attack!
+  hittext: HIT!
+  misstext: MISS!

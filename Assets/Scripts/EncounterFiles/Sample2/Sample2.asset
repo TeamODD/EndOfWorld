@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8a1cd31fa423ef409a822f46b285cfc, type: 3}
+  m_Name: Sample2
+  m_EditorClassIdentifier: 
+  ChaperLevel: 1
+  ProgressLevel: 2
+  ItemList:
+  - rid: 5294809987886612484
+  - rid: 5294810006568566785
+  - rid: 5294810006568566786
+  references:
+    version: 2
+    RefIds:
+    - rid: 5294809987886612484
+      type: {class: TextItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 0
+        text: "\uB2F9\uC2E0\uC740 \uC559\uC0C1\uD55C \uB364\uBD88 \uC0AC\uC774\uB97C
+          \uAC78\uC5B4\uAC00\uACE0 \uC788\uC5C8\uB2E4. \uC190\uC5D0 \uC954 \uBB34\uAE30\uB85C
+          \uAC04\uC2E0\uD788 \uD5E4\uCE58\uBA70 \uC9C0\uB098\uACE0 \uC788\uB358 \uADF8\uB54C,
+          \uB9D0\uB77C\uBD99\uC5B4 \uC218\uBD81\uD788 \uC313\uC5EC\uC788\uB294 \uB098\uBB47\uC78E
+          \uD2C8\uC73C\uB85C \uBC14\uC2A4\uB77D \uAC70\uB9AC\uB294 \uC18C\uB9AC\uAC00
+          \uB4E4\uB824\uC654\uB2E4.\r\n \uACE0\uAC1C\uB97C \uB3CC\uB824\uBCF4\uB2C8,
+          \uBA70\uCE60\uC740 \uAD76\uC740 \uB4EF\uD55C \uD1A0\uB07C\uAC00 \uB2F9\uC2E0\uC744
+          \uBCF4\uBA70 \uB4B7\uAC78\uC74C\uC9C8 \uCE58\uACE0 \uC788\uC5C8\uB2E4."
+    - rid: 5294810006568566785
+      type: {class: SpriteItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 1
+        sprite: {fileID: 21300000, guid: 6d4d58f15abbc1749aaac0cc153767e8, type: 3}
+    - rid: 5294810006568566786
+      type: {class: ChoiceItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 2
+        choiceList:
+        - text: "\uC804\uD22C \uC2DC\uC791"
+          encounterFile: {fileID: 11400000, guid: 2f441d3067d49474090e22e80ecb39b5, type: 2}
+          PopupObject: {fileID: 0}
+        - text: "\uC870\uC6A9\uD788 \uC9C0\uB098\uCCD0 \uAC04\uB2E4"
+          encounterFile: {fileID: 11400000, guid: 264cdbe3d9eeec943a3c954f83f7d9d9, type: 2}
+          PopupObject: {fileID: 0}

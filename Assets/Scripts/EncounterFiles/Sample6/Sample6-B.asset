@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8a1cd31fa423ef409a822f46b285cfc, type: 3}
+  m_Name: Sample6-B
+  m_EditorClassIdentifier: 
+  ChaperLevel: 1
+  ProgressLevel: 5
+  ItemList:
+  - rid: 1965081327255420990
+  - rid: 1965081327255420991
+  - rid: 1965081327255420992
+  references:
+    version: 2
+    RefIds:
+    - rid: 1965081327255420990
+      type: {class: TextItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 0
+        text: "\uB2F9\uC2E0\uC740 \uC774\uC804\uC758 \uAE30\uC5B5\uC744 \uB354\uB4EC\uC5B4
+          \uB9C9\uD78C \uAC83\uCC98\uB7FC \uC740\uD3D0\uB41C \uAE38\uC744 \uCC3E\uC544\uB0C8\uB2E4.
+          \uAC00\uC2DC\uB369\uAD74\uC774 \uB2E4\uB978 \uACF3\uBCF4\uB2E4 \uCD18\uCD18\uD788
+          \uC5BD\uD600 \uC788\uC5B4, \uC5CE\uB4DC\uB824 \uACA8\uC6B0 \uC9C0\uB098\uAC14\uB2E4.\r\n\uADF8\uB9AC\uACE0
+          \uB3C4\uCC29\uD55C \uACF3\uC5D0\uC120 \uCD08\uB85D \uBE5B\uC73C\uB85C \uBC1D\uAC8C
+          \uBE5B\uB098\uB294 \uC815\uB839\uC744 \uB9CC\uB0A0 \uC218 \uC788\uC5C8\uB2E4."
+    - rid: 1965081327255420991
+      type: {class: SpriteItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 1
+        sprite: {fileID: 0}
+    - rid: 1965081327255420992
+      type: {class: ChoiceItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 2
+        choiceList:
+        - text: "\uC815\uB839\uC5D0\uAC8C \uB2E4\uAC00\uAC04\uB2E4."
+          encounterFile: {fileID: 11400000, guid: 848f7ae3912e92e4887461bae6556e48, type: 2}
+          PopupObject: {fileID: 0}
