@@ -17,7 +17,18 @@ namespace EndOfWorld.EncounterSystem
         SetHP,
         UpgradeArmor,
         Enchant,
-        SpecialEncounter
+        SpecialEncounter,
+        ProgressLevel,
+        SkipEncounterItem,
+        StatIncreaseItem,
+        SkillItem
+    }
+
+    public enum StatType
+    {
+        ATK,
+        DEF,
+        DEX
     }
 
     [System.Serializable]
@@ -168,5 +179,41 @@ namespace EndOfWorld.EncounterSystem
         public EncounterFile SpecialEncounterFile;
 
         public SpecialEncounterItem() : base(ItemType.SpecialEncounter) { }
+    }
+
+    [System.Serializable]
+    public class AddProgressLevel : Item
+    {
+        public int ProgressLevelRisingCount;
+
+        public AddProgressLevel() : base(ItemType.ProgressLevel) {
+            ProgressLevelRisingCount = 1;
+        }
+    }
+
+    [System.Serializable]
+    public class AddSkipEncounterItem : Item
+    {
+        public AddSkipEncounterItem() : base(ItemType.SkipEncounterItem) { }
+    }
+
+    [System.Serializable]
+    public class AddStatIncreaseItem : Item
+    {
+        public StatType StatType;
+
+        public int StatPoint;
+
+        public AddStatIncreaseItem() : base(ItemType.StatIncreaseItem) { }
+    }
+
+    [System.Serializable]
+    public class AddSkillItem : Item
+    {
+        public SkillSO Skill;
+
+        public AddSkillItem() : base(ItemType.SkillItem) 
+        {
+        }
     }
 }

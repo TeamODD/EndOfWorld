@@ -68,5 +68,29 @@ namespace EndOfWorld.EncounterSystem
         {
             ItemList.Add(new SpecialEncounterItem());
         }
+
+        [ContextMenu("AddProgressLevel")]
+        public void AddProgressLevel()
+        {
+            ItemList.Add(new AddProgressLevel());
+        }
+
+        [ContextMenu("AddSkipEncounterItem")]
+        public void AddSkipEncounterItem()
+        {
+            ItemList.Add(new AddSkipEncounterItem());
+        }
+
+        [ContextMenu("AddStatIncreaseItem")]
+        public void AddStatIncreaseItem()
+        {
+            ItemList.Add(new AddStatIncreaseItem());
+        }
+
+        [ContextMenu("AddSkillItem")]
+        public void AddSkillItem()
+        {
+            ItemList.Add(new AddSkillItem());
+        }
     }
 }

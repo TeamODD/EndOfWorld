@@ -16,11 +16,17 @@ MonoBehaviour:
   ProgressLevel: 2
   ItemList:
   - rid: 5294810006568566797
+  - rid: 1965081327255420945
   - rid: 5294810006568566798
   - rid: 5294810006568566799
   references:
     version: 2
     RefIds:
+    - rid: 1965081327255420945
+      type: {class: AddProgressLevel, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 8
+        ProgressLevelRisingCount: 1
     - rid: 5294810006568566797
       type: {class: EnchantItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
       data:

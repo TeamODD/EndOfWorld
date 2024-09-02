@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8a1cd31fa423ef409a822f46b285cfc, type: 3}
+  m_Name: Sample5
+  m_EditorClassIdentifier: 
+  ChaperLevel: 1
+  ProgressLevel: 4
+  ItemList:
+  - rid: 5294809987886612487
+  - rid: 1965081327255420936
+  - rid: 1965081327255420937
+  references:
+    version: 2
+    RefIds:
+    - rid: 1965081327255420936
+      type: {class: SpriteItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 1
+        sprite: {fileID: 21300000, guid: 4358f2211cf395641bbae071f3218a1b, type: 3}
+    - rid: 1965081327255420937
+      type: {class: ChoiceItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 2
+        choiceList:
+        - text: "\uC804\uD22C \uC2DC\uC791"
+          encounterFile: {fileID: 11400000, guid: aeeaca6a2f049574a89ec7edae7692cd, type: 2}
+          PopupObject: {fileID: 0}
+    - rid: 5294809987886612487
+      type: {class: TextItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 0
+        text: "\uB2F9\uC2E0\uC740 \uC774\uACF3\uC800\uACF3 \uD769\uC5B4\uC9C4 \uB9C8\uBB3C\uB4E4\uC758
+          \uBF08\uB97C \uBC1C\uACAC\uD588\uB2E4. \uBD80\uB7EC\uC9C0\uACE0 \uAE08\uC774
+          \uAC04 \uC794\uD574\uB4E4\uC774 \uBB34\uC9C8\uC11C\uD558\uAC8C \uB110\uB824
+          \uC788\uC5C8\uB2E4. \uBD80\uC11C\uC9C4 \uC794\uD574\uB4E4\uC744 \uBCF4\uBA74,
+          \uB0A0\uCE74\uB85C\uC6B4 \uBB34\uC5B8\uAC00\uC5D0 \uC758\uD574 \uAE01\uD788\uACE0
+          \uBD80\uC11C\uC9C4 \uAC83\uCC98\uB7FC \uBCF4\uC600\uB2E4.\r\n \uADF8\uB54C\uC600\uB2E4.
+          \uD55C \uC21C\uAC04 \uB0A0\uCE74\uB85C\uC6B4 \uC18C\uB9AC\uAC00 \uC2A4\uCE58\uB354\uB2C8,
+          \uAC70\uB300\uD55C \uB0A0\uAC1C\uB97C \uD3BC\uCE58\uBA70 \uAD34\uC870\uAC00
+          \uB0A0\uC544\uC62C\uB790\uB2E4. \uB2F9\uC2E0\uC758 \uC874\uC7AC\uB97C \uB208\uCE58\uCC48
+          \uB4EF \uAC70\uB300\uD55C \uADF8\uB9BC\uC790\uAC00 \uBB34\uAC8C\uB97C \uC2E4\uC5B4
+          \uB0A0\uC544\uC624\uAE30 \uC2DC\uC791\uD588\uB2E4.\r\n \uAC70\uB300 \uAD34\uC870\uB294
+          \uB545\uC5D0 \uACE4\uB450\uBC15\uC9C8 \uCCE4\uB2E4. \uB0A0\uAC1C\uB97C
+          \uD37C\uB355\uC600\uC9C0\uB9CC \uC5BC\uB9C8 \uC9C0\uB098\uC9C0 \uC54A\uC544
+          \uC6C0\uC9C1\uC784\uC774 \uBA48\uCD94\uC5C8\uB2E4. \r"
