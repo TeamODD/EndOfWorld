@@ -46,6 +46,3 @@ MonoBehaviour:
         - text: "\uC804\uD22C \uC2DC\uC791"
           encounterFile: {fileID: 11400000, guid: 2f441d3067d49474090e22e80ecb39b5, type: 2}
           PopupObject: {fileID: 0}
-        - text: "\uC870\uC6A9\uD788 \uC9C0\uB098\uCCD0 \uAC04\uB2E4"
-          encounterFile: {fileID: 11400000, guid: 264cdbe3d9eeec943a3c954f83f7d9d9, type: 2}
-          PopupObject: {fileID: 0}

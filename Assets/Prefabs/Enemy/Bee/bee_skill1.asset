@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34fe107c39d1b174ba3e58cd696dfc92, type: 3}
+  m_Name: bee_skill1
+  m_EditorClassIdentifier: 
+  skillname: "\uC57D\uACF5\uACA9"
+  skilltype: 0
+  skillattacktype: 1
+  target: 0
+  coefficienttype: 1
+  minAttackRange: 1
+  maxAttackRange: 2
+  numberOfAttack: 1
+  damage: 100
+  minDistance: 2
+  maxDistance: 2
+  move: -1
+  effect: []
+  linkskill: {fileID: 0}
+  skillicon: {fileID: 0}
+  uses: 10
+  cooltime: 0
+  usingtext: "\uC801\uC774 \uB3CC\uC9C4\uD574\uC654\uB2E4."
+  hittext: 
+  misstext: 

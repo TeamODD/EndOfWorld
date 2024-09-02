@@ -132,7 +132,7 @@ public class PlayerDataUI : MonoBehaviour
 
     private void Update()
     {
-        //Á¤·Ä ¹ö±× fix¸¦ À§ÇÑ ÄÚµå
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ fixï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½
         _verticalLayoutGroup.enabled = false;
         _verticalLayoutGroup.enabled = true;
     }

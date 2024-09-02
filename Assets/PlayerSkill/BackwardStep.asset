@@ -23,7 +23,7 @@ MonoBehaviour:
   damage: 0
   minDistance: 1
   maxDistance: 5
-  move: 0
+  move: 1
   effect: []
   linkskill: {fileID: 0}
   skillicon: {fileID: 21300000, guid: d0d564fa9f43b4418b127f278e616c9b, type: 3}

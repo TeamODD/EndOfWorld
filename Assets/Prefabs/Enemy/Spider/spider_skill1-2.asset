@@ -25,7 +25,7 @@ MonoBehaviour:
   maxDistance: 5
   move: 0
   effect:
-  - {fileID: 11400000, guid: 104834c17e29a4f418b0bdae7dc8a3c3, type: 2}
+  - {fileID: 11400000, guid: 688d06dec652e46439e954ef90098633, type: 2}
   linkskill: {fileID: 0}
   skillicon: {fileID: 0}
   uses: 2

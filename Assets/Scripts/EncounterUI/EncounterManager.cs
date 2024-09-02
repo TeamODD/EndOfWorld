@@ -13,6 +13,7 @@ namespace EndOfWorld.EncounterSystem
 {
     public class EncounterManager : MonoBehaviour
     {
+        public static EncounterManager Instance { get; private set; }
         [SerializeField]
         private short _chaperIndex;
 
@@ -21,9 +22,7 @@ namespace EndOfWorld.EncounterSystem
 
         [SerializeField]
         private List<EncounterFile> _usedEncounterFileList = new List<EncounterFile>();
-
-        [SerializeField]
-        private SavedData _savedData;
+        public SavedData _savedData;
 
         [SerializeField]
         private EncounterFileListForAcquiredFiles _encounterFileListForAcquiredFiles;

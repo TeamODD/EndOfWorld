@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class PlayerData : MonoBehaviour
 {
+    public static PlayerData Instance { get; private set; }
     [SerializeField]
     private int maxHP;
     [SerializeField]

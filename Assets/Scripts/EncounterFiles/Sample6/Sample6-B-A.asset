@@ -54,7 +54,7 @@ MonoBehaviour:
       type: {class: AddSkillItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
       data:
         itemType: 11
-        Skill: {fileID: 0}
+        Skill: {fileID: 11400000, guid: 346a8fdcc7e884ebaa6ef77c3716440b, type: 2}
     - rid: 1965081327255420998
       type: {class: TextItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
       data:

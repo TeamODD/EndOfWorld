@@ -81,5 +81,5 @@ MonoBehaviour:
   AttackPoint: 10
   DefencePoint: 5
   SpeedPoint: 50
-  StartingDistance: 3
+  StartingDistance: 2
   StartingSkill: {fileID: 0}

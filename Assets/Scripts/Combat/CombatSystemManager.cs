@@ -269,11 +269,13 @@ public class CombatSystemManager : MonoBehaviour
 
             if (enemy.currentHitPoint <= 0)
             {
-                Debug.Log("플레이어 승리");
-                GetComponent<PlayerData>().CurrentHP = player.currentHitPoint;
+                Debug.Log("Player Win");
+                // int test=PlayerData.Instance.CurrentHP;
+                Debug.Log("Player Win2");
+                // GetComponent<PlayerData>().CurrentHP = player.currentHitPoint;
                 player.RemoveAllUsedSkill();
-                GetComponent<PlayerData>().CombatSkill = player.getCombatSkillList();
-                GetComponent<PlayerData>().MoveSkill = player.getMoveSkillList();
+                // GetComponent<PlayerData>().CombatSkill = player.getCombatSkillList();
+                // GetComponent<PlayerData>().MoveSkill = player.getMoveSkillList();
                 dataManager.UnLoadCombatScene(CombatResult.Win);
             }
 

@@ -16,9 +16,6 @@ public class SceneTransitionManager : MonoBehaviour
     [SerializeField]
     private GameObject encounterUI;
 
-    [SerializeField]
-    private GameObject screenUI;
-
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);    
@@ -32,7 +29,6 @@ public class SceneTransitionManager : MonoBehaviour
     {
         EnemyData=enemyData;
         encounterUI.SetActive(false);
-        screenUI.SetActive(false);
         SceneManager.LoadScene("CombatScene", LoadSceneMode.Additive);
     }
     /// <summary>
@@ -44,7 +40,6 @@ public class SceneTransitionManager : MonoBehaviour
     {
         SceneManager.UnloadSceneAsync("CombatScene");
         encounterUI.SetActive(true);
-        screenUI.SetActive(true);
         OnCombatEnd.Invoke(combatResult);
     }
 

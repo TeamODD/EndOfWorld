@@ -96,7 +96,7 @@ namespace EndOfWorld.EncounterSystem
 
         public EncounterFile encounterFile;
 
-        //¼±ÅÃÁö Å¬¸¯½Ã ÆË¾÷ È­¸éÀÌ ¶°¾ßÇÒ °æ¿ì¿¡ ³ª¿À°Ô ÇÒ ÆË¾÷ UI ¿ÀºêÁ§Æ®
+        //ì„ íƒì§€ í´ë¦­ì‹œ íŒì—… í™”ë©´ì´ ë– ì•¼í•  ê²½ìš°ì— ë‚˜ì˜¤ê²Œ í•  íŒì—… UI ì˜¤ë¸Œì íŠ¸
         public GameObject PopupObject;
     }
 
