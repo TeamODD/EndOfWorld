@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c1e3abcfb593ab4a8be5463520cd5ee, type: 3}
   m_Name: EncounterFilesSavingObject
   m_EditorClassIdentifier: 
-  UnusedEncounterFiles: []
-  UsedEncounterFiles: []
-  ProgressLevel: 0
+  UnusedEncounterFiles:
+  - {fileID: 11400000, guid: f07087e7f4e6e9442bcbe973db9953a0, type: 2}
+  - {fileID: 11400000, guid: 71b45f77ef6614745b35c173bc6fabe7, type: 2}
+  - {fileID: 11400000, guid: af27eea29480b864b98c9f31ebd2dd80, type: 2}
+  UsedEncounterFiles:
+  - {fileID: 11400000, guid: 3f56def65c26b4f3695035c1b1cfd7da, type: 2}
+  - {fileID: 11400000, guid: eb5ecfa5bcd6c554983b72800620972d, type: 2}
+  - {fileID: 11400000, guid: 6a8d6333f0e1b144faeb910666e5221d, type: 2}
+  ProgressLevel: 2
