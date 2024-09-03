@@ -1,6 +1,5 @@
-using UnityEditor;
 using UnityEngine;
-
+using UnityEditor;
 
 //Attribute
 public class ArrayElementTitleAttribute : PropertyAttribute
