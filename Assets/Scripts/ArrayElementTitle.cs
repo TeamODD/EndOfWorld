@@ -1,7 +1,8 @@
 using UnityEditor;
 using UnityEngine;
+using EndOfWorld.EncounterSystem;
 
-
+#if UNITY_EDITOR
 //Attribute
 public class ArrayElementTitleAttribute : PropertyAttribute
 {
@@ -95,3 +96,5 @@ public class ArrayElementTitleDrawer : PropertyDrawer
         return "";
     }
 }
+
+#endif

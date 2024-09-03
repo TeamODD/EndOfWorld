@@ -17,7 +17,11 @@ namespace EndOfWorld.EncounterSystem
         [Space(10f)]
 
         [SerializeReference]
+
+        #if UNITY_EDITOR
         [ArrayElementTitle("itemType")]
+        #endif
+
         public List<Item> ItemList = new List<Item>();
 
 

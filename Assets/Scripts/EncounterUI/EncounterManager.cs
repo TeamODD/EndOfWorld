@@ -5,7 +5,9 @@ using System.IO;
 using System.Linq;
 using static UnityEngine.GraphicsBuffer;
 using UnityEditor;
+#if UNITY_EDITOR
 using UnityEditor.UI;
+#endif
 using UnityEngine.UI;
 
 
@@ -410,7 +412,7 @@ namespace EndOfWorld.EncounterSystem
             _savedData.UsedEncounterFiles = new List<EncounterFile>(_usedEncounterFileList);
             _savedData.ProgressLevel = this._thisProgressLevel;
 
-            EditorUtility.SetDirty(_savedData);
+            //EditorUtility.SetDirty(_savedData);
 
             _encounterFileListForAcquiredFiles.SaveData();
         }
