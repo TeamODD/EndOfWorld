@@ -4995,7 +4995,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _chaperIndex: 1
   _unusedEncounterFileList:
-  - {fileID: 11400000, guid: d52dd53e716e6f14c961414f5147397c, type: 2}
+  - {fileID: 11400000, guid: 3f56def65c26b4f3695035c1b1cfd7da, type: 2}
   - {fileID: 11400000, guid: 6a8d6333f0e1b144faeb910666e5221d, type: 2}
   - {fileID: 11400000, guid: eb5ecfa5bcd6c554983b72800620972d, type: 2}
   - {fileID: 11400000, guid: 71b45f77ef6614745b35c173bc6fabe7, type: 2}
@@ -5375,7 +5375,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000030517578}
+  m_AnchoredPosition: {x: 0, y: 300.00003}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1861725913

@@ -19,7 +19,7 @@ MonoBehaviour:
   coefficienttype: 2
   minAttackRange: 1
   maxAttackRange: 5
-  numberOfAttack: 0
+  numberOfAttack: 1
   damage: 100
   minDistance: 1
   maxDistance: 5
