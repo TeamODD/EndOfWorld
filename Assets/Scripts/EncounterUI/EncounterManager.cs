@@ -118,6 +118,8 @@ namespace EndOfWorld.EncounterSystem
 
         private void BringSavedData()
         {
+            if (_savedData == null) return;
+
             if (_savedData.ProgressLevel > 1) //저장 된적이 있는지 없는지 구분
             {
                 this._unusedEncounterFileList = _savedData.UnusedEncounterFiles;
@@ -408,6 +410,8 @@ namespace EndOfWorld.EncounterSystem
 
         private void SaveData()
         {
+            if (_savedData == null) return;
+
             _savedData.UnusedEncounterFiles = new List<EncounterFile>(_unusedEncounterFileList);
             _savedData.UsedEncounterFiles = new List<EncounterFile>(_usedEncounterFileList);
             _savedData.ProgressLevel = this._thisProgressLevel;
