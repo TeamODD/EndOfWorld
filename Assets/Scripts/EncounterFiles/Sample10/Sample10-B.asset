@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8a1cd31fa423ef409a822f46b285cfc, type: 3}
+  m_Name: Sample10-B
+  m_EditorClassIdentifier: 
+  ChaperLevel: 1
+  ProgressLevel: 7
+  ItemList:
+  - rid: 1965081351405961233
+  - rid: 1965081351405961234
+  - rid: 1965081351405961235
+  - rid: 1965081351405961237
+  - rid: 1965081351405961236
+  references:
+    version: 2
+    RefIds:
+    - rid: 1965081351405961233
+      type: {class: TextItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 0
+        text: " \uC870\uADF8\uB9E3\uAC8C \uB098\uC788\uB294 \uAE38\uC744 \uD1B5\uD574
+          \uC9C0\uB098\uAC00\uC790, \uAC00\uC2DC\uB369\uAD74\uC774 \uC21C\uC2DD\uAC04\uC5D0
+          \uC790\uB77C\uB098 \uC9C0\uB098\uC628 \uAE38\uC744 \uB9C9\uC544\uC130\uB2E4.
+          \uD558\uB294 \uC218 \uC5C6\uC774 \uB2F9\uC2E0\uC740 \uD76C\uBBF8\uD55C
+          \uBE5B\uC5D0 \uB354 \uB2E4\uAC00\uAC14\uB2E4. \r\n \uC8FC\uC704\uB97C \uACBD\uACC4\uD558\uBA70
+          \uB2E4\uAC00\uAC00\uC790 \uAC70\uB300\uD55C \uC554\uC11D\uC774 \uBAA8\uC2B5\uC744
+          \uB4DC\uB7EC\uB0C8\uB2E4. \uC790\uC5F0\uC2A4\uB7EC\uC6B4 \uC554\uC11D\uC774
+          \uC544\uB2CC, \uB0A0\uCE74\uB85C\uC6B4 \uBB34\uC5B8\uAC00\uB85C \uAE01\uC5B4
+          \uD45C\uBA74\uC744 \uC778\uACF5\uC801\uC73C\uB85C \uAE4E\uC740 \uB4EF\uD55C
+          \uBAA8\uC2B5\uC774\uC5C8\uB2E4."
+    - rid: 1965081351405961234
+      type: {class: ChoiceItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 2
+        choiceList:
+        - text: "\uC870\uC0AC\uD55C\uB2E4."
+          encounterFile: {fileID: 0}
+          PopupObject: {fileID: 4200971445940761208, guid: c17c0a5e984d98f46927bd78f9fb5eb7, type: 3}
+    - rid: 1965081351405961235
+      type: {class: TextItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 0
+        text: " \uB2F9\uC2E0\uC740 \uC870\uC0AC\uD55C \uC554\uC11D\uC744 \uB4A4\uB85C
+          \uD55C \uCC44 \uB2E4\uC2DC \uD55C\uBC88 \uAE38\uC744 \uB098\uC130\uB2E4."
+    - rid: 1965081351405961236
+      type: {class: ChoiceItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 2
+        choiceList:
+        - text: "\uACC4\uC18D\uD558\uAE30"
+          encounterFile: {fileID: 0}
+          PopupObject: {fileID: 0}
+    - rid: 1965081351405961237
+      type: {class: AddProgressLevel, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 8
+        ProgressLevelRisingCount: 1

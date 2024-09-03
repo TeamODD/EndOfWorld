@@ -15,6 +15,9 @@ public class SceneTransitionManager : MonoBehaviour
     /// </summary>
     [SerializeField]
     private GameObject encounterUI;
+    //위와 같음
+    [SerializeField]
+    private GameObject mainUI;
 
     private void Awake()
     {
@@ -29,6 +32,7 @@ public class SceneTransitionManager : MonoBehaviour
     {
         EnemyData=enemyData;
         encounterUI.SetActive(false);
+        mainUI.SetActive(false);
         SceneManager.LoadScene("CombatScene", LoadSceneMode.Additive);
     }
     /// <summary>
@@ -40,6 +44,7 @@ public class SceneTransitionManager : MonoBehaviour
     {
         SceneManager.UnloadSceneAsync("CombatScene");
         encounterUI.SetActive(true);
+        mainUI.SetActive(true);
         OnCombatEnd.Invoke(combatResult);
     }
 

@@ -21,7 +21,8 @@ namespace EndOfWorld.EncounterSystem
         ProgressLevel,
         SkipEncounterItem,
         StatIncreaseItem,
-        SkillItem
+        SkillItem,
+        SkillCount
     }
 
     public enum StatType
@@ -213,6 +214,17 @@ namespace EndOfWorld.EncounterSystem
         public SkillSO Skill;
 
         public AddSkillItem() : base(ItemType.SkillItem) 
+        {
+        }
+    }
+
+    [System.Serializable]
+    public class AddSkillCount : Item
+    {
+        //모든 스킬 횟수 회복 아이템
+        public int IncreaseCount;
+
+        public AddSkillCount() : base(ItemType.SkillCount)
         {
         }
     }

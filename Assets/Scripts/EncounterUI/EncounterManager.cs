@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using static UnityEngine.GraphicsBuffer;
 using UnityEditor;
+using Unity.VisualScripting;
+
 #if UNITY_EDITOR
 using UnityEditor.UI;
 #endif
@@ -39,6 +41,8 @@ namespace EndOfWorld.EncounterSystem
         [SerializeField]
         private SceneTransitionManager _sceneTransitionManager;
 
+        private Canvas _encounterUICanvas;
+
         private EncounterFile _encounterFile;
 
         private PrintManager _printManager;
@@ -61,7 +65,10 @@ namespace EndOfWorld.EncounterSystem
         private bool _isWaitingPrint = true;
 
         [HideInInspector]
-        public bool _isCombatEnd = false;
+        public bool isCombatEnd = false;
+
+        [HideInInspector]
+        public bool isPopupUIShow = false;
 
         [HideInInspector]
         public CombatResult CombatResult;
@@ -69,6 +76,8 @@ namespace EndOfWorld.EncounterSystem
         private void Awake()
         {
             _printManager = GameObject.FindWithTag("PrintManager").GetComponent<PrintManager>();
+
+            _encounterUICanvas = GameObject.FindWithTag("EncounterUI").GetComponent<Canvas>();
 
             _enchantManager = GameObject.FindWithTag("EnchantManager").GetComponent<EnchantManager>();
 
@@ -175,7 +184,24 @@ namespace EndOfWorld.EncounterSystem
 
                         _printManager.isPrintDone = false;
                         _isWaitingPrint = false;
+
+
+                        //선택지에 PopupUI가 있는지 체크
+                        if (item.ItemType == ItemType.Choice)
+                        {
+                            List<ChoiceContents> contents = ((ChoiceItem)item).choiceList.ToList();
+
+                            for (int i = 0; i < contents.Count; i++)
+                            {
+                                if (contents[i].PopupObject != null)
+                                    this.isPopupUIShow = true;
+                            }
+                        }
+
+                        //선택지 클릭 후 PopupUI가 떴다면 UI가 닫힐 때까지 대기
+                        yield return new WaitUntil(() => this.isPopupUIShow == false);
                         yield return null;
+
 
                         break;
 
@@ -185,10 +211,10 @@ namespace EndOfWorld.EncounterSystem
                         _sceneTransitionManager.LoadCombatScene(_enemy);
 
                         //전투가 끝날 때까지 대기
-                        yield return new WaitUntil(() => this._isCombatEnd == true);
+                        yield return new WaitUntil(() => this.isCombatEnd == true);
                         yield return null;
 
-                        this._isCombatEnd = false;
+                        this.isCombatEnd = false;
 
                         for(int i = 0; i < 3; i++)
                         {
@@ -263,6 +289,26 @@ namespace EndOfWorld.EncounterSystem
                         _playerData.ApplySkill(skill);
                         break;
 
+                    case ItemType.SkillCount:
+
+                        for(int i = 0; i < _playerData.CombatSkill.Count; i++)
+                        {
+                            if (_playerData.CombatSkill[i].USES + ((AddSkillCount)item).IncreaseCount >= _playerData.CombatSkill[i].MAXUSES)
+                                _playerData.CombatSkill[i].USES = _playerData.CombatSkill[i].MAXUSES;
+                            else
+                                _playerData.CombatSkill[i].USES += ((AddSkillCount)item).IncreaseCount;
+                        }
+
+                        for (int i = 0; i < _playerData.MoveSkill.Count; i++)
+                        {
+                            if (_playerData.MoveSkill[i].USES + ((AddSkillCount)item).IncreaseCount >= _playerData.MoveSkill[i].MAXUSES)
+                                _playerData.MoveSkill[i].USES = _playerData.MoveSkill[i].MAXUSES;
+                            else
+                                _playerData.MoveSkill[i].USES += ((AddSkillCount)item).IncreaseCount;
+                        }
+
+                        break;
+
                 }
 
             }
@@ -280,9 +326,17 @@ namespace EndOfWorld.EncounterSystem
             //선택지가 다음 encounterFile이 아닌 팝업 오브젝트를 가지고 있다면
             if (_choiceItemList[index].PopupObject != null)
             {
-                GameObject popupObject = GameObject.Instantiate(_choiceItemList[index].PopupObject) as GameObject;
+                GameObject popupObject = Instantiate(_choiceItemList[index].PopupObject, _encounterUICanvas.gameObject.transform.position, Quaternion.identity);
 
-                popupObject.transform.SetParent(_verticalLayoutGroup.gameObject.transform, false);
+                popupObject.transform.SetParent(_encounterUICanvas.gameObject.transform, false);
+
+                popupObject.transform.SetAsLastSibling();
+
+                popupObject.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
+
+                _printManager.ReturnChoiceObjects();
+
+                this.isPopupUIShow = true;
 
                 return;
             } 
@@ -291,6 +345,8 @@ namespace EndOfWorld.EncounterSystem
 
             ConveyToUsedList();
 
+            //PopupUI가 있는 선택지가 아닌 일반 선택지를 골랐을 경우 false로 설정
+            this.isPopupUIShow = false;
 
             if (_choiceItemList[index].encounterFile != null)
             {
@@ -392,7 +448,7 @@ namespace EndOfWorld.EncounterSystem
 
         public void EndCombat()
         {
-            this._isCombatEnd = true;
+            this.isCombatEnd = true;
         }
 
         public void GetCombatResult(CombatResult combatResult)
