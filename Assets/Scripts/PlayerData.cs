@@ -17,10 +17,9 @@ public class PlayerData : MonoBehaviour
     [SerializeField]
     private int speedPoint;
 
-    [HideInInspector]
+    [Header("having skills")]
     public List<SkillDB> MoveSkill;
 
-    [HideInInspector]
     public List<SkillDB> CombatSkill;
 
 
@@ -123,6 +122,7 @@ public class PlayerData : MonoBehaviour
             skill.HITTEXT,
             skill.MISSTEXT
             );
+
 
         if (skillDB.TYPE == global::SkillSO.SkillType.combatSkill) this.CombatSkill.Add(skillDB);
         else if (skillDB.TYPE == global::SkillSO.SkillType.moveSkill) this.MoveSkill.Add(skillDB);

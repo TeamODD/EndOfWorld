@@ -50,8 +50,8 @@ public abstract class PullingManager : MonoBehaviour
 
         if (nextPullingIndex > pulledObjectList.Count - 1)
         {
-            pulledObjectList.Add(Instantiate(initObject, _canvas.transform.position, Quaternion.identity));
-            pulledObjectList[nextPullingIndex].transform.SetParent(_canvas.transform);
+            pulledObjectList.Add(Instantiate(initObject, _scrollViewObject.transform.position, Quaternion.identity));
+            pulledObjectList[nextPullingIndex].transform.SetParent(_scrollViewObject.transform);
         }
         else
             pulledObjectList[nextPullingIndex].SetActive(true);
