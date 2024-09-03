@@ -81,6 +81,10 @@ public class CombatLogSystemManager : MonoBehaviour
 
 
         Instantiate(skillText, contentObject.transform);
-        StartCoroutine (ScrollPositionSet());
+    }
+
+    public void startScroll()
+    {
+        StartCoroutine(ScrollPositionSet());
     }
 }

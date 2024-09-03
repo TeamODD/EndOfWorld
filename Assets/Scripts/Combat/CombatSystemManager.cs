@@ -134,33 +134,28 @@ public class CombatSystemManager : MonoBehaviour
 
     private void EnemyTurn()
     {
-        Debug.Log("적의 턴");
         enemy.CoolTimeSet();
         enemy.DicreaseEffectDuration();
         enemy.TurnResetStat();
         enemy.ActivateEffect();
-
         setHUDAll();
 
         state = BattleState.ENEMYTURN;
-
         if (enemy.isFrightened || enemy.isEnsnared || enemy.isParalysus) enemyReservationSkill = enemy.ReservationSkill(distance);
-
-
         isHit = CheckHitAttackDistance(enemyReservationSkill) ? true : false;
         logSystemManager.setTextInContents(enemyReservationSkill, isHit);
-        
+
         if (enemyReservationSkill != null)
         {
-            if(isHit) CaculateCombat(enemyReservationSkill);
+            if (isHit) CaculateCombat(enemyReservationSkill);
             SkillCooltimeAndUsesSet(enemyReservationSkill);
-            
+
         }
-        
+
         setHUDAll();
 
-        if(enemyReservationSkill != null && enemyReservationSkill.LINKSKILL != null)
-        { 
+        if (enemyReservationSkill != null && enemyReservationSkill.LINKSKILL != null)
+        {
             enemyReservationSkill = enemy.linkSkillList.Find(x => x.NAME == enemyReservationSkill.LINKSKILL.SKILLNAME);
         }
 
@@ -169,14 +164,17 @@ public class CombatSystemManager : MonoBehaviour
             enemyReservationSkill = enemy.ReservationSkill(distance);
         }
 
+
         if (player.currentHitPoint <= 0)
         {
-            Debug.Log("적의 승리");
-            GetComponent<PlayerData>().CurrentHP = 0;
-            player.RemoveAllUsedSkill();
-            GetComponent<PlayerData>().CombatSkill = player.getCombatSkillList();
-            GetComponent<PlayerData>().MoveSkill = player.getMoveSkillList();
+            CombatResultSetting();
             dataManager.UnLoadCombatScene(CombatResult.Lose);
+        }
+
+        else if(distance >= 6)
+        {
+            CombatResultSetting();
+            dataManager.UnLoadCombatScene(CombatResult.Escape);
         }
 
         else
@@ -185,19 +183,11 @@ public class CombatSystemManager : MonoBehaviour
         }
     }
 
-    private int SetDistance()
-    {
-        int temp = 2;
-        return temp;
-    }
-
     private BattleState CompareSpeed()
     {
         if (player.speed >= enemy.speed) return BattleState.PLAYERTURN;
         else return BattleState.ENEMYTURN;
     }
-
-
 
     //사거리 체크
     private bool CheckHitAttackDistance(SkillDB usingSkill)
@@ -211,14 +201,12 @@ public class CombatSystemManager : MonoBehaviour
     {
         if (usingSkill != null)
         {
-            Debug.Log("asdf");
             for (int i = 0; i < usingSkill.NUMOFATTACK; i++)
             {
                 reservedDamageOrHealAmount = usingSkill.TARGET == SkillSO.Target.Player ? player.CombatSkillActivate(usingSkill) : enemy.CombatSkillActivate(usingSkill);
                 logSystemManager.SetDamageText(usingSkill, reservedDamageOrHealAmount);
                 if (usingSkill.EFFECT.Length > 0)
                 {
-                    Debug.Log("버프/디버프 발동");
                     foreach (var effect in usingSkill.EFFECT)
                     {
                         if (effect.TARGET == StatusEffetSO.Target.Player) player.ApplyEffect(effect);
@@ -234,6 +222,8 @@ public class CombatSystemManager : MonoBehaviour
             //이거 몬스터도 해야함!!
             //이동 확인
         }
+
+        logSystemManager.startScroll();
     }
 
     private void SkillCooltimeAndUsesSet(SkillDB usingSkill)
@@ -265,14 +255,14 @@ public class CombatSystemManager : MonoBehaviour
 
             if (enemy.currentHitPoint <= 0)
             {
-                Debug.Log("Player Win");
-                // int test=PlayerData.Instance.CurrentHP;
-                Debug.Log("Player Win2");
-                // GetComponent<PlayerData>().CurrentHP = player.currentHitPoint;
-                player.RemoveAllUsedSkill();
-                // GetComponent<PlayerData>().CombatSkill = player.getCombatSkillList();
-                // GetComponent<PlayerData>().MoveSkill = player.getMoveSkillList();
+                CombatResultSetting();
                 dataManager.UnLoadCombatScene(CombatResult.Win);
+            }
+
+            else if (distance >= 6)
+            {
+                CombatResultSetting();
+                dataManager.UnLoadCombatScene(CombatResult.Escape);
             }
 
             else
@@ -280,5 +270,15 @@ public class CombatSystemManager : MonoBehaviour
                 EnemyTurn();
             }
         }
+    }
+
+    private void CombatResultSetting()
+    {
+        PlayerData playerData = GameObject.FindObjectOfType<PlayerData>();
+        if (player.currentHitPoint <= 0) playerData.CurrentHP = 0;
+        else playerData.CurrentHP = player.currentHitPoint;
+        player.RemoveAllUsedSkill();
+        playerData.CombatSkill = player.getCombatSkillList();
+        playerData.MoveSkill = player.getMoveSkillList();
     }
 }

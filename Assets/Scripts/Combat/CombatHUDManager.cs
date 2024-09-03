@@ -72,6 +72,8 @@ public class CombatHUDManager : MonoBehaviour
 
     public void SetEnemySprite(Enemy enemy, int distance)
     {
+        if (distance <= 0) distance = 1;
+        if (distance > 5) distance = 5;
         enemyImage.GetComponent<Image>().sprite = enemy.enemySprites[distance - 1];
         enemyImage.GetComponent<Image>().SetNativeSize();
     }
