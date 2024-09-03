@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2955849413205747929
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4918014505337212047}
+  - component: {fileID: 4979533634810419503}
+  - component: {fileID: 8388434681393413672}
+  m_Layer: 0
+  m_Name: Basilisk
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4918014505337212047
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2955849413205747929}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4979533634810419503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2955849413205747929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5d93ef05bf33a14aa614c05cc561cb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyName: "\uBC14\uC2E4\uB9AC\uC2A4\uD06C"
+  allSkillList:
+  - {fileID: 11400000, guid: 9cbaeadc3b6b07b46a03530c96a474e2, type: 2}
+  - {fileID: 11400000, guid: cf809075d922566498737f538e5500d1, type: 2}
+  - {fileID: 11400000, guid: a1e888817adacc944997a9dc12f503cd, type: 2}
+  - {fileID: 11400000, guid: 507f0cce70c2c2048b3932bdc1f77747, type: 2}
+  - {fileID: 11400000, guid: 384eb4fec34c4534b9a6d81d82e2ca65, type: 2}
+  - {fileID: 11400000, guid: 4692d0e773873a1429a0d070aebdf805, type: 2}
+  - {fileID: 11400000, guid: 24e8336b2cfcaad499020e34e9e1111a, type: 2}
+  - {fileID: 11400000, guid: be9ff1ebbeb29d842947f6cca914e0de, type: 2}
+  - {fileID: 11400000, guid: 3d1743d7a96b23d4db1b9e3b1bebc09e, type: 2}
+  firstPreferenceDistance: 1
+  secondPreferenceDistance: 2
+  enemySprites:
+  - {fileID: 21300000, guid: 91cbafa3acdd5447eafc631d4ac605f6, type: 3}
+  - {fileID: 21300000, guid: 24ba10eb6c52a4a17aed8cf33e19a1bc, type: 3}
+  - {fileID: 21300000, guid: 5462607fe14f04852adb3cbac76e6304, type: 3}
+  - {fileID: 21300000, guid: 38f9c9fd310b540018c56dc331671fca, type: 3}
+  - {fileID: 21300000, guid: aa0b53fbff50a4a71a503416fe4cf82d, type: 3}
+--- !u!114 &8388434681393413672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2955849413205747929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4a6057c55afab9409f379856f9fd72d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHP: 47
+  CurrentHP: 47
+  AttackPoint: 10
+  DefencePoint: 5
+  SpeedPoint: 50
+  StartingDistance: 2
+  StartingSkill: {fileID: 0}
