@@ -196,8 +196,15 @@ namespace EndOfWorld.EncounterSystem
 
             int imageNum = Random.Range(0, 3);
 
-            _amountA = _statsAmount[choiceA, imageNum];
-
+            //_amountA = _statsAmount[choiceA, imageNum];
+            if (choiceA == 0)
+            {
+                _amountA = Random.Range(1, 4) * 5;
+            }
+            else
+            {
+                _amountA = Random.Range(1, 4);
+            }
             PrintAbilityImage(choiceA, imageNum);
         }
 
@@ -304,7 +311,7 @@ namespace EndOfWorld.EncounterSystem
 
         private void ShowSkillImage(int randomNumber1, int randomNumber2)
         {
-            switch(_skillType)
+            switch (_skillType)
             {
                 case SkillType.Fire:
                     _choiceB.sprite = _fireSkills[randomNumber1].SKILLICON;

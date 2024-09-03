@@ -203,7 +203,7 @@ namespace EndOfWorld.EncounterSystem
                         break;
 
                     case ItemType.SetHP:
-                        ((AddHPItem)item).AddHpPoint(((AddHPItem)item).HpPoint);
+                        _playerData.CurrentHP += ((AddHPItem)item).HpPoint;
                         break;
 
                     case ItemType.UpgradeArmor:
