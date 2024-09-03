@@ -1,8 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 using System.Linq;
+using static UnityEngine.GraphicsBuffer;
 using UnityEditor;
+#if UNITY_EDITOR
+using UnityEditor.UI;
+#endif
 using UnityEngine.UI;
 
 
@@ -10,7 +15,6 @@ namespace EndOfWorld.EncounterSystem
 {
     public class EncounterManager : MonoBehaviour
     {
-        public static EncounterManager Instance { get; private set; }
         [SerializeField]
         private short _chaperIndex;
 
@@ -19,7 +23,9 @@ namespace EndOfWorld.EncounterSystem
 
         [SerializeField]
         private List<EncounterFile> _usedEncounterFileList = new List<EncounterFile>();
-        public SavedData _savedData;
+
+        [SerializeField]
+        private SavedData _savedData;
 
         [SerializeField]
         private EncounterFileListForAcquiredFiles _encounterFileListForAcquiredFiles;
@@ -406,7 +412,7 @@ namespace EndOfWorld.EncounterSystem
             _savedData.UsedEncounterFiles = new List<EncounterFile>(_usedEncounterFileList);
             _savedData.ProgressLevel = this._thisProgressLevel;
 
-            EditorUtility.SetDirty(_savedData);
+            //EditorUtility.SetDirty(_savedData);
 
             _encounterFileListForAcquiredFiles.SaveData();
         }

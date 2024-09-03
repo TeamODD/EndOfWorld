@@ -1,4 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
+#if UNITY_EDITOR
+using UnityEditor.Experimental.GraphView;
+#endif
 using UnityEngine;
 
 public class InitPlayerBasicSkills : MonoBehaviour

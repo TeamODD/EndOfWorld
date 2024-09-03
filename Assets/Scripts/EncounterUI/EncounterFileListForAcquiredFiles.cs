@@ -31,7 +31,7 @@ public class EncounterFileListForAcquiredFiles : ScriptableObject
 
     public void SaveData()
     {
-        EditorUtility.SetDirty(this);
+        //EditorUtility.SetDirty(this);
     }
 }
 
