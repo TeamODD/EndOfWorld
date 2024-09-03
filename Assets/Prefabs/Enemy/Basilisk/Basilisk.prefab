@@ -47,15 +47,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: "\uBC14\uC2E4\uB9AC\uC2A4\uD06C"
   allSkillList:
-  - {fileID: 11400000, guid: 9cbaeadc3b6b07b46a03530c96a474e2, type: 2}
-  - {fileID: 11400000, guid: cf809075d922566498737f538e5500d1, type: 2}
-  - {fileID: 11400000, guid: a1e888817adacc944997a9dc12f503cd, type: 2}
-  - {fileID: 11400000, guid: 507f0cce70c2c2048b3932bdc1f77747, type: 2}
-  - {fileID: 11400000, guid: 384eb4fec34c4534b9a6d81d82e2ca65, type: 2}
-  - {fileID: 11400000, guid: 4692d0e773873a1429a0d070aebdf805, type: 2}
+  - {fileID: 11400000, guid: da2c670c7f25d41189e0d46737a08d76, type: 2}
+  - {fileID: 11400000, guid: c9056187685d548fa82b4759b4aa96d7, type: 2}
+  - {fileID: 11400000, guid: 35d6e9b658e644e0da371e7d8210b987, type: 2}
+  - {fileID: 11400000, guid: 185d2abdd0f4a40788a7404885eb042c, type: 2}
+  - {fileID: 11400000, guid: 43abd01c64f564ff98c27f3b26802c21, type: 2}
+  - {fileID: 11400000, guid: 59cf9c00c2d624f6f9d253413eb21e8d, type: 2}
   - {fileID: 11400000, guid: 24e8336b2cfcaad499020e34e9e1111a, type: 2}
   - {fileID: 11400000, guid: be9ff1ebbeb29d842947f6cca914e0de, type: 2}
-  - {fileID: 11400000, guid: 3d1743d7a96b23d4db1b9e3b1bebc09e, type: 2}
   firstPreferenceDistance: 1
   secondPreferenceDistance: 2
   enemySprites:
@@ -76,10 +75,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4a6057c55afab9409f379856f9fd72d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 47
-  CurrentHP: 47
-  AttackPoint: 10
-  DefencePoint: 5
-  SpeedPoint: 50
-  StartingDistance: 2
-  StartingSkill: {fileID: 0}
+  MaxHP: 100
+  CurrentHP: 100
+  AttackPoint: 20
+  DefencePoint: 10
+  SpeedPoint: 5
+  StartingDistance: 3
+  StartingSkill: {fileID: 11400000, guid: da2c670c7f25d41189e0d46737a08d76, type: 2}
