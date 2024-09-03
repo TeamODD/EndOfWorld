@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8a1cd31fa423ef409a822f46b285cfc, type: 3}
-  m_Name: Sample5-A
+  m_Name: Sample2-B
   m_EditorClassIdentifier: 
   ChaperLevel: 1
-  ProgressLevel: 4
+  ProgressLevel: 2
   ItemList:
-  - rid: 1965081327255420938
+  - rid: 5294810006568566791
   references:
     version: 2
     RefIds:
-    - rid: 1965081327255420938
+    - rid: 5294810006568566791
       type: {class: EncounterItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
       data:
         itemType: 3
-        Enemy: {fileID: 2955849413205747929, guid: fd4232be95aa249b89359d263b5894aa, type: 3}
+        Enemy: {fileID: 2955849413205747929, guid: ef71dd415fb77b245b795aa513a009c1, type: 3}
         CombatResultReportList:
         - combatResult: 0
-          encounterFile: {fileID: 11400000, guid: eabda167f420dcf4285232cbff25a428, type: 2}
+          encounterFile: {fileID: 11400000, guid: 22bfcc6e85f9bc744a7a845ab464f52b, type: 2}
         - combatResult: 1
-          encounterFile: {fileID: 11400000, guid: bdc83ec71f5f8d746acc116a5ce0d934, type: 2}
+          encounterFile: {fileID: 11400000, guid: ea3a958b0508ffd43ba65de9e794fd03, type: 2}
         - combatResult: 2
-          encounterFile: {fileID: 11400000, guid: 8d813695326091d47906c096f16e742a, type: 2}
+          encounterFile: {fileID: 11400000, guid: dbd4b99c0d5f04e429b1298cd6b6ef89, type: 2}

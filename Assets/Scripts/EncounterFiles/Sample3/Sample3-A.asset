@@ -30,4 +30,4 @@ MonoBehaviour:
         - combatResult: 1
           encounterFile: {fileID: 11400000, guid: 882ae61b24e2b4b40a39404729483779, type: 2}
         - combatResult: 2
-          encounterFile: {fileID: 0}
+          encounterFile: {fileID: 11400000, guid: 63b83bae7c3475b458ad41af1607ab4d, type: 2}
