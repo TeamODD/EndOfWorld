@@ -12,23 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34fe107c39d1b174ba3e58cd696dfc92, type: 3}
   m_Name: Basilisk_skill3
   m_EditorClassIdentifier: 
-  skillname: "\uAC15\uD0C0"
+  skillname: "\uAF2C\uB9AC \uACF5\uACA9"
   skilltype: 0
   skillattacktype: 1
   target: 0
   coefficienttype: 1
-  minAttackRange: 1
-  maxAttackRange: 1
+  minAttackRange: 2
+  maxAttackRange: 2
   numberOfAttack: 1
-  damage: 140
-  minDistance: 1
-  maxDistance: 1
+  damage: 180
+  minDistance: 2
+  maxDistance: 2
   move: 0
   effect: []
   linkskill: {fileID: 0}
   skillicon: {fileID: 0}
   uses: 0
   cooltime: 0
-  usingtext: "\uC801\uC774 \uAC70\uB300\uD55C \uB2E4\uB9AC\uB97C \uD718\uB458\uB800\uB2E4."
-  hittext: "\uAC15\uB825\uD55C \uC77C\uACA9\uC5D0 \uC815\uD1B5\uC73C\uB85C \uB9DE\uC558\uB2E4."
-  misstext: "\uADF8\uB7EC\uB098 \uD5C8\uACF5\uC744 \uD718\uB458\uB800\uB2E4."
+  usingtext: "\uC801\uC774 \uBA3C \uAC70\uB9AC\uB97C \uAF2C\uB9AC\uB85C \uD729\uC4F8\uAE30
+    \uC2DC\uC791\uD588\uB2E4."
+  hittext: 
+  misstext: 

@@ -20,14 +20,14 @@ MonoBehaviour:
   minAttackRange: 1
   maxAttackRange: 5
   numberOfAttack: 0
-  damage: 100
-  minDistance: 2
-  maxDistance: 2
+  damage: 300
+  minDistance: 1
+  maxDistance: 5
   move: 0
   effect: []
   linkskill: {fileID: 0}
   skillicon: {fileID: 0}
-  uses: 0
+  uses: 4
   cooltime: 0
   usingtext: "\uC801\uC774 \uB2E8\uB2E8\uD55C \uAECD\uB370\uAE30\uB85C \uBAB8\uC744
     \uBCF4\uD638\uD588\uB2E4."

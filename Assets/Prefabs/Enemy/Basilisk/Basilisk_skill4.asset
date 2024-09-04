@@ -27,8 +27,8 @@ MonoBehaviour:
   effect: []
   linkskill: {fileID: 0}
   skillicon: {fileID: 0}
-  uses: 3
-  cooltime: 2
-  usingtext: "\uC801\uC774 \uB048\uC801\uD55C \uC2E4\uC744 \uBC49\uC5B4\uB0C8\uB2E4."
-  hittext: "\uB2E4\uB9AC\uAC00 \uBB36\uC5EC \uC6C0\uC9C1\uC77C \uC218 \uC5C6\uC5B4\uC84C\uB2E4."
-  misstext: "\uC2E4\uC774 \uAC00\uAE4C\uC2A4\uB85C \uC2A4\uCCD0 \uC9C0\uB098\uAC14\uB2E4."
+  uses: 2
+  cooltime: 4
+  usingtext: "\uC801\uC774 \uC0C8\uB85C\uC6B4 \uBE44\uB298\uC744 \uB9CC\uB4E4\uC5C8\uB2E4."
+  hittext: 
+  misstext: 
