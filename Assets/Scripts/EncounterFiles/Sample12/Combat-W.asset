@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8a1cd31fa423ef409a822f46b285cfc, type: 3}
+  m_Name: Combat-W
+  m_EditorClassIdentifier: 
+  ChaperLevel: 1
+  ProgressLevel: 10
+  ItemList:
+  - rid: 1965081351405961258
+  - rid: 1965081351405961255
+  - rid: 1965081351405961257
+  - rid: 1965081351405961256
+  references:
+    version: 2
+    RefIds:
+    - rid: 1965081351405961255
+      type: {class: TextItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 0
+        text: "\uB2F9\uC2E0\uC758 \uC77C\uACA9\uC5D0 \uBC14\uC2E4\uB9AC\uC2A4\uD06C\uB294
+          \uC18C\uB984\uB3CB\uB294 \uBE44\uBA85\uACFC \uD568\uAED8 \uD53C\uB97C \uD1A0\uD558\uBA70
+          \uC4F0\uB7EC\uC84C\uB2E4. \uADF8\uB7EC\uC790 \uBC14\uC2E4\uB9AC\uC2A4\uD06C\uAC00
+          \uB9C9\uACE0 \uC788\uB358 \uC138\uACC4\uC218\uC758 \uBC11\uB465\uC5D0 \uC0C8\uB85C\uC6B4
+          \uACF5\uAC04\uC73C\uB85C \uD5A5\uD558\uB294 \uBB38\uC774 \uC0DD\uACA8\uB0AC\uB2E4. "
+    - rid: 1965081351405961256
+      type: {class: ChoiceItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 2
+        choiceList:
+        - text: "\uACC4\uC18D\uD558\uAE30"
+          encounterFile: {fileID: 0}
+          PopupObject: {fileID: 0}
+    - rid: 1965081351405961257
+      type: {class: AddProgressLevel, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 8
+        ProgressLevelRisingCount: 1
+    - rid: 1965081351405961258
+      type: {class: EnchantItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 6

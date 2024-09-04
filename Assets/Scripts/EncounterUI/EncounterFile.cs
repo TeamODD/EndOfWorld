@@ -97,5 +97,11 @@ namespace EndOfWorld.EncounterSystem
         {
             ItemList.Add(new AddSkillItem());
         }
+
+        [ContextMenu("AddSkillCount")]
+        public void AddSkillcount()
+        {
+            ItemList.Add(new AddSkillCount());
+        }
     }
 }

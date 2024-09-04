@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -35,15 +36,15 @@ public class PlayerData : MonoBehaviour
         get => maxHP;
         set
         {
-            int gap=value-maxHP;
-            maxHP=value;
-            if(gap>0)
+            int gap = value - maxHP;
+            maxHP = value;
+            if (gap > 0)
             {
-                CurrentHP+=gap;
+                CurrentHP += gap;
             }
             else
             {
-                CurrentHP=MaxHP<CurrentHP? MaxHP : CurrentHP;
+                CurrentHP = MaxHP < CurrentHP ? MaxHP : CurrentHP;
             }
         }
     }
@@ -52,7 +53,7 @@ public class PlayerData : MonoBehaviour
         get => currentHP;
         set
         {
-            currentHP=value<=MaxHP ? value : MaxHP;
+            currentHP = value <= MaxHP ? value : MaxHP;
             OnHPChanged.Invoke(MaxHP, CurrentHP);
         }
     }
@@ -61,7 +62,7 @@ public class PlayerData : MonoBehaviour
         get => attackPoint;
         set
         {
-            attackPoint=value>=0 ? value : 0;
+            attackPoint = value >= 0 ? value : 0;
             OnAttackPointChanged.Invoke(AttackPoint);
         }
     }
@@ -70,7 +71,7 @@ public class PlayerData : MonoBehaviour
         get => defencePoint;
         set
         {
-            defencePoint=value>=0 ? value : 0;
+            defencePoint = value >= 0 ? value : 0;
             OnDefencePointChanged.Invoke(DefencePoint);
         }
     }
@@ -79,11 +80,11 @@ public class PlayerData : MonoBehaviour
         get => speedPoint;
         set
         {
-            speedPoint=value>=0 ? value : 0;
+            speedPoint = value >= 0 ? value : 0;
             OnSpeedPointChanged.Invoke(SpeedPoint);
         }
     }
-    
+
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -91,10 +92,10 @@ public class PlayerData : MonoBehaviour
         CombatSkill = new List<SkillDB>();
         MoveSkill = new List<SkillDB>();
 
-        MaxHP+=100;
-        AttackPoint=10;
-        DefencePoint=10;
-        SpeedPoint=10;
+        MaxHP += 100;
+        AttackPoint = 10;
+        DefencePoint = 10;
+        SpeedPoint = 10;
     }
 
     public void ApplySkill(SkillSO skill)
@@ -124,12 +125,38 @@ public class PlayerData : MonoBehaviour
             );
 
 
-        if (skillDB.TYPE == global::SkillSO.SkillType.combatSkill) this.CombatSkill.Add(skillDB);
-        else if (skillDB.TYPE == global::SkillSO.SkillType.moveSkill) this.MoveSkill.Add(skillDB);
+        if (skillDB.TYPE == global::SkillSO.SkillType.combatSkill)
+        {
+            for (int i = 0; i < CombatSkill.Count; i++)
+            {
+                //스킬 중복시
+                if (CombatSkill[i].NAME == skillDB.NAME)
+                {
+                    CombatSkill[i].USES = CombatSkill[i].MAXUSES;
+                    return;
+                }
+            }
+
+            this.CombatSkill.Add(skillDB);
+        }
+        else if (skillDB.TYPE == global::SkillSO.SkillType.moveSkill)
+        {
+            for (int i = 0; i < MoveSkill.Count; i++)
+            {
+                //스킬 중복시
+                if (MoveSkill[i].NAME == skillDB.NAME)
+                {
+                    MoveSkill[i].USES = MoveSkill[i].MAXUSES;
+                    return;
+                }
+            }
+
+            this.MoveSkill.Add(skillDB);
+        }
     }
 
     public UnityEvent<int, int> OnHPChanged;
     public UnityEvent<int> OnAttackPointChanged;
     public UnityEvent<int> OnDefencePointChanged;
-    public UnityEvent<int> OnSpeedPointChanged; 
+    public UnityEvent<int> OnSpeedPointChanged;
 }
