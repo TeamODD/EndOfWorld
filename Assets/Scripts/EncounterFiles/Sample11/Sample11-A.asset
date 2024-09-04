@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sample11-A
   m_EditorClassIdentifier: 
   ChaperLevel: 1
-  ProgressLevel: 9
+  ProgressLevel: 8
   ItemList:
   - rid: 1965081351405961241
   - rid: 1965081351405961243

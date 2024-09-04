@@ -13,13 +13,19 @@ MonoBehaviour:
   m_Name: Sample11
   m_EditorClassIdentifier: 
   ChaperLevel: 1
-  ProgressLevel: 9
+  ProgressLevel: 8
   ItemList:
   - rid: 1965081351405961239
+  - rid: 1235609244492627971
   - rid: 1965081351405961240
   references:
     version: 2
     RefIds:
+    - rid: 1235609244492627971
+      type: {class: SpriteItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 1
+        sprite: {fileID: 21300000, guid: 0d097d552ecc144f89d69650fa874977, type: 3}
     - rid: 1965081351405961239
       type: {class: TextItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
       data:

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Combat-W
   m_EditorClassIdentifier: 
   ChaperLevel: 1
-  ProgressLevel: 10
+  ProgressLevel: 9
   ItemList:
   - rid: 1965081351405961258
   - rid: 1965081351405961255

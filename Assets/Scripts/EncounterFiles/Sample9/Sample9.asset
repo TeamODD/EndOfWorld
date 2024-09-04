@@ -18,11 +18,18 @@ MonoBehaviour:
   - rid: 1965081327255420987
   - rid: 1965081351405961220
   - rid: 1965081327255420988
-  - rid: 1965081351405961221
-  - rid: 1965081327255420989
+  - rid: 1235609244492627972
   references:
     version: 2
     RefIds:
+    - rid: 1235609244492627972
+      type: {class: ChoiceItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
+      data:
+        itemType: 2
+        choiceList:
+        - text: "\uC804\uD22C \uC2DC\uC791"
+          encounterFile: {fileID: 11400000, guid: 83a07dcb605f38548815810c8b56ec96, type: 2}
+          PopupObject: {fileID: 0}
     - rid: 1965081327255420987
       type: {class: TextItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
       data:
@@ -36,14 +43,6 @@ MonoBehaviour:
       data:
         itemType: 1
         sprite: {fileID: 21300000, guid: ccc6be8268887ab4396b94e879362207, type: 3}
-    - rid: 1965081327255420989
-      type: {class: ChoiceItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
-      data:
-        itemType: 2
-        choiceList:
-        - text: "\uC804\uD22C\uC2DC\uC791"
-          encounterFile: {fileID: 11400000, guid: 83a07dcb605f38548815810c8b56ec96, type: 2}
-          PopupObject: {fileID: 0}
     - rid: 1965081351405961220
       type: {class: TextItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
       data:
@@ -52,10 +51,6 @@ MonoBehaviour:
           \uBC14\uB2E5\uC5D0 \uBE5B\uC744 \uB4DC\uB9AC\uC6CC\uBCF4\uB2C8 \uB048\uC801\uAC70\uB9AC\uB294
           \uAC70\uBBF8\uC904\uC744 \uBC1C\uACAC\uD588\uB2E4. \uC870\uC2EC\uC2A4\uB808
           \uAC70\uBBF8\uC904\uC744 \uD53C\uD574 \uB098\uC544\uAC00\uC790, \uC7A0\uC790\uB4EF\uC774
-          \uBA48\uCDB0\uC11C \uC788\uB294 \uB9C8\uBB3C\uC744 \uBC1C\uACAC\uD588\uB2E4."
-    - rid: 1965081351405961221
-      type: {class: TextItem, ns: EndOfWorld.EncounterSystem, asm: Assembly-CSharp}
-      data:
-        itemType: 0
-        text: " \uB0A0\uCE74\uB85C\uC6B4 \uB2E4\uB9AC\uC640 \uC804\uAC08\uC758 \uAF2C\uB9AC\uAC00
-          \uD558\uB098\uB85C \uD569\uCCD0\uC9C4, \uB4A4\uD2C0\uB9B0 \uD615\uC0C1\uC774\uC5C8\uB2E4.\r\n"
+          \uBA48\uCDB0\uC11C \uC788\uB294 \uB9C8\uBB3C\uC744 \uBC1C\uACAC\uD588\uB2E4.\n
+          \uB0A0\uCE74\uB85C\uC6B4 \uB2E4\uB9AC\uC640 \uC804\uAC08\uC758 \uAF2C\uB9AC\uAC00
+          \uD558\uB098\uB85C \uD569\uCCD0\uC9C4, \uB4A4\uD2C0\uB9B0 \uD615\uC0C1\uC774\uC5C8\uB2E4.\r"

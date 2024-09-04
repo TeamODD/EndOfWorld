@@ -75,10 +75,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4a6057c55afab9409f379856f9fd72d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 100
-  CurrentHP: 100
+  MaxHP: 150
+  CurrentHP: 150
   AttackPoint: 20
   DefencePoint: 10
   SpeedPoint: 5
   StartingDistance: 3
-  StartingSkill: {fileID: 11400000, guid: da2c670c7f25d41189e0d46737a08d76, type: 2}
+  StartingSkill: {fileID: 0}

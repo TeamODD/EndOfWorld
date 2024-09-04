@@ -20,7 +20,7 @@ MonoBehaviour:
   minAttackRange: 1
   maxAttackRange: 2
   numberOfAttack: 1
-  damage: 30
+  damage: 200
   minDistance: 1
   maxDistance: 2
   move: 0

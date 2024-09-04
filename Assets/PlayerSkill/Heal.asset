@@ -19,8 +19,8 @@ MonoBehaviour:
   coefficienttype: 0
   minAttackRange: 1
   maxAttackRange: 5
-  numberOfAttack: 0
-  damage: 20
+  numberOfAttack: 1
+  damage: 40
   minDistance: 1
   maxDistance: 5
   move: 0
