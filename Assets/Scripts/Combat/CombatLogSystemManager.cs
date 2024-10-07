@@ -1,19 +1,22 @@
 using System.Collections;
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 public class CombatLogSystemManager : MonoBehaviour
 {
     private const float ANIMATIONTIME = 0.2f;
     private readonly Vector2 SCROLLEND = Vector2.zero;
     private readonly string DONOTHING = "적은 아무런 행동도 하지 않았다.";
+    
     [SerializeField]
     private ScrollRect scrollViewObject;
     [SerializeField]
     private GameObject contentObject;
     [SerializeField]
-    private TextMeshProUGUI skillText;
+    private TextMeshProUGUI skillTextObject;
 
     public IEnumerator ScrollPositionSet()
     {
@@ -32,59 +35,77 @@ public class CombatLogSystemManager : MonoBehaviour
 
     public void setTextInContents(SkillDB skill, bool isHit)
     {
-        skillText.text = null;
+        skillTextObject.text = null;
+        string _skillText = null;
 
-        if(skill != null)
+        if (skill != null)
         {
-            skillText.text += skill.USINGTEXT;
+            _skillText += skill.USINGTEXT;
 
             if (isHit)
             {
-                skillText.text += " " + skill.HITTEXT;
+                _skillText += " " + skill.HITTEXT;
             }
 
             else
             {
-                skillText.text += " " + skill.MISSTEXT;
+                _skillText += " " + skill.MISSTEXT;
             }
         }
 
         else
         {
-            skillText.text = DONOTHING;
+            _skillText = DONOTHING;
         }
 
-        Instantiate(skillText, contentObject.transform);
+        logInstantiate(_skillText);
     }
 
     public void SetDamageText(SkillDB skill, int skillDamage)
     {
-        skillText.text = null;
-
-        if (skill.TARGET == SkillSO.Target.Enemy) skillText.text += "상대는 ";
-        else skillText.text += "플레이어는 ";
+        skillTextObject.text = null;
+        string _skillText = null;
+        if (skill.TARGET == SkillSO.Target.Enemy) _skillText += "상대는 ";
+        else _skillText += "플레이어는 ";
         
         switch (skill.ATTACKTYPE)
         {
             case SkillSO.SkillAttackType.Attack:
-                skillText.text += skillDamage.ToString() + " 피해를 입었다.";
+                _skillText += skillDamage.ToString() + " 피해를 입었다.";
                 break;
 
             case SkillSO.SkillAttackType.Defense:
-                skillText.text += skillDamage.ToString() + " 방어도를 얻었다.";
+                _skillText += skillDamage.ToString() + " 방어도를 얻었다.";
                 break;
 
             case SkillSO.SkillAttackType.Heal:
-                skillText.text += skillDamage.ToString() + " 만큼 회복했다.";
+                _skillText += skillDamage.ToString() + " 만큼 회복했다.";
                 break;
         }
 
-
-        Instantiate(skillText, contentObject.transform);
+        logInstantiate(_skillText);
     }
 
     public void startScroll()
     {
         StartCoroutine(ScrollPositionSet());
+    }
+
+    private void logInstantiate(string _skillText)
+    {
+        TextMeshProUGUI text = Instantiate(skillTextObject, contentObject.transform);
+        StartCoroutine(TypingEffect(_skillText, text));
+    }
+
+    IEnumerator TypingEffect(string _skillText, TextMeshProUGUI textObject)
+    {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (int i = 0; i < _skillText.Length; i++)
+        {
+            stringBuilder.Append(_skillText[i]);
+            textObject.text = stringBuilder.ToString();
+            yield return new WaitForSeconds(0.05f);
+        }
     }
 }
