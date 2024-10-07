@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -119,7 +120,6 @@ public class CombatSystemManager : MonoBehaviour
 
     private void PlayerTurn()
     {
-        Debug.Log("플레이어 턴!");
         player.CoolTimeSet();
         player.DicreaseEffectDuration();
         player.TurnResetStat();
@@ -164,23 +164,7 @@ public class CombatSystemManager : MonoBehaviour
             enemyReservationSkill = enemy.ReservationSkill(distance);
         }
 
-
-        if (player.currentHitPoint <= 0)
-        {
-            CombatResultSetting();
-            dataManager.UnLoadCombatScene(CombatResult.Lose);
-        }
-
-        else if(distance >= 6)
-        {
-            CombatResultSetting();
-            dataManager.UnLoadCombatScene(CombatResult.Escape);
-        }
-
-        else
-        {
-            PlayerTurn();
-        }
+        StartCoroutine(CheckPlayer());
     }
 
     private BattleState CompareSpeed()
@@ -253,22 +237,50 @@ public class CombatSystemManager : MonoBehaviour
             setHUDAll();
             clickButton.GetComponent<SkillButtonInfo>().UsedSkillSet(usingSkill);
 
-            if (enemy.currentHitPoint <= 0)
-            {
-                CombatResultSetting();
-                dataManager.UnLoadCombatScene(CombatResult.Win);
-            }
+            StartCoroutine(CheckEnemy());
+        }
+    }
 
-            else if (distance >= 6)
-            {
-                CombatResultSetting();
-                dataManager.UnLoadCombatScene(CombatResult.Escape);
-            }
+    IEnumerator CheckEnemy()
+    {
+        yield return new WaitForSeconds(0.8f);
+        if (enemy.currentHitPoint <= 0)
+        {
+            CombatResultSetting();
+            dataManager.UnLoadCombatScene(CombatResult.Win);
+        }
 
-            else
-            {
-                EnemyTurn();
-            }
+        else if (distance >= 6)
+        {
+            CombatResultSetting();
+            dataManager.UnLoadCombatScene(CombatResult.Escape);
+        }
+
+        else
+        {
+            EnemyTurn();
+        }
+    }
+
+    IEnumerator CheckPlayer()
+    {
+        yield return new WaitForSeconds(0.8f);
+
+        if (player.currentHitPoint <= 0)
+        {
+            CombatResultSetting();
+            dataManager.UnLoadCombatScene(CombatResult.Lose);
+        }
+
+        else if (distance >= 6)
+        {
+            CombatResultSetting();
+            dataManager.UnLoadCombatScene(CombatResult.Escape);
+        }
+
+        else
+        {
+            PlayerTurn();
         }
     }
 

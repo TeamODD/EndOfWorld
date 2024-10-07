@@ -1743,7 +1743,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollViewObject: {fileID: 306183785}
   contentObject: {fileID: 2046405236}
-  skillText: {fileID: 1973645885966709614, guid: fc057be2b5ec44c4699c2d758a38aeac, type: 3}
+  skillTextObject: {fileID: 1973645885966709614, guid: fc057be2b5ec44c4699c2d758a38aeac, type: 3}
 --- !u!4 &1536479819
 Transform:
   m_ObjectHideFlags: 0
