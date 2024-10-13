@@ -105,7 +105,7 @@ public class CombatLogSystemManager : MonoBehaviour
         {
             stringBuilder.Append(_skillText[i]);
             textObject.text = stringBuilder.ToString();
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.03f);
         }
     }
 }

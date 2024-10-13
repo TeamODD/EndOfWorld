@@ -5,12 +5,15 @@ using TMPro;
 
 public class CombatHUDManager : MonoBehaviour
 {
+    [Space(1), Header("공통")]
+    [SerializeField] private Slider hpSlider;
+    [SerializeField] private TMP_Text hpText;
+    
     [Space(1), Header("몬스터 전용")]
     [SerializeField] private TMP_Text monsterName;
     [SerializeField] private GameObject enemyImage;
 
     [Space(1), Header("플레이어 전용")]
-    [SerializeField] private Slider hpSlider;
     [SerializeField] private Button skillButton;
     [SerializeField] private GameObject CombatSkillParent;
     [SerializeField] private GameObject MoveSkillParent;
@@ -21,6 +24,7 @@ public class CombatHUDManager : MonoBehaviour
     {
         hpSlider.maxValue = unit.maxHitPoint;
         hpSlider.value = unit.currentHitPoint;
+        hpText.text = unit.currentHitPoint + " / " + unit.maxHitPoint;
     }
 
     public void SetEnemyName(Enemy enemy)
@@ -77,6 +81,7 @@ public class CombatHUDManager : MonoBehaviour
         enemyImage.GetComponent<Image>().sprite = enemy.enemySprites[distance - 1];
         enemyImage.GetComponent<Image>().SetNativeSize();
     }
+
 
     //상태이상 표시
     public void SetCharaterStatus(StatSystem unit)

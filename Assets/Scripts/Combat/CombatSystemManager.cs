@@ -164,6 +164,7 @@ public class CombatSystemManager : MonoBehaviour
             enemyReservationSkill = enemy.ReservationSkill(distance);
         }
 
+        logSystemManager.startScroll();
         StartCoroutine(CheckPlayer());
     }
 
@@ -206,8 +207,6 @@ public class CombatSystemManager : MonoBehaviour
             //이거 몬스터도 해야함!!
             //이동 확인
         }
-
-        logSystemManager.startScroll();
     }
 
     private void SkillCooltimeAndUsesSet(SkillDB usingSkill)
@@ -237,6 +236,7 @@ public class CombatSystemManager : MonoBehaviour
             setHUDAll();
             clickButton.GetComponent<SkillButtonInfo>().UsedSkillSet(usingSkill);
 
+            logSystemManager.startScroll();
             StartCoroutine(CheckEnemy());
         }
     }
