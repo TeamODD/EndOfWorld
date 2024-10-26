@@ -9,4 +9,6 @@ public class InitialStat : MonoBehaviour
     public int SpeedPoint;
     public int StartingDistance;
     public SkillSO StartingSkill;
+    public float AnchorY;
+    public Vector2 Pivot;
 }
