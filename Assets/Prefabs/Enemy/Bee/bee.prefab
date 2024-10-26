@@ -81,6 +81,8 @@ MonoBehaviour:
   SpeedPoint: 5
   StartingDistance: 2
   StartingSkill: {fileID: 0}
+  AnchorY: 0.6
+  Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &6993422776436603759
 SpriteRenderer:
   m_ObjectHideFlags: 0

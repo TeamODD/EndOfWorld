@@ -82,3 +82,5 @@ MonoBehaviour:
   SpeedPoint: 5
   StartingDistance: 3
   StartingSkill: {fileID: 0}
+  AnchorY: 0.3
+  Pivot: {x: 0.5, y: 0.4}
