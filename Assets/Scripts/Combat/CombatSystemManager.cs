@@ -125,7 +125,7 @@ public class CombatSystemManager : MonoBehaviour
         player.TurnResetStat();
         player.ActivateEffect();
 
-        playerHUD.SetButtonActivated(distance);
+        playerHUD.SetButtonActivated(distance, player);
 
         setHUDAll();
 
@@ -200,12 +200,11 @@ public class CombatSystemManager : MonoBehaviour
                 }
             }
 
-            //나중에 상태이상 체크
-            distance = Mathf.Abs(distance + usingSkill.MOVE);
-            if (distance == 0) distance = 1;
-
-            //이거 몬스터도 해야함!!
-            //이동 확인
+            if((state == BattleState.PLAYERTURN && !player.isEnsnared) || (state == BattleState.ENEMYTURN && !enemy.isEnsnared))
+            {
+                distance = Mathf.Abs(distance + usingSkill.MOVE);
+                if (distance == 0) distance = 1;
+            }
         }
     }
 

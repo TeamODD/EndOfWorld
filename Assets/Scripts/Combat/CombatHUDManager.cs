@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class CombatHUDManager : MonoBehaviour
 {
@@ -18,7 +19,9 @@ public class CombatHUDManager : MonoBehaviour
     [SerializeField] private GameObject CombatSkillParent;
     [SerializeField] private GameObject MoveSkillParent;
 
-    private List<Button> skillButtons = new List<Button>();
+    //전투스킬과 이동스킬로 나누고 cc 걸린거에 따라 그거 전체를 비활성화 시키자
+    private List<Button> combatSkillButtons = new List<Button>();
+    private List<Button> moveSkillButtons = new List<Button>();
 
     public void SetHUD(StatSystem unit)
     {
@@ -44,15 +47,16 @@ public class CombatHUDManager : MonoBehaviour
         foreach (SkillDB skill in skills)
         {
             Button button = Instantiate(skillButton);
-            skillButtons.Add(button);
             SkillButtonInfo info = button.GetComponent<SkillButtonInfo>();
             if(skill.TYPE == SkillSO.SkillType.combatSkill)
             {
+                combatSkillButtons.Add(button);
                 button.transform.SetParent(CombatSkillParent.transform);
             }
 
             else if(skill.TYPE == SkillSO.SkillType.moveSkill)
             {
+                moveSkillButtons.Add(button);
                 button.transform.SetParent(MoveSkillParent.transform);
             }
 
@@ -61,11 +65,36 @@ public class CombatHUDManager : MonoBehaviour
         }
     }
 
-    public void SetButtonActivated(int distance)
+    //상태이상에 따라 사용 가능한지 안한지도 추가해야한다.
+    public void SetButtonActivated(int distance, Player player)
     {
-        foreach(Button skill in  skillButtons)
+        if (player.isFrightened || player.isParalysus)
         {
-            if (skill.GetComponent<SkillButtonInfo>().skill.USES < 1 || 
+            foreach(Button skill in combatSkillButtons) { skill.enabled = false; }
+        }
+
+        else
+        {
+            skillInteractableCheck(distance, combatSkillButtons);
+        }
+
+        if (player.isEnsnared || player.isParalysus)
+        {
+            foreach (Button skill in moveSkillButtons) { skill.enabled = false; }
+        }
+
+        else
+        {
+            skillInteractableCheck(distance, moveSkillButtons);
+        }
+
+    }
+
+    private void skillInteractableCheck(int distance, List<Button> list)
+    {
+        foreach (Button skill in list)
+        {
+            if (skill.GetComponent<SkillButtonInfo>().skill.USES < 1 ||
                 skill.GetComponent<SkillButtonInfo>().skill.COOLTIME > 0 ||
                 skill.GetComponent<SkillButtonInfo>().skill.MINDISTANCE > distance ||
                 skill.GetComponent<SkillButtonInfo>().skill.MAXDISTANCE < distance) skill.interactable = false;
