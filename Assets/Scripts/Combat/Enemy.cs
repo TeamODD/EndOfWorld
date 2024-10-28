@@ -17,8 +17,8 @@ public abstract class Enemy : StatSystem
     [SerializeField]
     private int secondPreferenceDistance;
 
-    [Space(1), Header("거리 별 적 스프라이트")]
-    public Sprite[] enemySprites;
+    [Space(1), Header("적 스프라이트")]
+    public Sprite enemySprite;
 
     public void EnemySkillListReady()
     {

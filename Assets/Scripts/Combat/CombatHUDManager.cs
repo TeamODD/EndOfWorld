@@ -33,6 +33,7 @@ public class CombatHUDManager : MonoBehaviour
     public void SetEnemyName(Enemy enemy)
     {
         monsterName.text = enemy.enemyName;
+        enemyImage.GetComponent<Image>().sprite = enemy.enemySprite;
     }
 
     public void SetHPSlider(int currentHP)
@@ -103,11 +104,13 @@ public class CombatHUDManager : MonoBehaviour
         }
     }
 
+    //이부분 고칠 예정 sprite는 1개며 scale 조정 방식으로 교체
     public void SetEnemySprite(Enemy enemy, int distance)
     {
         if (distance <= 0) distance = 1;
         if (distance > 5) distance = 5;
-        enemyImage.GetComponent<Image>().sprite = enemy.enemySprites[distance - 1];
+
+        enemyImage.GetComponent<Image>().transform.localScale = new Vector3(1.3f - 0.15f * distance, 1.3f - 0.15f * distance, 1f);
         enemyImage.GetComponent<Image>().SetNativeSize();
     }
 

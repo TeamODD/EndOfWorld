@@ -148,6 +148,7 @@ public class CombatSystemManager : MonoBehaviour
         if (enemyReservationSkill != null)
         {
             if (isHit) CaculateCombat(enemyReservationSkill);
+            MoveSkillActivate(enemyReservationSkill);
             SkillCooltimeAndUsesSet(enemyReservationSkill);
 
         }
@@ -199,12 +200,15 @@ public class CombatSystemManager : MonoBehaviour
                     }
                 }
             }
+        }
+    }
 
-            if((state == BattleState.PLAYERTURN && !player.isEnsnared) || (state == BattleState.ENEMYTURN && !enemy.isEnsnared))
-            {
-                distance = Mathf.Abs(distance + usingSkill.MOVE);
-                if (distance == 0) distance = 1;
-            }
+    private void MoveSkillActivate(SkillDB usingSkill)
+    {
+        if ((state == BattleState.PLAYERTURN && !player.isEnsnared) || (state == BattleState.ENEMYTURN && !enemy.isEnsnared))
+        {
+            distance = Mathf.Abs(distance + usingSkill.MOVE);
+            if (distance == 0) distance = 1;
         }
     }
 
@@ -230,6 +234,7 @@ public class CombatSystemManager : MonoBehaviour
             logSystemManager.setTextInContents(usingSkill, isHit);
 
             if(isHit) CaculateCombat(usingSkill);
+            MoveSkillActivate(usingSkill);
             SkillCooltimeAndUsesSet(usingSkill);
 
             setHUDAll();

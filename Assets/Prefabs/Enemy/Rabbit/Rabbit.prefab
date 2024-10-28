@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4918014505337212047}
   - component: {fileID: 4979533634810419503}
   - component: {fileID: 8745982800430260843}
-  - component: {fileID: 6993422776436603759}
   m_Layer: 0
   m_Name: Rabbit
   m_TagString: Untagged
@@ -56,12 +55,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 24e8336b2cfcaad499020e34e9e1111a, type: 2}
   firstPreferenceDistance: 1
   secondPreferenceDistance: 2
-  enemySprites:
-  - {fileID: 21300000, guid: f95ae8b5be3294722ab8811960bda85b, type: 3}
-  - {fileID: 21300000, guid: f54645e4b7c784dc48e7e82152afbd6c, type: 3}
-  - {fileID: 21300000, guid: 38bc51d61851244cc9bb392f5591fd04, type: 3}
-  - {fileID: 21300000, guid: 37b662a2a62e240f38ed8cb62bd35ce8, type: 3}
-  - {fileID: 21300000, guid: dc5e33fcc0a7844e2a6b9095a9e68db3, type: 3}
+  enemySprite: {fileID: 21300000, guid: f54645e4b7c784dc48e7e82152afbd6c, type: 3}
 --- !u!114 &8745982800430260843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,55 +77,3 @@ MonoBehaviour:
   StartingSkill: {fileID: 0}
   AnchorY: 0.3
   Pivot: {x: 0.5, y: 0.4}
---- !u!212 &6993422776436603759
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2955849413205747929}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0

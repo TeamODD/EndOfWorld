@@ -30,5 +30,5 @@ MonoBehaviour:
   uses: 10
   cooltime: 0
   usingtext: "\uC801\uC774 \uB3CC\uC9C4\uD574\uC654\uB2E4."
-  hittext: 
-  misstext: 
+  hittext: 11
+  misstext: 22

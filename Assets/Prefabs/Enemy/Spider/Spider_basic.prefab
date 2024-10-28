@@ -58,12 +58,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3d1743d7a96b23d4db1b9e3b1bebc09e, type: 2}
   firstPreferenceDistance: 1
   secondPreferenceDistance: 2
-  enemySprites:
-  - {fileID: 21300000, guid: 48b74d0caee9e0f47be13795d1b5c4e9, type: 3}
-  - {fileID: 21300000, guid: f4652822465a1a04da756453bb2f420d, type: 3}
-  - {fileID: 21300000, guid: d4fc68b6d87b1dc4e88c53f52d340836, type: 3}
-  - {fileID: 21300000, guid: 1910a407d56a96e4f8f07b9888c7beb2, type: 3}
-  - {fileID: 21300000, guid: 572ec3cd29573c64495c0ca79e1b2ba1, type: 3}
+  enemySprite: {fileID: 21300000, guid: 1910a407d56a96e4f8f07b9888c7beb2, type: 3}
 --- !u!114 &8388434681393413672
 MonoBehaviour:
   m_ObjectHideFlags: 0
